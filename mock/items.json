@@ -1,0 +1,1144 @@
+[
+  {
+    "id": "TFT_Item_AdaptiveHelm",
+    "name": "Adaptive Helm",
+    "description": "Gain an additional % Mana from all sources. The holder gains an additional bonus based on their Role:Tanks and Fighters: Gain  Armor and Magic Resistance.Other Roles: Gain % Attack Damage and Ability Power.",
+    "components": [
+      "TFT_Item_NegatronCloak",
+      "TFT_Item_TearOfTheGoddess"
+    ],
+    "icon": "ASSETS/Maps/TFT/Icons/Items/Hexcore/TFT_Item_AdaptiveHelm.TFT_Set13.tex",
+    "isComponent": false,
+    "isEmblem": false,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT16_Item_SorcererEmblemItem",
+    "name": "Arcanist Emblem",
+    "description": "The holder gains the Arcanist trait. On kill, refund % of the holder's max Mana.",
+    "components": [
+      "TFT_Item_FryingPan",
+      "TFT_Item_NeedlesslyLargeRod"
+    ],
+    "icon": "ASSETS/Maps/Particles/TFT/Item_Icons/Traits/Spatula/Set16/TFT16_Emblem_Arcanist.TFT_Set16.tex",
+    "isComponent": false,
+    "isEmblem": true,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT_Item_ArchangelsStaff",
+    "name": "Archangel's Staff",
+    "description": "Combat start: Gain % Ability Power every  seconds in combat.",
+    "components": [
+      "TFT_Item_NeedlesslyLargeRod",
+      "TFT_Item_TearOfTheGoddess"
+    ],
+    "icon": "ASSETS/Maps/TFT/Icons/Items/Hexcore/TFT_Item_ArchangelsStaff.TFT_Set13.tex",
+    "isComponent": false,
+    "isEmblem": false,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT_Item_BFSword",
+    "name": "B.F. Sword",
+    "description": "%i:scaleAD% +% Attack Damage",
+    "components": [],
+    "icon": "ASSETS/Maps/TFT/Icons/Items/Hexcore/TFT_Item_BFSword.TFT_Set13.tex",
+    "isComponent": true,
+    "isEmblem": false,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT16_Item_BilgewaterEmblemItem",
+    "name": "Bilgewater Emblem",
+    "description": "The holder gains the Bilgewater trait.",
+    "components": [
+      "TFT_Item_Spatula",
+      "TFT_Item_TearOfTheGoddess"
+    ],
+    "icon": "ASSETS/Maps/Particles/TFT/Item_Icons/Traits/Spatula/Set16/TFT16_Emblem_Bilgewater.TFT_Set16.tex",
+    "isComponent": false,
+    "isEmblem": true,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT_Item_Bloodthirster",
+    "name": "Bloodthirster",
+    "description": "Once per combat at % Health, gain a % max Health Shield that lasts up to  seconds.",
+    "components": [
+      "TFT_Item_BFSword",
+      "TFT_Item_NegatronCloak"
+    ],
+    "icon": "ASSETS/Maps/TFT/Icons/Items/Hexcore/TFT_Item_Bloodthirster.TFT_Set13.tex",
+    "isComponent": false,
+    "isEmblem": false,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT_Item_BlueBuff",
+    "name": "Blue Buff",
+    "description": "Gain % additional Attack Damage and Ability Power from all sources.",
+    "components": [
+      "TFT_Item_TearOfTheGoddess",
+      "TFT_Item_TearOfTheGoddess"
+    ],
+    "icon": "ASSETS/Maps/TFT/Icons/Items/Hexcore/TFT_Item_BlueBuff.TFT_Set13.tex",
+    "isComponent": false,
+    "isEmblem": false,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT_Item_BrambleVest",
+    "name": "Bramble Vest",
+    "description": "Gain % max health.Take % reduced damage from attacks. When struck by any attack, deal  magic damage to all adjacent enemies.Cooldown:  seconds",
+    "components": [
+      "TFT_Item_ChainVest",
+      "TFT_Item_ChainVest"
+    ],
+    "icon": "ASSETS/Maps/TFT/Icons/Items/Hexcore/TFT_Item_BrambleVest.TFT_Set13.tex",
+    "isComponent": false,
+    "isEmblem": false,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT16_Item_BrawlerEmblemItem",
+    "name": "Bruiser Emblem",
+    "description": "The holder gains the Bruiser trait. Every second, deal % of the holder's max Health as magic damage in a -hex radius.",
+    "components": [
+      "TFT_Item_FryingPan",
+      "TFT_Item_GiantsBelt"
+    ],
+    "icon": "ASSETS/Maps/Particles/TFT/Item_Icons/Traits/Spatula/Set16/TFT16_Emblem_Bruiser.TFT_Set16.tex",
+    "isComponent": false,
+    "isEmblem": true,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT_Item_ChainVest",
+    "name": "Chain Vest",
+    "description": "%i:scaleArmor% + Armor",
+    "components": [],
+    "icon": "ASSETS/Maps/TFT/Icons/Items/Hexcore/TFT_Item_ChainVest.TFT_Set13.tex",
+    "isComponent": true,
+    "isEmblem": false,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT_Item_Crownguard",
+    "name": "Crownguard",
+    "description": "Combat Start: Gain a % max Health Shield for  seconds.When the Shield expires, gain % Ability Power.",
+    "components": [
+      "TFT_Item_NeedlesslyLargeRod",
+      "TFT_Item_ChainVest"
+    ],
+    "icon": "ASSETS/Maps/TFT/Icons/Items/Hexcore/TFT_Item_Crownguard.TFT_Set13.tex",
+    "isComponent": false,
+    "isEmblem": false,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT_Item_Deathblade",
+    "name": "Deathblade",
+    "description": "Perfect peace and calm for the holder - and all who face it.",
+    "components": [
+      "TFT_Item_BFSword",
+      "TFT_Item_BFSword"
+    ],
+    "icon": "ASSETS/Maps/TFT/Icons/Items/Hexcore/TFT_Item_Deathblade.TFT_Set13.tex",
+    "isComponent": false,
+    "isEmblem": false,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT_Item_CorruptedDeathblade",
+    "name": "Deathblade",
+    "description": "Perfect peace and calm for the holder - and all who face it.",
+    "components": [
+      "TFT_Item_BFSword",
+      "TFT_Item_BFSword"
+    ],
+    "icon": "ASSETS/Maps/TFT/Icons/Items/Hexcore/TFT_Item_Deathblade.TFT_Set13.tex",
+    "isComponent": false,
+    "isEmblem": false,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT16_Item_DefenderEmblemItem",
+    "name": "Defender Emblem",
+    "description": "The holder gains the Defender trait. Combat Start: Gain % more Armor OR Magic Resist from all sources, depending on whichever is higher.",
+    "components": [
+      "TFT_Item_FryingPan",
+      "TFT_Item_ChainVest"
+    ],
+    "icon": "ASSETS/Maps/Particles/TFT/Item_Icons/Traits/Spatula/Set16/TFT16_Emblem_Defender.TFT_Set16.tex",
+    "isComponent": false,
+    "isEmblem": true,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT16_Item_DemaciaEmblemItem",
+    "name": "Demacia Emblem",
+    "description": "The holder gains the Demacia trait.",
+    "components": [
+      "TFT_Item_Spatula",
+      "TFT_Item_ChainVest"
+    ],
+    "icon": "ASSETS/Maps/Particles/TFT/Item_Icons/Traits/Spatula/Set16/TFT16_Emblem_Demacia.TFT_Set16.tex",
+    "isComponent": false,
+    "isEmblem": true,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT16_Item_MagusEmblemItem",
+    "name": "Disruptor Emblem",
+    "description": "The holder gains the Disruptor trait. Abilities deal % bonus magic damage over  seconds.",
+    "components": [],
+    "icon": "ASSETS/Maps/Particles/TFT/Item_Icons/Traits/Spatula/Set16/TFT16_Emblem_Disruptor.TFT_Set16.tex",
+    "isComponent": false,
+    "isEmblem": true,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT_Item_DragonsClaw",
+    "name": "Dragon's Claw",
+    "description": "Gain % max health.Every  seconds, heal % max Health.",
+    "components": [
+      "TFT_Item_NegatronCloak",
+      "TFT_Item_NegatronCloak"
+    ],
+    "icon": "ASSETS/Maps/TFT/Icons/Items/Hexcore/TFT_Item_DragonsClaw.TFT_Set13.tex",
+    "isComponent": false,
+    "isEmblem": false,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT_Item_GuardianAngel",
+    "name": "Edge of Night",
+    "description": "At % Health, briefly become untargetable, shed negative effects, and heal % missing health.",
+    "components": [
+      "TFT_Item_BFSword",
+      "TFT_Item_ChainVest"
+    ],
+    "icon": "ASSETS/Maps/TFT/Icons/Items/Hexcore/TFT_Item_GuardianAngel.TFT_Set13.tex",
+    "isComponent": false,
+    "isEmblem": false,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT_Item_SpectralGauntlet",
+    "name": "Evenshroud",
+    "description": "% Sunder enemies within  hexes. Gain  Armor and Magic Resist for the first  seconds of combat.Sunder: Reduce Armor",
+    "components": [
+      "TFT_Item_NegatronCloak",
+      "TFT_Item_GiantsBelt"
+    ],
+    "icon": "ASSETS/Maps/TFT/Icons/Items/Hexcore/TFT_Item_SpectralGauntlet.TFT_Set13.tex",
+    "isComponent": false,
+    "isEmblem": false,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT16_Item_FreljordEmblemItem",
+    "name": "Freljord Emblem",
+    "description": "The holder gains the Freljord trait.",
+    "components": [
+      "TFT_Item_Spatula",
+      "TFT_Item_GiantsBelt"
+    ],
+    "icon": "ASSETS/Maps/Particles/TFT/Item_Icons/Traits/Spatula/Set16/TFT16_Emblem_Freljord.TFT_Set16.tex",
+    "isComponent": false,
+    "isEmblem": true,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT_Item_FryingPan",
+    "name": "Frying Pan",
+    "description": "...why else would it be here?",
+    "components": [],
+    "icon": "ASSETS/Maps/TFT/Icons/Items/Hexcore/TFT_Item_FryingPan.TFT_Set13.tex",
+    "isComponent": true,
+    "isEmblem": false,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT_Item_GargoyleStoneplate",
+    "name": "Gargoyle Stoneplate",
+    "description": "Gain  Armor and  Magic Resist for each enemy targeting the holder.",
+    "components": [
+      "TFT_Item_ChainVest",
+      "TFT_Item_NegatronCloak"
+    ],
+    "icon": "ASSETS/Maps/TFT/Icons/Items/Hexcore/TFT_Item_GargoyleStoneplate.TFT_Set13.tex",
+    "isComponent": false,
+    "isEmblem": false,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT_Item_CorruptedGargoyleStoneplate",
+    "name": "Gargoyle Stoneplate",
+    "description": "Gain  Armor and  Magic Resist for each enemy targeting the holder.",
+    "components": [
+      "TFT_Item_ChainVest",
+      "TFT_Item_NegatronCloak"
+    ],
+    "icon": "ASSETS/Maps/TFT/Icons/Items/Hexcore/TFT_Item_GargoyleStoneplate.TFT_Set13.tex",
+    "isComponent": false,
+    "isEmblem": false,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT_Item_MadredsBloodrazor",
+    "name": "Giant Slayer",
+    "description": "Gain % additional Damage Amp against Tanks.",
+    "components": [
+      "TFT_Item_BFSword",
+      "TFT_Item_RecurveBow"
+    ],
+    "icon": "ASSETS/Maps/TFT/Icons/Items/Hexcore/TFT_Item_MadredsBloodrazor.TFT_Set13.tex",
+    "isComponent": false,
+    "isEmblem": false,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT_Item_GiantsBelt",
+    "name": "Giant's Belt",
+    "description": "%i:scaleHealth% + Health",
+    "components": [],
+    "icon": "ASSETS/Maps/TFT/Icons/Items/Hexcore/TFT_Item_GiantsBelt.TFT_Set13.tex",
+    "isComponent": true,
+    "isEmblem": false,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT_Item_GuinsoosRageblade",
+    "name": "Guinsoo's Rageblade",
+    "description": "Gain % stacking Attack Speed every second.",
+    "components": [
+      "TFT_Item_RecurveBow",
+      "TFT_Item_NeedlesslyLargeRod"
+    ],
+    "icon": "ASSETS/Maps/TFT/Icons/Items/Hexcore/TFT_Item_GuinsoosRageblade.TFT_Set13.tex",
+    "isComponent": false,
+    "isEmblem": false,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT_Item_CorruptedGuinsoosRageblade",
+    "name": "Guinsoo's Rageblade",
+    "description": "Gain % stacking Attack Speed every second.",
+    "components": [
+      "TFT_Item_RecurveBow",
+      "TFT_Item_NeedlesslyLargeRod"
+    ],
+    "icon": "ASSETS/Maps/TFT/Icons/Items/Hexcore/TFT_Item_GuinsoosRageblade.TFT_Set13.tex",
+    "isComponent": false,
+    "isEmblem": false,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT16_Item_GunslingerEmblemItem",
+    "name": "Gunslinger Emblem",
+    "description": "The holder gains the Gunslinger trait.Dealing physical damage to an enemy reduces their Armor by .",
+    "components": [],
+    "icon": "ASSETS/Maps/Particles/TFT/Item_Icons/Traits/Spatula/Set16/TFT16_Emblem_Gunslinger.TFT_Set16.tex",
+    "isComponent": false,
+    "isEmblem": true,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT_Item_UnstableConcoction",
+    "name": "Hand Of Justice",
+    "description": "Gain 2 effects:% Attack Damage and % Ability Power.% Omnivamp.While above % health, double the Attack Damage and Ability Power. While below % Health, double the Omnivamp.",
+    "components": [
+      "TFT_Item_TearOfTheGoddess",
+      "TFT_Item_SparringGloves"
+    ],
+    "icon": "ASSETS/Maps/TFT/Icons/Items/Hexcore/TFT_Item_UnstableConcoction.TFT_Set13.tex",
+    "isComponent": false,
+    "isEmblem": false,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT_Item_CorruptedHandOfJustice",
+    "name": "Hand Of Justice",
+    "description": "Gain 2 effects:% Attack Damage and % Ability Power.% Omnivamp.While above % health, double the Attack Damage and Ability Power. While below % Health, double the Omnivamp.",
+    "components": [
+      "TFT_Item_TearOfTheGoddess",
+      "TFT_Item_SparringGloves"
+    ],
+    "icon": "ASSETS/Maps/TFT/Icons/Items/Hexcore/TFT_Item_UnstableConcoction.TFT_Set13.tex",
+    "isComponent": false,
+    "isEmblem": false,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT_Item_HextechGunblade",
+    "name": "Hextech Gunblade",
+    "description": "Heal the lowest percent Health ally for % of damage dealt.Ally Healing:",
+    "components": [
+      "TFT_Item_BFSword",
+      "TFT_Item_NeedlesslyLargeRod"
+    ],
+    "icon": "ASSETS/Maps/TFT/Icons/Items/Hexcore/TFT_Item_HextechGunblade.TFT_Set13.tex",
+    "isComponent": false,
+    "isEmblem": false,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT_Item_InfinityEdge",
+    "name": "Infinity Edge",
+    "description": "Abilities can critically strike.If the holder's abilities can already critically strike, gain % Critical Strike Damage instead.",
+    "components": [
+      "TFT_Item_BFSword",
+      "TFT_Item_SparringGloves"
+    ],
+    "icon": "ASSETS/Maps/TFT/Icons/Items/Hexcore/TFT_Item_InfinityEdge.TFT_Set13.tex",
+    "isComponent": false,
+    "isEmblem": false,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT_Item_CorruptedInfinityEdge",
+    "name": "Infinity Edge",
+    "description": "Abilities can critically strike.If the holder's abilities can already critically strike, gain % Critical Strike Damage instead.",
+    "components": [
+      "TFT_Item_BFSword",
+      "TFT_Item_SparringGloves"
+    ],
+    "icon": "ASSETS/Maps/TFT/Icons/Items/Hexcore/TFT_Item_InfinityEdge.TFT_Set13.tex",
+    "isComponent": false,
+    "isEmblem": false,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT16_Item_InvokerEmblemItem",
+    "name": "Invoker Emblem",
+    "description": "The holder gains the Invoker trait. On cast, gain Ability Power equal to % of Mana spent.",
+    "components": [
+      "TFT_Item_FryingPan",
+      "TFT_Item_TearOfTheGoddess"
+    ],
+    "icon": "ASSETS/Maps/Particles/TFT/Item_Icons/Traits/Spatula/Set16/TFT16_Emblem_Invoker.TFT_Set16.tex",
+    "isComponent": false,
+    "isEmblem": true,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT16_Item_IoniaEmblemItem",
+    "name": "Ionia Emblem",
+    "description": "The holder gains the Ionia trait.",
+    "components": [
+      "TFT_Item_Spatula",
+      "TFT_Item_NeedlesslyLargeRod"
+    ],
+    "icon": "ASSETS/Maps/Particles/TFT/Item_Icons/Traits/Spatula/Set16/TFT16_Emblem_Ionia.TFT_Set16.tex",
+    "isComponent": false,
+    "isEmblem": true,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT_Item_IonicSpark",
+    "name": "Ionic Spark",
+    "description": "% Shred enemies within  hexes. When enemies cast an Ability, deal magic damage equal to % of the Mana spentShred: Reduce Magic Resist",
+    "components": [
+      "TFT_Item_NeedlesslyLargeRod",
+      "TFT_Item_NegatronCloak"
+    ],
+    "icon": "ASSETS/Maps/TFT/Icons/Items/Hexcore/TFT_Item_IonicSpark.TFT_Set13.tex",
+    "isComponent": false,
+    "isEmblem": false,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT16_Item_IxtalEmblemItem",
+    "name": "Ixtal Emblem",
+    "description": "The holder gains the Ixtal trait.",
+    "components": [],
+    "icon": "ASSETS/Maps/Particles/TFT/Item_Icons/Traits/Spatula/Set16/TFT16_Emblem_Ixtal.TFT_Set16.tex",
+    "isComponent": false,
+    "isEmblem": true,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT_Item_JeweledGauntlet",
+    "name": "Jeweled Gauntlet",
+    "description": "Abilities can critically strike.If the holder's abilities can already critically strike, gain % Critical Strike Damage instead.",
+    "components": [
+      "TFT_Item_NeedlesslyLargeRod",
+      "TFT_Item_SparringGloves"
+    ],
+    "icon": "ASSETS/Maps/TFT/Icons/Items/Hexcore/TFT_Item_JeweledGauntlet.TFT_Set13.tex",
+    "isComponent": false,
+    "isEmblem": false,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT_Item_CorruptedJeweledGauntlet",
+    "name": "Jeweled Gauntlet",
+    "description": "Abilities can critically strike.If the holder's abilities can already critically strike, gain % Critical Strike Damage instead.",
+    "components": [
+      "TFT_Item_NeedlesslyLargeRod",
+      "TFT_Item_SparringGloves"
+    ],
+    "icon": "ASSETS/Maps/TFT/Icons/Items/Hexcore/TFT_Item_JeweledGauntlet.TFT_Set13.tex",
+    "isComponent": false,
+    "isEmblem": false,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT16_Item_JuggernautEmblemItem",
+    "name": "Juggernaut Emblem",
+    "description": "The holder gains the Juggernaut trait and % of other Juggernaut's max Health when they die.",
+    "components": [
+      "TFT_Item_FryingPan",
+      "TFT_Item_NegatronCloak"
+    ],
+    "icon": "ASSETS/Maps/Particles/TFT/Item_Icons/Traits/Spatula/Set16/TFT16_Emblem_Juggernaut.TFT_Set16.tex",
+    "isComponent": false,
+    "isEmblem": true,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT_Item_RunaansHurricane",
+    "name": "Kraken's Fury",
+    "description": "Attacks grant % stacking Attack Damage, up to  attacks. After  attacks, gain % Attack Speed.",
+    "components": [
+      "TFT_Item_NegatronCloak",
+      "TFT_Item_RecurveBow"
+    ],
+    "icon": "ASSETS/Maps/TFT/Icons/Items/Hexcore/TFT_Item_KrakenSlayer.TFT_TFT14_5.tex",
+    "isComponent": false,
+    "isEmblem": false,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT_Item_LastWhisper",
+    "name": "Last Whisper",
+    "description": "Damage from attacks and Abilities % Sunder the target for  seconds. This effect does not stack.Sunder: Reduce Armor",
+    "components": [
+      "TFT_Item_RecurveBow",
+      "TFT_Item_SparringGloves"
+    ],
+    "icon": "ASSETS/Maps/TFT/Icons/Items/Hexcore/TFT_Item_LastWhisper.TFT_Set13.tex",
+    "isComponent": false,
+    "isEmblem": false,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT16_Item_LongshotEmblemItem",
+    "name": "Longshot Emblem",
+    "description": "The holder gains the Longshot trait and + Attack Range.",
+    "components": [],
+    "icon": "ASSETS/Maps/Particles/TFT/Item_Icons/Traits/Spatula/Set16/TFT16_Emblem_Longshot.TFT_Set16.tex",
+    "isComponent": false,
+    "isEmblem": true,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT_Item_Morellonomicon",
+    "name": "Morellonomicon",
+    "description": "Attacks and Abilities deal % Burn and % Wound to enemies for  seconds.Burn: Deals a percent of the target's max Health as true damage every secondWound: Reduces healing received",
+    "components": [
+      "TFT_Item_NeedlesslyLargeRod",
+      "TFT_Item_GiantsBelt"
+    ],
+    "icon": "ASSETS/Maps/TFT/Icons/Items/Hexcore/TFT_Item_Morellonomicon.TFT_Set13.tex",
+    "isComponent": false,
+    "isEmblem": false,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT_Item_Leviathan",
+    "name": "Nashor's Tooth",
+    "description": "Attacks grant  bonus Mana, increased to  if they critically strike.",
+    "components": [
+      "TFT_Item_RecurveBow",
+      "TFT_Item_GiantsBelt"
+    ],
+    "icon": "ASSETS/Maps/TFT/Icons/Items/Hexcore/TFT_Item_Leviathan.TFT_Set13.tex",
+    "isComponent": false,
+    "isEmblem": false,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT_Item_NeedlesslyLargeRod",
+    "name": "Needlessly Large Rod",
+    "description": "%i:scaleAP% + Ability Power",
+    "components": [],
+    "icon": "ASSETS/Maps/TFT/Icons/Items/Hexcore/TFT_Item_NeedlesslyLargeRod.TFT_Set13.tex",
+    "isComponent": true,
+    "isEmblem": false,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT_Item_NegatronCloak",
+    "name": "Negatron Cloak",
+    "description": "%i:scaleMR% + Magic Resist",
+    "components": [],
+    "icon": "ASSETS/Maps/TFT/Icons/Items/Hexcore/TFT_Item_NegatronCloak.TFT_Set13.tex",
+    "isComponent": true,
+    "isEmblem": false,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT16_Item_NoxusEmblemItem",
+    "name": "Noxus Emblem",
+    "description": "The holder gains the Noxus trait.",
+    "components": [
+      "TFT_Item_Spatula",
+      "TFT_Item_BFSword"
+    ],
+    "icon": "ASSETS/Maps/Particles/TFT/Item_Icons/Traits/Spatula/Set16/TFT16_Emblem_Noxus.TFT_Set16.tex",
+    "isComponent": false,
+    "isEmblem": true,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT16_Item_PiltoverEmblemItem",
+    "name": "Piltover Emblem",
+    "description": "The holder gains the Piltover trait.",
+    "components": [],
+    "icon": "ASSETS/Maps/Particles/TFT/Item_Icons/Traits/Spatula/Set16/TFT16_Emblem_Piltover.TFT_Set16.tex",
+    "isComponent": false,
+    "isEmblem": true,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT_Item_FrozenHeart",
+    "name": "Protector's Vow",
+    "description": "Combat Start: Gain  Mana.At % Health, gain  Mana and a Shield equal to % max Health.",
+    "components": [
+      "TFT_Item_TearOfTheGoddess",
+      "TFT_Item_ChainVest"
+    ],
+    "icon": "ASSETS/Maps/TFT/Icons/Items/Hexcore/TFT_Item_FrozenHeart.TFT_Set13.tex",
+    "isComponent": false,
+    "isEmblem": false,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT_Item_Quicksilver",
+    "name": "Quicksilver",
+    "description": "Combat Start: Gain immunity to crowd control for  seconds.Gain % stacking Attack Speed every second.",
+    "components": [
+      "TFT_Item_SparringGloves",
+      "TFT_Item_NegatronCloak"
+    ],
+    "icon": "ASSETS/Maps/TFT/Icons/Items/Hexcore/TFT_Item_Quicksilver.TFT_Set13.tex",
+    "isComponent": false,
+    "isEmblem": false,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT16_Item_RapidfireEmblemItem",
+    "name": "Quickstriker Emblem",
+    "description": "The holder gains the Quickstriker trait. On takedown, dash to the nearest target and heal for % maximum Health.",
+    "components": [
+      "TFT_Item_FryingPan",
+      "TFT_Item_RecurveBow"
+    ],
+    "icon": "ASSETS/Maps/Particles/TFT/Item_Icons/Traits/Spatula/Set16/TFT16_Emblem_Quickstriker.TFT_Set16.tex",
+    "isComponent": false,
+    "isEmblem": true,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT_Item_RabadonsDeathcap",
+    "name": "Rabadon's Deathcap",
+    "description": "This humble hat can help you make, or unmake, the world itself.",
+    "components": [
+      "TFT_Item_NeedlesslyLargeRod",
+      "TFT_Item_NeedlesslyLargeRod"
+    ],
+    "icon": "ASSETS/Maps/TFT/Icons/Items/Hexcore/TFT_Item_RabadonsDeathcap.TFT_Set13.tex",
+    "isComponent": false,
+    "isEmblem": false,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT_Item_CorruptedRabadonsDeathcap",
+    "name": "Rabadon's Deathcap",
+    "description": "This humble hat can help you make, or unmake, the world itself.",
+    "components": [
+      "TFT_Item_NeedlesslyLargeRod",
+      "TFT_Item_NeedlesslyLargeRod"
+    ],
+    "icon": "ASSETS/Maps/TFT/Icons/Items/Hexcore/TFT_Item_RabadonsDeathcap.TFT_Set13.tex",
+    "isComponent": false,
+    "isEmblem": false,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT_Item_RecurveBow",
+    "name": "Recurve Bow",
+    "description": "%i:scaleAS% +% Attack Speed",
+    "components": [],
+    "icon": "ASSETS/Maps/TFT/Icons/Items/Hexcore/TFT_Item_RecurveBow.TFT_Set13.tex",
+    "isComponent": true,
+    "isEmblem": false,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT_Item_RapidFireCannon",
+    "name": "Red Buff",
+    "description": "Attacks and Abilities % Burn and % Wound enemies for  seconds.Burn: Deals a percent of the target's max Health as true damage every secondWound: Reduces healing received",
+    "components": [
+      "TFT_Item_RecurveBow",
+      "TFT_Item_RecurveBow"
+    ],
+    "icon": "ASSETS/Maps/TFT/Icons/Items/Hexcore/TFT_Item_RapidFireCannon.TFT_Set13.tex",
+    "isComponent": false,
+    "isEmblem": false,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT16_Item_SlayerEmblemItem",
+    "name": "Slayer Emblem",
+    "description": "The holder gains the Slayer trait. Upon dropping below % max Health, Gain  Mana and a % max Health Shield.",
+    "components": [
+      "TFT_Item_FryingPan",
+      "TFT_Item_BFSword"
+    ],
+    "icon": "ASSETS/Maps/Particles/TFT/Item_Icons/Traits/Spatula/Set16/TFT16_Emblem_Slayer.TFT_Set16.tex",
+    "isComponent": false,
+    "isEmblem": true,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT_Item_SparringGloves",
+    "name": "Sparring Gloves",
+    "description": "+ Critical Strike Chance",
+    "components": [],
+    "icon": "ASSETS/Maps/TFT/Icons/Items/Hexcore/TFT_Item_SparringGloves.TFT_Set13.tex",
+    "isComponent": true,
+    "isEmblem": false,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT_Item_Spatula",
+    "name": "Spatula",
+    "description": "It must do something...",
+    "components": [],
+    "icon": "ASSETS/Maps/TFT/Icons/Items/Hexcore/TFT_Item_Spatula.TFT_Set13.tex",
+    "isComponent": true,
+    "isEmblem": false,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT_Item_SpearOfShojin",
+    "name": "Spear of Shojin",
+    "description": "Attacks grant  bonus Mana.",
+    "components": [
+      "TFT_Item_BFSword",
+      "TFT_Item_TearOfTheGoddess"
+    ],
+    "icon": "ASSETS/Maps/TFT/Icons/Items/Hexcore/TFT_Item_SpearOfShojin.TFT_Set13.tex",
+    "isComponent": false,
+    "isEmblem": false,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT_Item_CorruptedSpearOfShojin",
+    "name": "Spear of Shojin",
+    "description": "Attacks grant  bonus Mana.",
+    "components": [
+      "TFT_Item_BFSword",
+      "TFT_Item_TearOfTheGoddess"
+    ],
+    "icon": "ASSETS/Maps/TFT/Icons/Items/Hexcore/TFT_Item_SpearOfShojin.TFT_Set13.tex",
+    "isComponent": false,
+    "isEmblem": false,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT_Item_Redemption",
+    "name": "Spirit Visage",
+    "description": "Regenerate % of missing Health each second.",
+    "components": [
+      "TFT_Item_TearOfTheGoddess",
+      "TFT_Item_GiantsBelt"
+    ],
+    "icon": "ASSETS/Maps/TFT/Icons/Items/Hexcore/TFT_Item_SpiritVisageRR.TFT_TFT14_5.tex",
+    "isComponent": false,
+    "isEmblem": false,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT_Item_CorruptedRedemption",
+    "name": "Spirit Visage",
+    "description": "Regenerate % of missing Health each second.",
+    "components": [
+      "TFT_Item_TearOfTheGoddess",
+      "TFT_Item_GiantsBelt"
+    ],
+    "icon": "ASSETS/Maps/TFT/Icons/Items/Hexcore/TFT_Item_SpiritVisageRR.TFT_TFT14_5.tex",
+    "isComponent": false,
+    "isEmblem": false,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT_Item_NightHarvester",
+    "name": "Steadfast Heart",
+    "description": "Gain % Durability. While above % Health, instead gain % Durability.",
+    "components": [
+      "TFT_Item_ChainVest",
+      "TFT_Item_SparringGloves"
+    ],
+    "icon": "ASSETS/Maps/TFT/Icons/Items/Hexcore/TFT_Item_NightHarvester.TFT_Set13.tex",
+    "isComponent": false,
+    "isEmblem": false,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT_Item_SteraksGage",
+    "name": "Sterak's Gage",
+    "description": "At % Health, gain a Shield equal to % of the wearer's maximum Health that rapidly decays over  seconds.",
+    "components": [
+      "TFT_Item_BFSword",
+      "TFT_Item_GiantsBelt"
+    ],
+    "icon": "ASSETS/Maps/TFT/Icons/Items/Hexcore/TFT_Item_SteraksGage.TFT_Set13.tex",
+    "isComponent": false,
+    "isEmblem": false,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT_Item_PowerGauntlet",
+    "name": "Striker's Flail",
+    "description": "Critical Strikes grant % Damage Amp for  seconds, stacking up to  times.",
+    "components": [
+      "TFT_Item_GiantsBelt",
+      "TFT_Item_SparringGloves"
+    ],
+    "icon": "ASSETS/Maps/TFT/Icons/Items/Hexcore/TFT_Item_PowerGauntlet.TFT_Set13.tex",
+    "isComponent": false,
+    "isEmblem": false,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT_Item_RedBuff",
+    "name": "Sunfire Cape",
+    "description": "Gain % max Health. Every  seconds, deal % Burn and % Wound to an enemy within  hexes for  seconds.Burn: Deals a percent of the target's max Health as true damage every secondWound: Reduces healing received",
+    "components": [
+      "TFT_Item_ChainVest",
+      "TFT_Item_GiantsBelt"
+    ],
+    "icon": "ASSETS/Maps/TFT/Icons/Items/Hexcore/TFT_Item_RedBuff.TFT_Set13.tex",
+    "isComponent": false,
+    "isEmblem": false,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT_Item_TacticiansRing",
+    "name": "Tactician's Cape",
+    "description": "Your team gains + max team size.% chance to drop 1 gold after  seconds of combat.\"...and a bit of Luck.\"",
+    "components": [
+      "TFT_Item_Spatula",
+      "TFT_Item_FryingPan"
+    ],
+    "icon": "ASSETS/Maps/TFT/Icons/Items/Hexcore/TFT_Item_TacticiansRing.TFT_Set13.tex",
+    "isComponent": false,
+    "isEmblem": false,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT_Item_ForceOfNature",
+    "name": "Tactician's Crown",
+    "description": "Your team gains + max team size.% chance to drop 1 gold when you win combat.\"...the Heart of a hero...\"",
+    "components": [
+      "TFT_Item_Spatula",
+      "TFT_Item_Spatula"
+    ],
+    "icon": "ASSETS/Maps/TFT/Icons/Items/Hexcore/TFT_Item_ForceOfNature.TFT_Set13.tex",
+    "isComponent": false,
+    "isEmblem": false,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT_Item_TacticiansScepter",
+    "name": "Tactician's Shield",
+    "description": "Your team gains + max team size.% chance to drop 1 gold when the holder dies.\"Imbued with a Philosopher's wisdom...\"",
+    "components": [
+      "TFT_Item_FryingPan",
+      "TFT_Item_FryingPan"
+    ],
+    "icon": "ASSETS/Maps/TFT/Icons/Items/Hexcore/TFT_Item_TacticiansScepter.TFT_Set13.tex",
+    "isComponent": false,
+    "isEmblem": false,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT_Item_TearOfTheGoddess",
+    "name": "Tear of the Goddess",
+    "description": "%i:TFTManaRegen% + Mana Regen",
+    "components": [],
+    "icon": "ASSETS/Maps/TFT/Icons/Items/Hexcore/TFT_Item_TearOfTheGoddess.TFT_Set13.tex",
+    "isComponent": true,
+    "isEmblem": false,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT_Item_CursedBlade",
+    "name": "tft_item_name_CursedBlade",
+    "description": "TFT_item_description_CursedBlade",
+    "components": [
+      "TFT_Item_CursedBlade",
+      "TFT_Item_CursedBlade"
+    ],
+    "icon": "ASSETS/Maps/Particles/TFT/TFT_Item_CursedBlade.tex",
+    "isComponent": true,
+    "isEmblem": false,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT_Item_CursedBlade",
+    "name": "tft_item_name_CursedBlade",
+    "description": "TFT_item_description_CursedBlade",
+    "components": [
+      "TFT_Item_CursedBlade",
+      "TFT_Item_CursedBlade"
+    ],
+    "icon": "ASSETS/Maps/Particles/TFT/TFT_Item_CursedBlade.tex",
+    "isComponent": false,
+    "isEmblem": false,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT_Item_HextechChestguard",
+    "name": "tft_item_name_HextechChestguard",
+    "description": "tft_item_description_HextechChestguard",
+    "components": [
+      "TFT_Item_HextechChestguard",
+      "TFT_Item_HextechChestguard"
+    ],
+    "icon": "ASSETS/Maps/Particles/TFT/TFT_Item_HextechChestguard.tex",
+    "isComponent": true,
+    "isEmblem": false,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT_Item_HextechChestguard",
+    "name": "tft_item_name_HextechChestguard",
+    "description": "tft_item_description_HextechChestguard",
+    "components": [
+      "TFT_Item_HextechChestguard",
+      "TFT_Item_HextechChestguard"
+    ],
+    "icon": "ASSETS/Maps/Particles/TFT/TFT_Item_HextechChestguard.tex",
+    "isComponent": false,
+    "isEmblem": false,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT_Item_ThiefsGloves",
+    "name": "Thief's Gloves",
+    "description": "Each round: Equip 2 random items.[Consumes 3 item slots.]",
+    "components": [
+      "TFT_Item_SparringGloves",
+      "TFT_Item_SparringGloves"
+    ],
+    "icon": "ASSETS/Maps/TFT/Icons/Items/Hexcore/TFT_Item_ThiefsGloves.TFT_Set13.tex",
+    "isComponent": false,
+    "isEmblem": false,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT_Item_TitansResolve",
+    "name": "Titan's Resolve",
+    "description": "Gain % Attack Damage and % Ability Power when attacking or taking damage, stacking up to  times.  At full stacks, gain % Damage Amp and gain immunity to crowd control.",
+    "components": [
+      "TFT_Item_ChainVest",
+      "TFT_Item_RecurveBow"
+    ],
+    "icon": "ASSETS/Maps/TFT/Icons/Items/Hexcore/TFT_Item_TitansResolve.TFT_Set13.tex",
+    "isComponent": false,
+    "isEmblem": false,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT16_Item_VanquisherEmblemItem",
+    "name": "Vanquisher Emblem",
+    "description": "The holder gains the Vanquisher trait and a % chance to drop  gold on critical strikes.Cooldown:  secondsGold generated this game:",
+    "components": [
+      "TFT_Item_FryingPan",
+      "TFT_Item_SparringGloves"
+    ],
+    "icon": "ASSETS/Maps/Particles/TFT/Item_Icons/Traits/Spatula/Set16/TFT16_Emblem_Vanquisher.TFT_Set16.tex",
+    "isComponent": false,
+    "isEmblem": true,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT16_Item_VoidEmblemItem",
+    "name": "Void Emblem",
+    "description": "The holder gains the Void trait.",
+    "components": [
+      "TFT_Item_Spatula",
+      "TFT_Item_RecurveBow"
+    ],
+    "icon": "ASSETS/Maps/Particles/TFT/Item_Icons/Traits/Spatula/Set16/TFT16_Emblem_Void.TFT_Set16.tex",
+    "isComponent": false,
+    "isEmblem": true,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT_Item_StatikkShiv",
+    "name": "Void Staff",
+    "description": "Damage from attacks and Abilities % Shred the target for  seconds. This effect does not stack.Shred: Reduce Magic Resist",
+    "components": [
+      "TFT_Item_RecurveBow",
+      "TFT_Item_TearOfTheGoddess"
+    ],
+    "icon": "ASSETS/Maps/TFT/Icons/Items/Hexcore/TFT_Item_VoidStaff.TFT_TFT14_5.tex",
+    "isComponent": false,
+    "isEmblem": false,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT16_Item_WardenEmblemItem",
+    "name": "Warden Emblem",
+    "description": "The holder gains the Warden trait. When a Shield on the holder breaks, heal them for % of the Shield's initial value.",
+    "components": [],
+    "icon": "ASSETS/Maps/Particles/TFT/Item_Icons/Traits/Spatula/Set16/TFT16_Emblem_Warden.TFT_Set16.tex",
+    "isComponent": false,
+    "isEmblem": true,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT_Item_WarmogsArmor",
+    "name": "Warmog's Armor",
+    "description": "Gain % max Health.",
+    "components": [
+      "TFT_Item_GiantsBelt",
+      "TFT_Item_GiantsBelt"
+    ],
+    "icon": "ASSETS/Maps/TFT/Icons/Items/Hexcore/TFT_Item_WarmogsArmor.TFT_Set13.tex",
+    "isComponent": false,
+    "isEmblem": false,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT_Item_CorruptedWarmogsArmor",
+    "name": "Warmog's Armor",
+    "description": "Gain % max Health.",
+    "components": [
+      "TFT_Item_GiantsBelt",
+      "TFT_Item_GiantsBelt"
+    ],
+    "icon": "ASSETS/Maps/TFT/Icons/Items/Hexcore/TFT_Item_WarmogsArmor.TFT_Set13.tex",
+    "isComponent": false,
+    "isEmblem": false,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT16_Item_YordleEmblemItem",
+    "name": "Yordle Emblem",
+    "description": "The holder gains the Yordle trait.",
+    "components": [
+      "TFT_Item_Spatula",
+      "TFT_Item_NegatronCloak"
+    ],
+    "icon": "ASSETS/Maps/Particles/TFT/Item_Icons/Traits/Spatula/Set16/TFT16_Emblem_Yordle.TFT_Set16.tex",
+    "isComponent": false,
+    "isEmblem": true,
+    "isArtifact": false,
+    "isRadiant": false
+  },
+  {
+    "id": "TFT16_Item_ZaunEmblemItem",
+    "name": "Zaun Emblem",
+    "description": "The holder gains the Zaun trait.",
+    "components": [
+      "TFT_Item_Spatula",
+      "TFT_Item_SparringGloves"
+    ],
+    "icon": "ASSETS/Maps/Particles/TFT/Item_Icons/Traits/Spatula/Set16/TFT16_Emblem_Zaun.TFT_Set16.tex",
+    "isComponent": false,
+    "isEmblem": true,
+    "isArtifact": false,
+    "isRadiant": false
+  }
+]

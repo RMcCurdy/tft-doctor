@@ -1,0 +1,65 @@
+{
+  "sampleInput": {
+    "augments": ["TFT16_Augment_RumbleCarry"],
+    "emblems": ["TFT_Item_YordleEmblem"],
+    "items": ["TFT_Item_RabadonsDeathcap", "TFT_Item_JeweledGauntlet"],
+    "artifacts": []
+  },
+  "sampleResponse": {
+    "recommendations": [
+      {
+        "rank": 1,
+        "compId": "yordle-veigar",
+        "fitScore": 92,
+        "fitExplanation": [
+          "Your Yordle Emblem enables 8 Yordle without needing Ziggs, unlocking the chromatic breakpoint",
+          "Rabadon's Deathcap and Jeweled Gauntlet are best-in-slot items for Veigar carry",
+          "Artillery Barrage augment synergizes with Rumble's frontline pressure"
+        ],
+        "confidence": "high",
+        "emblemApplication": {
+          "emblemId": "TFT_Item_YordleEmblem",
+          "bestChampionId": "TFT16_Lissandra",
+          "bestChampionName": "Lissandra",
+          "reasoning": "Applying Yordle Emblem to Lissandra lets you hit 8 Yordle while adding an Invoker for the 4 Invoker breakpoint"
+        },
+        "augmentSynergies": [
+          {
+            "augmentId": "TFT16_Augment_RumbleCarry",
+            "augmentName": "Artillery Barrage",
+            "impact": "+0.4 avg placement improvement when paired with 6+ Yordle"
+          }
+        ]
+      },
+      {
+        "rank": 2,
+        "compId": "freljord-bruisers",
+        "fitScore": 61,
+        "fitExplanation": [
+          "Rabadon's and Jeweled Gauntlet are excellent on Lissandra carry",
+          "Yordle Emblem has limited use here — could flex onto a secondary unit for trait synergy"
+        ],
+        "confidence": "medium",
+        "augmentSynergies": []
+      },
+      {
+        "rank": 3,
+        "compId": "void-belveth",
+        "fitScore": 45,
+        "fitExplanation": [
+          "Your AP items don't align well with Bel'Veth's attack-speed-focused build",
+          "Kai'Sa could use the items but prefers AD-heavy builds",
+          "Yordle Emblem has no synergy with Void comp"
+        ],
+        "confidence": "medium",
+        "augmentSynergies": []
+      }
+    ],
+    "meta": {
+      "patchVersion": "16.6",
+      "dataFreshness": "2026-03-20T12:00:00Z",
+      "totalMatchesAnalyzed": 48750,
+      "confidence": "high"
+    }
+  }
+}

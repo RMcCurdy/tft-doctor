@@ -1,0 +1,212 @@
+[
+  {
+    "id": "TFT16_Item_Bilgewater_ArmorMRTier2",
+    "name": "+@BonusArmorMR@ Armor & Magic Resist",
+    "description": "Bilgewater champions gain  Armor and  Magic Resist.",
+    "icon": "ASSETS/Maps/Particles/TFT/Item_Icons/TFT16/TFT16_Bilgewater/TFT16_Bilgewater_ArmorMR_Tier2.TFT_Set16.tex",
+    "type": "other"
+  },
+  {
+    "id": "TFT16_Item_Bilgewater_ArmorMRTier3",
+    "name": "+@BonusArmorMR@ Armor & Magic Resist",
+    "description": "Bilgewater champions gain  Armor and  Magic Resist.",
+    "icon": "ASSETS/Maps/Particles/TFT/Item_Icons/TFT16/TFT16_Bilgewater/TFT16_Bilgewater_ArmorMR_Tier3.TFT_Set16.tex",
+    "type": "other"
+  },
+  {
+    "id": "TFT16_Item_Bilgewater_ArmorMRTier1",
+    "name": "+@BonusArmorMR@ Armor & Magic Resist",
+    "description": "Bilgewater champions gain  Armor and  Magic Resist.",
+    "icon": "ASSETS/Maps/Particles/TFT/Item_Icons/TFT16/TFT16_Bilgewater/TFT16_Bilgewater_ArmorMR_Tier1.TFT_Set16.tex",
+    "type": "other"
+  },
+  {
+    "id": "TFT16_Item_Bilgewater_ASTier2",
+    "name": "+@BonusAS*100@% Attack Speed",
+    "description": "Bilgewater champions gain % Attack Speed.",
+    "icon": "ASSETS/Maps/Particles/TFT/Item_Icons/TFT16/TFT16_Bilgewater/TFT16_Bilgewater_AS_Tier2.TFT_Set16.tex",
+    "type": "other"
+  },
+  {
+    "id": "TFT16_Item_Bilgewater_ASTier3",
+    "name": "+@BonusAS*100@% Attack Speed",
+    "description": "Bilgewater champions gain % Attack Speed.",
+    "icon": "ASSETS/Maps/Particles/TFT/Item_Icons/TFT16/TFT16_Bilgewater/TFT16_Bilgewater_AS_Tier3.TFT_Set16.tex",
+    "type": "other"
+  },
+  {
+    "id": "TFT16_Item_Piltover_90CaliberNets",
+    "name": "90 Caliber Nets",
+    "description": "Stun the  enemies who have dealt the most damage for  seconds.",
+    "icon": "ASSETS/Maps/Particles/TFT/Item_Icons/TFT16/TFT16_Piltover/TFT16_Item_Piltover_90CaliberNets.TFT_Set16.tex",
+    "type": "other"
+  },
+  {
+    "id": "TFT16_Item_Piltover_AccelerationGate",
+    "name": "Acceleration Gate",
+    "description": "After casting, Piltover units restore % of their max Mana over  seconds.",
+    "icon": "ASSETS/Maps/Particles/TFT/Item_Icons/TFT16/TFT16_Piltover/TFT16_Item_Piltover_AccelerationGate.TFT_Set16.tex",
+    "type": "other"
+  },
+  {
+    "id": "TFT16_Item_Piltover_ArmorNullifier",
+    "name": "Armor Nullifier",
+    "description": "Piltover units deal % more damage, increased to % against Tanks.",
+    "icon": "ASSETS/Maps/Particles/TFT/Item_Icons/TFT16/TFT16_Piltover/TFT16_Item_Piltover_ArmorNullifier.TFT_Set16.tex",
+    "type": "other"
+  },
+  {
+    "id": "TFT16_Item_Bilgewater_BlackmarketExplosives",
+    "name": "Blackmarket Explosives",
+    "description": "Every  seconds, deal  + % of damage dealt within the last  seconds as magic damage to current target and  nearest enemies.Recommended holder: Fizz",
+    "icon": "ASSETS/Maps/Particles/TFT/Item_Icons/TFT16/TFT16_Item_Bilgewater_BlackmarketExplosives.TFT_Set16.tex",
+    "type": "other"
+  },
+  {
+    "id": "TFT16_Item_Piltover_BlastShield",
+    "name": "Blast Shield",
+    "description": "All allies gain a % max Health Shield.",
+    "icon": "ASSETS/Maps/Particles/TFT/Item_Icons/TFT16/TFT16_Piltover/TFT16_Item_Piltover_BlastShield.TFT_Set16.tex",
+    "type": "other"
+  },
+  {
+    "id": "TFT16_Item_Piltover_ContinuumCogs",
+    "name": "Continuum Cogs",
+    "description": "All allies gain  Mana Regen and  Ability Power.",
+    "icon": "ASSETS/Maps/Particles/TFT/Item_Icons/TFT16/TFT16_Piltover/TFT16_Item_Piltover_ContinuumCogs.TFT_Set16.tex",
+    "type": "other"
+  },
+  {
+    "id": "TFT16_Item_Bilgewater_BilgeratCutlass",
+    "name": "Cutthroat's Cutlass",
+    "description": "Damaging enemies causes them to Bleed, dealing an additional % damage over 4 seconds.Recommended holder: Gangplank",
+    "icon": "ASSETS/Maps/Particles/TFT/Item_Icons/TFT16/TFT16_Item_Bilgewater_BilgeratCutlass.TFT_Set16.tex",
+    "type": "other"
+  },
+  {
+    "id": "TFT16_Item_Bilgewater_DeadmansDagger",
+    "name": "Dead Man's Dagger",
+    "description": "Attacks and Abilities execute enemies below % Health. On kill, gain % Attack Damage and % Ability Power.Recommended holder: Graves",
+    "icon": "ASSETS/Maps/Particles/TFT/Item_Icons/TFT16/TT16_Item_Bilgewater_DeadmansDagger.TFT_Set16.tex",
+    "type": "other"
+  },
+  {
+    "id": "TFT16_Item_Piltover_EMP",
+    "name": "E.M.P.",
+    "description": "Increase the Mana cost of all enemies' next cast by .",
+    "icon": "ASSETS/Maps/Particles/TFT/Item_Icons/TFT16/TFT16_Piltover/TFT16_Item_Piltover_EMP.TFT_Set16.tex",
+    "type": "other"
+  },
+  {
+    "id": "TFT16_Item_Piltover_EchoEngine",
+    "name": "Echo Engine",
+    "description": "For the rest of combat, repeat the effects of your other Modules every  seconds.",
+    "icon": "ASSETS/Maps/Particles/TFT/Item_Icons/TFT16/TFT16_Piltover/TFT16_Item_Piltover_UnstableCore.TFT_Set16.tex",
+    "type": "other"
+  },
+  {
+    "id": "TFT16_Item_Piltover_ElectricalOverload",
+    "name": "Electrical Overload",
+    "description": "Deal  + % max Health as true damage to all enemies.",
+    "icon": "ASSETS/Maps/Particles/TFT/Item_Icons/TFT16/TFT16_Piltover/TFT16_Item_Piltover_ElectricalOverload.TFT_Set16.tex",
+    "type": "other"
+  },
+  {
+    "id": "TFT16_Item_Piltover_GigantificationRay",
+    "name": "Gigantification Ray",
+    "description": "Piltover units gain % max Health and become much larger.",
+    "icon": "ASSETS/Maps/Particles/TFT/Item_Icons/TFT16/TFT16_Piltover/TFT16_Item_Piltover_GigantificationRay.TFT_Set16.tex",
+    "type": "other"
+  },
+  {
+    "id": "TFT16_Item_Piltover_KineticBarrier",
+    "name": "Kinetic Barrier",
+    "description": "Piltover units gain  Armor and  Magic Resist. If they've taken more magic damage than physical, they gain the opposite.",
+    "icon": "ASSETS/Maps/Particles/TFT/Item_Icons/TFT16/TFT16_Piltover/TFT16_Item_Piltover_KineticBarrier.TFT_Set16.tex",
+    "type": "other"
+  },
+  {
+    "id": "TFT16_Item_Bilgewater_LuckyEyepatch",
+    "name": "Lucky Doubloon",
+    "description": "On takedown, generate an additional  %i:scaleSerpents%. (Earned:&nbsp;)Recommended holder: Gangplank",
+    "icon": "ASSETS/Maps/Particles/TFT/Item_Icons/TFT16/TFT16_Item_LuckyDubloon.TFT_Set16.tex",
+    "type": "other"
+  },
+  {
+    "id": "TFT16_Item_Piltover_MagnetronCoil",
+    "name": "Magnetron Coil",
+    "description": "Piltover units gain % Damage Amp, increased by % for each cast from any Piltover unit this combat before this Module triggered.",
+    "icon": "ASSETS/Maps/Particles/TFT/Item_Icons/TFT16/TFT16_Piltover/TFT16_Item_Piltover_MagnetronCoil.TFT_Set16.tex",
+    "type": "other"
+  },
+  {
+    "id": "TFT16_Item_Piltover_MicroRockets",
+    "name": "Micro-Rockets",
+    "description": "Fire a barrage of missiles that repeats % of the damage dealt by Piltover units this combat as magic damage.",
+    "icon": "ASSETS/Maps/Particles/TFT/Item_Icons/TFT16/TFT16_Piltover/TFT16_Item_Piltover_MicroRockets.TFT_Set16.tex",
+    "type": "other"
+  },
+  {
+    "id": "TFT16_Item_Piltover_MiningDrill",
+    "name": "Mining Drill",
+    "description": "Gain  Gold or  Boot, randomly. (Repeats for every Piltover cast!)",
+    "icon": "ASSETS/Maps/Particles/TFT/Item_Icons/TFT16/TFT16_Piltover/TFT16_Item_Piltover_MiningDrill.TFT_Set16.tex",
+    "type": "other"
+  },
+  {
+    "id": "TFT16_Item_Piltover_MomentumDrive",
+    "name": "Momentum Drive",
+    "description": "Cleanse all allied crowd control effects. Your team gains % Tenacity.",
+    "icon": "ASSETS/Maps/Particles/TFT/Item_Icons/TFT16/TFT16_Piltover/TFT16_Item_Piltover_MomentumDrive.TFT_Set16.tex",
+    "type": "other"
+  },
+  {
+    "id": "TFT16_Item_Piltover_OverclockedCapacitors",
+    "name": "Overclocked Capacitors",
+    "description": "Grant your team % Attack Speed.",
+    "icon": "ASSETS/Maps/Particles/TFT/Item_Icons/TFT16/TFT16_Piltover/TFT16_Item_Piltover_OverclockedCapacitors.TFT_Set16.tex",
+    "type": "other"
+  },
+  {
+    "id": "TFT16_Item_WorldRune",
+    "name": "Realm Warp",
+    "description": "Use on any champion to gain an emblem for each of their listed traits.[Consumable - This item disappears when used.]",
+    "icon": "ASSETS/Maps/TFT/Icons/Items/Hexcore/RealmWrap.TFT_Set16.tex",
+    "type": "other"
+  },
+  {
+    "id": "TFT16_Item_Piltover_SuperiorLifeform",
+    "name": "Superior Lifeform",
+    "description": "Summon a robot copy of your  strongest Piltover units. They have % of the original's Health and deal % as much damage.",
+    "icon": "ASSETS/Maps/Particles/TFT/Item_Icons/TFT16/TFT16_Piltover/TFT16_Item_Piltover_SuperiorLifeform.TFT_Set16.tex",
+    "type": "other"
+  },
+  {
+    "id": "TFT16_Item_Piltover_TunedOscillator",
+    "name": "Tuned Oscillator",
+    "description": "Increase your team's Healing and Shielding by %.",
+    "icon": "ASSETS/Maps/Particles/TFT/Item_Icons/TFT16/TFT16_Piltover/TFT16_Item_Piltover_TunedOscillator.TFT_Set16.tex",
+    "type": "other"
+  },
+  {
+    "id": "TFT16_Item_Piltover_UnstableCore",
+    "name": "Unstable Core",
+    "description": "If Piltover units have cast at least  times this combat, deal % max Health true damage to all enemies. Otherwise, deal %.",
+    "icon": "ASSETS/Maps/Particles/TFT/Item_Icons/TFT16/TFT16_Piltover/TFT16_Item_Piltover_UnstableCore.TFT_Set16.tex",
+    "type": "other"
+  },
+  {
+    "id": "TFT16_Item_Piltover_Upgrade",
+    "name": "Upgrade!",
+    "description": "Upgrade a random item on your strongest Piltover unit to Radiant. They also gain % Attack Speed and  max Health.",
+    "icon": "ASSETS/Maps/Particles/TFT/Item_Icons/TFT16/TFT16_Piltover/TFT16_Item_Piltover_Upgrade.TFT_Set16.tex",
+    "type": "other"
+  },
+  {
+    "id": "TFT16_Item_Piltover_VoltageConduit",
+    "name": "Voltage Conduit",
+    "description": "Reduce the max Mana of Piltover units by %.",
+    "icon": "ASSETS/Maps/Particles/TFT/Item_Icons/TFT16/TFT16_Piltover/TFT16_Item_Piltover_VoltageConduit.TFT_Set16.tex",
+    "type": "other"
+  }
+]

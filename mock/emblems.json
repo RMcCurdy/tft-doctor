@@ -1,0 +1,134 @@
+[
+  {
+    "id": "TFT16_Item_SorcererEmblemItem",
+    "name": "Arcanist Emblem",
+    "traitId": "",
+    "icon": "ASSETS/Maps/Particles/TFT/Item_Icons/Traits/Spatula/Set16/TFT16_Emblem_Arcanist.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Item_BilgewaterEmblemItem",
+    "name": "Bilgewater Emblem",
+    "traitId": "",
+    "icon": "ASSETS/Maps/Particles/TFT/Item_Icons/Traits/Spatula/Set16/TFT16_Emblem_Bilgewater.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Item_BrawlerEmblemItem",
+    "name": "Bruiser Emblem",
+    "traitId": "",
+    "icon": "ASSETS/Maps/Particles/TFT/Item_Icons/Traits/Spatula/Set16/TFT16_Emblem_Bruiser.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Item_DefenderEmblemItem",
+    "name": "Defender Emblem",
+    "traitId": "",
+    "icon": "ASSETS/Maps/Particles/TFT/Item_Icons/Traits/Spatula/Set16/TFT16_Emblem_Defender.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Item_DemaciaEmblemItem",
+    "name": "Demacia Emblem",
+    "traitId": "",
+    "icon": "ASSETS/Maps/Particles/TFT/Item_Icons/Traits/Spatula/Set16/TFT16_Emblem_Demacia.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Item_MagusEmblemItem",
+    "name": "Disruptor Emblem",
+    "traitId": "",
+    "icon": "ASSETS/Maps/Particles/TFT/Item_Icons/Traits/Spatula/Set16/TFT16_Emblem_Disruptor.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Item_FreljordEmblemItem",
+    "name": "Freljord Emblem",
+    "traitId": "",
+    "icon": "ASSETS/Maps/Particles/TFT/Item_Icons/Traits/Spatula/Set16/TFT16_Emblem_Freljord.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Item_GunslingerEmblemItem",
+    "name": "Gunslinger Emblem",
+    "traitId": "",
+    "icon": "ASSETS/Maps/Particles/TFT/Item_Icons/Traits/Spatula/Set16/TFT16_Emblem_Gunslinger.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Item_InvokerEmblemItem",
+    "name": "Invoker Emblem",
+    "traitId": "",
+    "icon": "ASSETS/Maps/Particles/TFT/Item_Icons/Traits/Spatula/Set16/TFT16_Emblem_Invoker.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Item_IoniaEmblemItem",
+    "name": "Ionia Emblem",
+    "traitId": "",
+    "icon": "ASSETS/Maps/Particles/TFT/Item_Icons/Traits/Spatula/Set16/TFT16_Emblem_Ionia.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Item_IxtalEmblemItem",
+    "name": "Ixtal Emblem",
+    "traitId": "",
+    "icon": "ASSETS/Maps/Particles/TFT/Item_Icons/Traits/Spatula/Set16/TFT16_Emblem_Ixtal.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Item_JuggernautEmblemItem",
+    "name": "Juggernaut Emblem",
+    "traitId": "",
+    "icon": "ASSETS/Maps/Particles/TFT/Item_Icons/Traits/Spatula/Set16/TFT16_Emblem_Juggernaut.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Item_LongshotEmblemItem",
+    "name": "Longshot Emblem",
+    "traitId": "",
+    "icon": "ASSETS/Maps/Particles/TFT/Item_Icons/Traits/Spatula/Set16/TFT16_Emblem_Longshot.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Item_NoxusEmblemItem",
+    "name": "Noxus Emblem",
+    "traitId": "",
+    "icon": "ASSETS/Maps/Particles/TFT/Item_Icons/Traits/Spatula/Set16/TFT16_Emblem_Noxus.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Item_PiltoverEmblemItem",
+    "name": "Piltover Emblem",
+    "traitId": "",
+    "icon": "ASSETS/Maps/Particles/TFT/Item_Icons/Traits/Spatula/Set16/TFT16_Emblem_Piltover.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Item_RapidfireEmblemItem",
+    "name": "Quickstriker Emblem",
+    "traitId": "",
+    "icon": "ASSETS/Maps/Particles/TFT/Item_Icons/Traits/Spatula/Set16/TFT16_Emblem_Quickstriker.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Item_SlayerEmblemItem",
+    "name": "Slayer Emblem",
+    "traitId": "",
+    "icon": "ASSETS/Maps/Particles/TFT/Item_Icons/Traits/Spatula/Set16/TFT16_Emblem_Slayer.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Item_VanquisherEmblemItem",
+    "name": "Vanquisher Emblem",
+    "traitId": "",
+    "icon": "ASSETS/Maps/Particles/TFT/Item_Icons/Traits/Spatula/Set16/TFT16_Emblem_Vanquisher.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Item_VoidEmblemItem",
+    "name": "Void Emblem",
+    "traitId": "",
+    "icon": "ASSETS/Maps/Particles/TFT/Item_Icons/Traits/Spatula/Set16/TFT16_Emblem_Void.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Item_WardenEmblemItem",
+    "name": "Warden Emblem",
+    "traitId": "",
+    "icon": "ASSETS/Maps/Particles/TFT/Item_Icons/Traits/Spatula/Set16/TFT16_Emblem_Warden.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Item_YordleEmblemItem",
+    "name": "Yordle Emblem",
+    "traitId": "",
+    "icon": "ASSETS/Maps/Particles/TFT/Item_Icons/Traits/Spatula/Set16/TFT16_Emblem_Yordle.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Item_ZaunEmblemItem",
+    "name": "Zaun Emblem",
+    "traitId": "",
+    "icon": "ASSETS/Maps/Particles/TFT/Item_Icons/Traits/Spatula/Set16/TFT16_Emblem_Zaun.TFT_Set16.tex"
+  }
+]

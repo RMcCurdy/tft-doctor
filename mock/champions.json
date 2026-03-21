@@ -1,0 +1,1016 @@
+[
+  {
+    "id": "TFT16_Anivia",
+    "name": "Anivia",
+    "cost": 1,
+    "traits": [
+      "Freljord",
+      "Invoker"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Anivia/Skins/Base/Images/TFT16_Anivia_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Blitzcrank",
+    "name": "Blitzcrank",
+    "cost": 1,
+    "traits": [
+      "Zaun",
+      "Juggernaut"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Blitzcrank/Skins/Base/Images/TFT16_Blitzcrank_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Briar",
+    "name": "Briar",
+    "cost": 1,
+    "traits": [
+      "Noxus",
+      "Slayer",
+      "Juggernaut"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Briar/Skins/Base/Images/TFT16_Briar_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Caitlyn",
+    "name": "Caitlyn",
+    "cost": 1,
+    "traits": [
+      "Piltover",
+      "Longshot"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Caitlyn/Skins/Base/Images/TFT16_Caitlyn_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Illaoi",
+    "name": "Illaoi",
+    "cost": 1,
+    "traits": [
+      "Bilgewater",
+      "Bruiser"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Illaoi/Skins/Base/Images/TFT16_Illaoi_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_JarvanIV",
+    "name": "Jarvan IV",
+    "cost": 1,
+    "traits": [
+      "Demacia",
+      "Defender"
+    ],
+    "icon": "ASSETS/Characters/TFT16_JarvanIV/Skins/Base/Images/TFT16_JarvanIV_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Jhin",
+    "name": "Jhin",
+    "cost": 1,
+    "traits": [
+      "Ionia",
+      "Gunslinger"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Jhin/Skins/Base/Images/TFT16_Jhin_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_KogMaw",
+    "name": "Kog'Maw",
+    "cost": 1,
+    "traits": [
+      "Void",
+      "Arcanist",
+      "Longshot"
+    ],
+    "icon": "ASSETS/Characters/TFT16_KogMaw/Skins/Base/Images/TFT16_KogMaw_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Lulu",
+    "name": "Lulu",
+    "cost": 1,
+    "traits": [
+      "Yordle",
+      "Arcanist"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Lulu/Skins/Base/Images/TFT16_Lulu_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_PiltoverInvention",
+    "name": "Piltover Invention",
+    "cost": 1,
+    "traits": [],
+    "icon": "ASSETS/Characters/TFT16_PiltoverInvention/Skins/Base/Images/TFT16_PiltoverInvention_Mobile.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Qiyana",
+    "name": "Qiyana",
+    "cost": 1,
+    "traits": [
+      "Ixtal",
+      "Slayer"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Qiyana/Skins/Base/Images/TFT16_Qiyana_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Rumble",
+    "name": "Rumble",
+    "cost": 1,
+    "traits": [
+      "Yordle",
+      "Defender"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Rumble/Skins/Base/Images/TFT16_Rumble_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Shen",
+    "name": "Shen",
+    "cost": 1,
+    "traits": [
+      "Ionia",
+      "Bruiser"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Shen/Skins/Base/Images/TFT16_Shen_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Sona",
+    "name": "Sona",
+    "cost": 1,
+    "traits": [
+      "Demacia",
+      "Invoker"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Sona/Skins/Base/Images/TFT16_Sona_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Viego",
+    "name": "Viego",
+    "cost": 1,
+    "traits": [
+      "Shadow Isles",
+      "Quickstriker"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Viego/Skins/Base/Images/TFT16_Viego_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Aphelios",
+    "name": "Aphelios",
+    "cost": 2,
+    "traits": [
+      "Targon"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Aphelios/Skins/Base/Images/TFT16_Aphelios_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Ashe",
+    "name": "Ashe",
+    "cost": 2,
+    "traits": [
+      "Freljord",
+      "Quickstriker"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Ashe/Skins/Base/Images/TFT16_Ashe_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Bard",
+    "name": "Bard ",
+    "cost": 2,
+    "traits": [
+      "Caretaker"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Bard/Skins/Base/Images/TFT16_Bard_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_ChoGath",
+    "name": "Cho'Gath",
+    "cost": 2,
+    "traits": [
+      "Void",
+      "Juggernaut"
+    ],
+    "icon": "ASSETS/Characters/TFT16_ChoGath/Skins/Base/Images/TFT16_ChoGath_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Ekko",
+    "name": "Ekko",
+    "cost": 2,
+    "traits": [
+      "Zaun",
+      "Disruptor"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Ekko/Skins/Base/Images/TFT16_Ekko_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Graves",
+    "name": "Graves ",
+    "cost": 2,
+    "traits": [
+      "Bilgewater",
+      "Gunslinger"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Graves/Skins/Base/Images/TFT16_Graves_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Neeko",
+    "name": "Neeko",
+    "cost": 2,
+    "traits": [
+      "Ixtal",
+      "Arcanist",
+      "Defender"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Neeko/Skins/Base/Images/TFT16_Neeko_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Orianna",
+    "name": "Orianna ",
+    "cost": 2,
+    "traits": [
+      "Piltover",
+      "Invoker"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Orianna/Skins/Base/Images/TFT16_Orianna_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Poppy",
+    "name": "Poppy ",
+    "cost": 2,
+    "traits": [
+      "Demacia",
+      "Yordle",
+      "Juggernaut"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Poppy/Skins/Base/Images/TFT16_Poppy_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_RekSai",
+    "name": "Rek'Sai",
+    "cost": 2,
+    "traits": [
+      "Void",
+      "Vanquisher"
+    ],
+    "icon": "ASSETS/Characters/TFT16_RekSai/Skins/Base/Images/TFT16_RekSai_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Sion",
+    "name": "Sion",
+    "cost": 2,
+    "traits": [
+      "Noxus",
+      "Bruiser"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Sion/Skins/Base/Images/TFT16_Sion_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Teemo",
+    "name": "Teemo",
+    "cost": 2,
+    "traits": [
+      "Yordle",
+      "Longshot"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Teemo/Skins/Base/Images/TFT16_Teemo_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Tristana",
+    "name": "Tristana",
+    "cost": 2,
+    "traits": [
+      "Yordle",
+      "Gunslinger"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Tristana/Skins/Base/Images/TFT16_Tristana_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Tryndamere",
+    "name": "Tryndamere ",
+    "cost": 2,
+    "traits": [
+      "Freljord",
+      "Slayer"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Tryndamere/Skins/Base/Images/TFT16_Tryndamere_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_TwistedFate",
+    "name": "Twisted Fate",
+    "cost": 2,
+    "traits": [
+      "Bilgewater",
+      "Quickstriker"
+    ],
+    "icon": "ASSETS/Characters/TFT16_TwistedFate/Skins/Base/Images/TFT16_TwistedFate_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Vi",
+    "name": "Vi",
+    "cost": 2,
+    "traits": [
+      "Piltover",
+      "Zaun",
+      "Defender"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Vi/Skins/Base/Images/TFT16_Vi_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_XinZhao",
+    "name": "Xin Zhao",
+    "cost": 2,
+    "traits": [
+      "Demacia",
+      "Ionia",
+      "Warden"
+    ],
+    "icon": "ASSETS/Characters/TFT16_XinZhao/Skins/Base/Images/TFT16_XinZhao_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Yasuo",
+    "name": "Yasuo",
+    "cost": 2,
+    "traits": [
+      "Ionia",
+      "Slayer"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Yasuo/Skins/Base/Images/TFT16_Yasuo_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Yorick",
+    "name": "Yorick ",
+    "cost": 2,
+    "traits": [
+      "Shadow Isles",
+      "Warden"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Yorick/Skins/Base/Images/TFT16_Yorick_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Ahri",
+    "name": "Ahri",
+    "cost": 3,
+    "traits": [
+      "Ionia",
+      "Arcanist"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Ahri/Skins/Base/Images/TFT16_Ahri_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Darius",
+    "name": "Darius",
+    "cost": 3,
+    "traits": [
+      "Noxus",
+      "Defender"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Darius/Skins/Base/Images/TFT16_Darius_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_DrMundo",
+    "name": "Dr. Mundo",
+    "cost": 3,
+    "traits": [
+      "Zaun",
+      "Bruiser"
+    ],
+    "icon": "ASSETS/Characters/TFT16_DrMundo/Skins/Base/Images/TFT16_DrMundo_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Draven",
+    "name": "Draven",
+    "cost": 3,
+    "traits": [
+      "Noxus",
+      "Quickstriker"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Draven/Skins/Base/Images/TFT16_Draven_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Gangplank",
+    "name": "Gangplank",
+    "cost": 3,
+    "traits": [
+      "Bilgewater",
+      "Slayer",
+      "Vanquisher"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Gangplank/Skins/Base/Images/TFT16_Gangplank_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Gwen",
+    "name": "Gwen ",
+    "cost": 3,
+    "traits": [
+      "Shadow Isles",
+      "Disruptor"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Gwen/Skins/Base/Images/TFT16_Gwen_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Jinx",
+    "name": "Jinx",
+    "cost": 3,
+    "traits": [
+      "Zaun",
+      "Gunslinger"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Jinx/Skins/Base/Images/TFT16_Jinx_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Kennen",
+    "name": "Kennen ",
+    "cost": 3,
+    "traits": [
+      "Ionia",
+      "Yordle",
+      "Defender"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Kennen/Skins/Base/Images/TFT16_Kennen_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Kobuko",
+    "name": "Kobuko & Yuumi",
+    "cost": 3,
+    "traits": [
+      "Yordle",
+      "Bruiser",
+      "Invoker"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Kobuko/Skins/Base/Images/TFT16_Kobuko_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Leblanc",
+    "name": "LeBlanc ",
+    "cost": 3,
+    "traits": [
+      "Noxus",
+      "Invoker"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Leblanc/Skins/Base/Images/TFT16_Leblanc_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Leona",
+    "name": "Leona",
+    "cost": 3,
+    "traits": [
+      "Targon"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Leona/Skins/Base/Images/TFT16_Leona_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Loris",
+    "name": "Loris",
+    "cost": 3,
+    "traits": [
+      "Piltover",
+      "Warden"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Loris/Skins/Base/Images/TFT16_Loris_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Malzahar",
+    "name": "Malzahar",
+    "cost": 3,
+    "traits": [
+      "Void",
+      "Disruptor"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Malzahar/Skins/Base/Images/TFT16_Malzahar_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Milio",
+    "name": "Milio",
+    "cost": 3,
+    "traits": [
+      "Ixtal",
+      "Invoker"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Milio/Skins/Base/Images/TFT16_Milio_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Nautilus",
+    "name": "Nautilus",
+    "cost": 3,
+    "traits": [
+      "Bilgewater",
+      "Juggernaut",
+      "Warden"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Nautilus/Skins/Base/Images/TFT16_Nautilus_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Sejuani",
+    "name": "Sejuani",
+    "cost": 3,
+    "traits": [
+      "Freljord",
+      "Defender"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Sejuani/Skins/Base/Images/TFT16_Sejuani_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Vayne",
+    "name": "Vayne",
+    "cost": 3,
+    "traits": [
+      "Demacia",
+      "Longshot"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Vayne/Skins/Base/Images/TFT16_Vayne_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Zoe",
+    "name": "Zoe",
+    "cost": 3,
+    "traits": [
+      "Targon"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Zoe/Skins/Base/Images/TFT16_Zoe_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Ambessa",
+    "name": "Ambessa",
+    "cost": 4,
+    "traits": [
+      "Noxus",
+      "Vanquisher"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Ambessa/Skins/Base/Images/TFT16_Ambessa_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_BelVeth",
+    "name": "Bel'Veth",
+    "cost": 4,
+    "traits": [
+      "Void",
+      "Slayer"
+    ],
+    "icon": "ASSETS/Characters/TFT16_BelVeth/Skins/Base/Images/TFT16_BelVeth_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Braum",
+    "name": "Braum",
+    "cost": 4,
+    "traits": [
+      "Freljord",
+      "Warden"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Braum/Skins/Base/Images/TFT16_Braum_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Diana",
+    "name": "Diana ",
+    "cost": 4,
+    "traits": [
+      "Targon"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Diana/Skins/Base/Images/TFT16_Diana_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Fizz",
+    "name": "Fizz",
+    "cost": 4,
+    "traits": [
+      "Bilgewater",
+      "Yordle"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Fizz/Skins/Base/Images/TFT16_Fizz_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Garen",
+    "name": "Garen",
+    "cost": 4,
+    "traits": [
+      "Demacia",
+      "Defender"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Garen/Skins/Base/Images/TFT16_Garen_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Kaisa",
+    "name": "Kai'Sa ",
+    "cost": 4,
+    "traits": [
+      "Assimilator",
+      "Void",
+      "Longshot"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Kaisa/Skins/Base/Images/TFT16_Kaisa_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Kalista",
+    "name": "Kalista ",
+    "cost": 4,
+    "traits": [
+      "Shadow Isles",
+      "Vanquisher"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Kalista/Skins/Base/Images/TFT16_Kalista_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Lissandra",
+    "name": "Lissandra",
+    "cost": 4,
+    "traits": [
+      "Freljord",
+      "Invoker"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Lissandra/Skins/Base/Images/TFT16_Lissandra_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Lux",
+    "name": "Lux",
+    "cost": 4,
+    "traits": [
+      "Demacia",
+      "Arcanist"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Lux/Skins/Base/Images/TFT16_Lux_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_MissFortune",
+    "name": "Miss Fortune",
+    "cost": 4,
+    "traits": [
+      "Bilgewater",
+      "Gunslinger"
+    ],
+    "icon": "ASSETS/Characters/TFT16_MissFortune/Skins/Base/Images/TFT16_MissFortune_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Nasus",
+    "name": "Nasus ",
+    "cost": 4,
+    "traits": [
+      "Shurima"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Nasus/Skins/Base/Images/TFT16_Nasus_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Nidalee",
+    "name": "Nidalee ",
+    "cost": 4,
+    "traits": [
+      "Ixtal",
+      "Huntress"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Nidalee/Skins/Base/Images/TFT16_Nidalee_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Renekton",
+    "name": "Renekton ",
+    "cost": 4,
+    "traits": [
+      "Shurima"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Renekton/Skins/Base/Images/TFT16_Renekton_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_RiftHerald",
+    "name": "Rift Herald ",
+    "cost": 4,
+    "traits": [
+      "Void",
+      "Bruiser"
+    ],
+    "icon": "ASSETS/Characters/TFT16_RiftHerald/Skins/Base/Images/TFT16_RiftHerald_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Seraphine",
+    "name": "Seraphine",
+    "cost": 4,
+    "traits": [
+      "Piltover",
+      "Disruptor"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Seraphine/Skins/Base/Images/TFT16_Seraphine_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Singed",
+    "name": "Singed",
+    "cost": 4,
+    "traits": [
+      "Zaun",
+      "Juggernaut"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Singed/Skins/Base/Images/TFT16_Singed_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Skarner",
+    "name": "Skarner ",
+    "cost": 4,
+    "traits": [
+      "Ixtal"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Skarner/Skins/Base/Images/TFT16_Skarner_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Swain",
+    "name": "Swain",
+    "cost": 4,
+    "traits": [
+      "Noxus",
+      "Arcanist",
+      "Juggernaut"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Swain/Skins/Base/Images/TFT16_Swain_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Taric",
+    "name": "Taric",
+    "cost": 4,
+    "traits": [
+      "Targon"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Taric/Skins/Base/Images/TFT16_Taric_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Veigar",
+    "name": "Veigar",
+    "cost": 4,
+    "traits": [
+      "Yordle",
+      "Arcanist"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Veigar/Skins/Base/Images/TFT16_Veigar_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Warwick",
+    "name": "Warwick",
+    "cost": 4,
+    "traits": [
+      "Zaun",
+      "Quickstriker"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Warwick/Skins/Base/Images/TFT16_Warwick_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Wukong",
+    "name": "Wukong",
+    "cost": 4,
+    "traits": [
+      "Ionia",
+      "Bruiser"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Wukong/Skins/Base/Images/TFT16_Wukong_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Yone",
+    "name": "Yone",
+    "cost": 4,
+    "traits": [
+      "Ionia",
+      "Slayer"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Yone/Skins/Base/Images/TFT16_Yone_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Yunara",
+    "name": "Yunara",
+    "cost": 4,
+    "traits": [
+      "Ionia",
+      "Quickstriker"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Yunara/Skins/Base/Images/TFT16_Yunara_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Aatrox",
+    "name": "Aatrox ",
+    "cost": 5,
+    "traits": [
+      "Darkin",
+      "World Ender",
+      "Slayer"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Aatrox/Skins/Base/Images/TFT16_Aatrox_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Annie",
+    "name": "Annie",
+    "cost": 5,
+    "traits": [
+      "Dark Child",
+      "Arcanist"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Annie/Skins/Base/Images/TFT16_Annie_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_AurelionSol",
+    "name": "Aurelion Sol",
+    "cost": 5,
+    "traits": [
+      "Star Forger",
+      "Targon"
+    ],
+    "icon": "ASSETS/Characters/TFT16_AurelionSol/Skins/Base/Images/TFT16_AurelionSol_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Azir",
+    "name": "Azir",
+    "cost": 5,
+    "traits": [
+      "Shurima",
+      "Emperor",
+      "Disruptor"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Azir/Skins/Base/Images/TFT16_Azir_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_BaronNashor",
+    "name": "Baron Nashor",
+    "cost": 5,
+    "traits": [
+      "Void",
+      "Riftscourge"
+    ],
+    "icon": "ASSETS/Characters/TFT16_BaronNashor/Skins/Base/Images/TFT16_BaronNashor_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Brock",
+    "name": "Brock",
+    "cost": 5,
+    "traits": [
+      "Ixtal"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Brock/Skins/Base/Images/TFT16_Brock_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Fiddlesticks",
+    "name": "Fiddlesticks",
+    "cost": 5,
+    "traits": [
+      "Harvester",
+      "Vanquisher"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Fiddlesticks/Skins/Base/Images/TFT16_Fiddlesticks_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Galio",
+    "name": "Galio",
+    "cost": 5,
+    "traits": [
+      "Demacia",
+      "Heroic"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Galio/Skins/Base/Images/TFT16_Galio_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Kindred",
+    "name": "Kindred",
+    "cost": 5,
+    "traits": [
+      "Eternal",
+      "Quickstriker"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Kindred/Skins/Base/Images/TFT16_Kindred_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Lucian",
+    "name": "Lucian & Senna",
+    "cost": 5,
+    "traits": [
+      "Soulbound",
+      "Gunslinger"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Lucian/Skins/Base/Images/TFT16_Lucian_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Mel",
+    "name": "Mel ",
+    "cost": 5,
+    "traits": [
+      "Noxus",
+      "Disruptor"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Mel/Skins/Base/Images/TFT16_Mel_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Ornn",
+    "name": "Ornn",
+    "cost": 5,
+    "traits": [
+      "Blacksmith",
+      "Warden"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Ornn/Skins/Base/Images/TFT16_Ornn_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Ryze",
+    "name": "Ryze ",
+    "cost": 5,
+    "traits": [
+      "Rune Mage"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Ryze/Skins/Base/Images/TFT16_Ryze_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Sett",
+    "name": "Sett",
+    "cost": 5,
+    "traits": [
+      "Ionia",
+      "The Boss"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Sett/Skins/Base/Images/TFT16_Sett_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Shyvana",
+    "name": "Shyvana",
+    "cost": 5,
+    "traits": [
+      "Dragonborn",
+      "Juggernaut"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Shyvana/Skins/Base/Images/TFT16_Shyvana_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Sylas",
+    "name": "Sylas ",
+    "cost": 5,
+    "traits": [
+      "Chainbreaker",
+      "Arcanist",
+      "Defender"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Sylas/Skins/Base/Images/TFT16_Sylas_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_THex",
+    "name": "T-Hex",
+    "cost": 5,
+    "traits": [
+      "HexMech",
+      "Piltover",
+      "Gunslinger"
+    ],
+    "icon": "ASSETS/Characters/TFT16_THex/HUD/TFT16_THex_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_TahmKench",
+    "name": "Tahm Kench",
+    "cost": 5,
+    "traits": [
+      "Bilgewater",
+      "Glutton",
+      "Bruiser"
+    ],
+    "icon": "ASSETS/Characters/TFT16_TahmKench/Skins/Base/Images/TFT16_TahmKench_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Thresh",
+    "name": "Thresh ",
+    "cost": 5,
+    "traits": [
+      "Shadow Isles",
+      "Warden"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Thresh/Skins/Base/Images/TFT16_Thresh_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Volibear",
+    "name": "Volibear ",
+    "cost": 5,
+    "traits": [
+      "Freljord",
+      "Bruiser"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Volibear/Skins/Base/Images/TFT16_Volibear_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Xerath",
+    "name": "Xerath ",
+    "cost": 5,
+    "traits": [
+      "Shurima",
+      "Ascendant"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Xerath/Skins/Base/Images/TFT16_Xerath_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Zaahen",
+    "name": "Zaahen",
+    "cost": 5,
+    "traits": [
+      "Darkin",
+      "Immortal"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Zaahen/Skins/Base/Images/TFT16_Zaahen_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Ziggs",
+    "name": "Ziggs ",
+    "cost": 5,
+    "traits": [
+      "Zaun",
+      "Yordle",
+      "Longshot"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Ziggs/Skins/Base/Images/TFT16_Ziggs_splash_tile_0.TFT_Set16.tex"
+  },
+  {
+    "id": "TFT16_Zilean",
+    "name": "Zilean",
+    "cost": 5,
+    "traits": [
+      "Chronokeeper",
+      "Invoker"
+    ],
+    "icon": "ASSETS/Characters/TFT16_Zilean/Skins/Base/Images/TFT16_Zilean_splash_tile_0.TFT_Set16.tex"
+  }
+]
