@@ -24,11 +24,6 @@ export default function HomePage() {
           View Meta
         </Link>
       </div>
-      <p className="mt-16 max-w-md text-xs text-muted-foreground/60">
-        TFT Doctor is not endorsed by Riot Games and does not reflect the views
-        or opinions of Riot Games or anyone officially involved in producing or
-        managing Riot Games properties.
-      </p>
     </div>
   );
 }
