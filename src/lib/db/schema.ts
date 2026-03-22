@@ -46,7 +46,7 @@ export const matches = pgTable(
   {
     matchId: varchar("match_id", { length: 64 }).primaryKey(),
     patchId: integer("patch_id").references(() => patches.id),
-    gameVersion: varchar("game_version", { length: 64 }),
+    gameVersion: varchar("game_version", { length: 256 }),
     gameDatetime: timestamp("game_datetime"),
     gameLengthSeconds: integer("game_length_seconds"),
     queueId: integer("queue_id"),
