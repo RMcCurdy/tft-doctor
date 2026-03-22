@@ -119,9 +119,8 @@ function BoardPlacement({
               width: totalWidth,
               height: totalHeight,
               transform: `scale(${scale})`,
-              transformOrigin: "top left",
+              transformOrigin: "top center",
               marginBottom: scale < 1 ? -(totalHeight * (1 - scale)) : 0,
-              marginRight: scale < 1 ? -(totalWidth * (1 - scale)) : 0,
             }}
           >
             {grid.map((row, rowIdx) => {

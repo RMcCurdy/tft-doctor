@@ -77,10 +77,22 @@ export const REGION_TO_ROUTING: Record<string, string> = {
 };
 
 /** Summoned/spawned units that should be excluded from comp lineups.
- *  These are not purchasable from the shop and appear via trait activation. */
+ *  These are not purchasable from the shop and appear via trait activation.
+ *  Riot API returns inconsistent casing — store lowercase and check via isSummonedUnit(). */
+const SUMMONED_UNIT_IDS_LOWER = new Set([
+  "tft16_atakhan",
+]);
+
+/** @deprecated Use isSummonedUnit() for case-insensitive matching */
 export const SUMMONED_UNIT_IDS = new Set([
   "TFT16_Atakhan",
+  "tft16_atakhan",
 ]);
+
+/** Case-insensitive check for summoned/spawned units */
+export function isSummonedUnit(characterId: string): boolean {
+  return SUMMONED_UNIT_IDS_LOWER.has(characterId.toLowerCase());
+}
 
 /** Items classified as offensive (for carry identification) */
 export const OFFENSIVE_ITEM_IDS = new Set([

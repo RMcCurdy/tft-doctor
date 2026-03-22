@@ -15,7 +15,7 @@ import { logger } from "./utils/logger";
 
 import championsData from "../mock/champions.json";
 import traitsData from "../mock/traits.json";
-import { SUMMONED_UNIT_IDS } from "../src/lib/constants";
+import { isSummonedUnit } from "../src/lib/constants";
 
 const PATCH_ID = 1;
 
@@ -33,7 +33,7 @@ interface TraitDef {
 }
 
 const champions = (championsData as Champion[]).filter(
-  (c) => !SUMMONED_UNIT_IDS.has(c.id)
+  (c) => !isSummonedUnit(c.id)
 );
 const traits = traitsData as TraitDef[];
 
