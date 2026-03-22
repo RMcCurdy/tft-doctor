@@ -27,6 +27,7 @@ export interface CompChampion {
   championId: string;
   championName: string;
   starLevel: number; // Recommended star level (1-3)
+  threeStarRate?: number; // 0-1 fraction of games this champ was 3-starred
   position?: BoardPosition;
   recommendedItems: string[]; // Item IDs, typically 3 for carries
   isCarry: boolean;

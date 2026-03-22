@@ -6,6 +6,7 @@ import { GameIcon } from "@/components/shared/GameIcon";
 import { TraitBadge, sortTraits } from "@/components/shared/TraitBadge";
 import type { CompArchetype } from "@/types/comp";
 import { cn } from "@/lib/utils";
+import { Star } from "lucide-react";
 
 interface CompCardProps {
   comp: CompArchetype;
@@ -76,8 +77,8 @@ export function CompCard({ comp, getTraitIcon, getChampionCost }: CompCardProps)
               return (
                 <div
                   key={champ.championId}
-                  className={cn("rounded-sm ring-2", COST_BORDER[cost] ?? "ring-border")}
-                  title={`${champ.championName} (${cost} cost)${champ.isCarry ? " — Carry" : ""}`}
+                  className={cn("relative rounded-sm ring-2", COST_BORDER[cost] ?? "ring-border")}
+                  title={`${champ.championName} (${cost} cost)${champ.isCarry ? " — Carry" : ""}${(champ.threeStarRate ?? 0) >= 0.5 ? " — 3★" : ""}`}
                 >
                   <GameIcon
                     championId={champ.championId}
@@ -85,6 +86,13 @@ export function CompCard({ comp, getTraitIcon, getChampionCost }: CompCardProps)
                     size={48}
                     variant="champion"
                   />
+                  {(champ.threeStarRate ?? 0) >= 0.5 && (
+                    <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 flex gap-px">
+                      <Star className="h-3 w-3 fill-warning text-warning drop-shadow-sm" />
+                      <Star className="h-3 w-3 fill-warning text-warning drop-shadow-sm" />
+                      <Star className="h-3 w-3 fill-warning text-warning drop-shadow-sm" />
+                    </div>
+                  )}
                 </div>
               );
             })}

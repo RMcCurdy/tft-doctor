@@ -11,7 +11,7 @@
 
 import type { RiotUnit } from "@/types/riot";
 import type { CarryResult } from "./types";
-import { OFFENSIVE_ITEM_IDS, SECONDARY_CARRY_THRESHOLD, SECONDARY_CARRY_MIN_ITEMS } from "@/lib/constants";
+import { OFFENSIVE_ITEM_IDS, SECONDARY_CARRY_THRESHOLD, SECONDARY_CARRY_MIN_ITEMS, SUMMONED_UNIT_IDS } from "@/lib/constants";
 
 interface ScoredUnit {
   characterId: string;
@@ -37,6 +37,7 @@ export function identifyCarry(units: RiotUnit[]): CarryResult {
   }
 
   const scored = units
+    .filter((unit) => !SUMMONED_UNIT_IDS.has(unit.character_id))
     .map((unit) => scoreUnit(unit))
     .sort((a, b) => {
       // Sort by score descending, break ties by cost descending

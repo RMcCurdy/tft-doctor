@@ -76,6 +76,12 @@ export const REGION_TO_ROUTING: Record<string, string> = {
   vn2: "sea",
 };
 
+/** Summoned/spawned units that should be excluded from comp lineups.
+ *  These are not purchasable from the shop and appear via trait activation. */
+export const SUMMONED_UNIT_IDS = new Set([
+  "TFT16_Atakhan",
+]);
+
 /** Items classified as offensive (for carry identification) */
 export const OFFENSIVE_ITEM_IDS = new Set([
   "TFT_Item_InfinityEdge",

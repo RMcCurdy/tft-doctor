@@ -15,6 +15,7 @@ import { logger } from "./utils/logger";
 
 import championsData from "../mock/champions.json";
 import traitsData from "../mock/traits.json";
+import { SUMMONED_UNIT_IDS } from "../src/lib/constants";
 
 const PATCH_ID = 1;
 
@@ -31,7 +32,9 @@ interface TraitDef {
   breakpoints: { minUnits: number; style: string }[];
 }
 
-const champions = championsData as Champion[];
+const champions = (championsData as Champion[]).filter(
+  (c) => !SUMMONED_UNIT_IDS.has(c.id)
+);
 const traits = traitsData as TraitDef[];
 
 // Map trait display name → internal ID and breakpoints
@@ -266,6 +269,14 @@ function buildComp(def: CompDef) {
     championId: c.id,
     championName: c.name,
     starLevel: c.cost <= 2 ? 3 : 2,
+    threeStarRate: parseFloat(
+      (c.cost === 1 ? 0.6 + Math.random() * 0.3
+        : c.cost === 2 ? 0.3 + Math.random() * 0.3
+        : c.cost === 3 ? 0.05 + Math.random() * 0.2
+        : c.cost === 4 ? 0.01 + Math.random() * 0.09
+        : Math.random() * 0.03
+      ).toFixed(3)
+    ),
     recommendedItems:
       c.id === carry.id
         ? pickRandom(CARRY_ITEMS, 3)

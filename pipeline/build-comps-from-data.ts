@@ -19,6 +19,7 @@ import {
 } from "../src/lib/db/schema.js";
 import { eq, and } from "drizzle-orm";
 import { getCurrentPatch } from "../src/lib/db/queries/patches.js";
+import { SUMMONED_UNIT_IDS } from "../src/lib/constants.js";
 import { upsertCompArchetype } from "../src/lib/db/queries/comps.js";
 import { classifyBoards } from "../src/lib/clustering/comp-classifier.js";
 import { SET_16_COMP_DEFINITIONS } from "../src/lib/clustering/comp-definitions.js";
@@ -259,6 +260,7 @@ async function buildCompsFromData() {
     for (const { board } of group) {
       for (const unit of board.units) {
         const id = unit.character_id;
+        if (SUMMONED_UNIT_IDS.has(id)) continue;
         if (!champStats.has(id)) {
           champStats.set(id, { count: 0, starLevels: [], itemSets: [] });
         }
@@ -299,6 +301,7 @@ async function buildCompsFromData() {
       championId: string;
       championName: string;
       starLevel: number;
+      threeStarRate: number;
       recommendedItems: string[];
       isCarry: boolean;
       position?: { row: number; col: number };
@@ -326,6 +329,9 @@ async function buildCompsFromData() {
         championId: champId,
         championName: staticChamp?.name ?? champId.replace(/^TFT16_/, ""),
         starLevel: mode(stats.starLevels),
+        threeStarRate: parseFloat(
+          (stats.starLevels.filter((s) => s === 3).length / stats.starLevels.length).toFixed(3)
+        ),
         recommendedItems,
         isCarry,
       });
