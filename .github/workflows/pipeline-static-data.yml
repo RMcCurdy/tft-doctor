@@ -1,0 +1,31 @@
+name: Pipeline — Static Data & Patch Detection
+
+on:
+  schedule:
+    - cron: "0 6 * * *" # Daily at 06:00 UTC
+  workflow_dispatch: {} # Manual trigger
+
+concurrency:
+  group: pipeline-static-data
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      RIOT_API_KEY: ${{ secrets.RIOT_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "pnpm"
+      - run: pnpm install --frozen-lockfile
+      - name: Detect patch
+        run: npx tsx pipeline/detect-patch.ts
+      - name: Sync static data
+        run: npx tsx pipeline/sync-static-data.ts

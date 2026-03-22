@@ -1,0 +1,32 @@
+name: Pipeline — Ingest Matches
+
+on:
+  schedule:
+    - cron: "0 */6 * * *" # Every 6 hours
+  workflow_dispatch: {} # Manual trigger
+
+concurrency:
+  group: pipeline-matches
+  cancel-in-progress: false
+
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      RIOT_API_KEY: ${{ secrets.RIOT_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "pnpm"
+      - run: pnpm install --frozen-lockfile
+      - name: Ingest matches
+        run: npx tsx pipeline/ingest-matches.ts
+      - name: Aggregate comps
+        run: npx tsx pipeline/aggregate-comps.ts
