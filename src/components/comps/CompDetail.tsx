@@ -8,6 +8,7 @@ import { TraitBadge, sortTraits } from "@/components/shared/TraitBadge";
 import type { CompArchetype, BoardPosition } from "@/types/comp";
 import { cn } from "@/lib/utils";
 import { ArrowLeft } from "lucide-react";
+import { useRef, useState, useEffect, useCallback } from "react";
 
 interface CompDetailProps {
   comp: CompArchetype;
@@ -88,63 +89,89 @@ function BoardPlacement({
   const totalWidth = hSpacing * 7 + rowOffset;
   const totalHeight = vSpacing * 3 + hexH;
 
+  // Responsive scaling: measure container and shrink board to fit
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [scale, setScale] = useState(1);
+
+  const updateScale = useCallback(() => {
+    if (!containerRef.current) return;
+    const available = containerRef.current.clientWidth;
+    setScale(Math.min(1, available / totalWidth));
+  }, [totalWidth]);
+
+  useEffect(() => {
+    updateScale();
+    const observer = new ResizeObserver(updateScale);
+    if (containerRef.current) observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, [updateScale]);
+
   return (
     <Card>
       <CardHeader className="pb-3">
         <h2 className="text-base font-bold">Board Placement</h2>
       </CardHeader>
       <CardContent className="pt-0">
-        <div
-          className="relative mx-auto"
-          style={{ width: totalWidth, height: totalHeight }}
-        >
-          {grid.map((row, rowIdx) => {
-            const isOdd = rowIdx % 2 === 1;
-            const offX = isOdd ? rowOffset : 0;
-            const y = rowIdx * vSpacing;
+        <div ref={containerRef} className="w-full">
+          <div
+            className="relative mx-auto"
+            style={{
+              width: totalWidth,
+              height: totalHeight,
+              transform: `scale(${scale})`,
+              transformOrigin: "top left",
+              marginBottom: scale < 1 ? -(totalHeight * (1 - scale)) : 0,
+              marginRight: scale < 1 ? -(totalWidth * (1 - scale)) : 0,
+            }}
+          >
+            {grid.map((row, rowIdx) => {
+              const isOdd = rowIdx % 2 === 1;
+              const offX = isOdd ? rowOffset : 0;
+              const y = rowIdx * vSpacing;
 
-            return row.map((cell, colIdx) => {
-              const x = offX + colIdx * hSpacing;
+              return row.map((cell, colIdx) => {
+                const x = offX + colIdx * hSpacing;
 
-              return (
-                <div
-                  key={`${rowIdx}-${colIdx}`}
-                  className="absolute"
-                  style={{ left: x, top: y, width: hexW, height: hexH }}
-                >
-                  {/* Cost-colored ring (rendered behind the hex) */}
-                  {cell && (
+                return (
+                  <div
+                    key={`${rowIdx}-${colIdx}`}
+                    className="absolute"
+                    style={{ left: x, top: y, width: hexW, height: hexH }}
+                  >
+                    {/* Cost-colored ring (rendered behind the hex) */}
+                    {cell && (
+                      <div
+                        className="absolute -inset-[3px]"
+                        style={{
+                          clipPath: HEX_CLIP,
+                          backgroundColor: COST_COLORS[getChampionCost?.(cell.championId) ?? 1] ?? COST_COLORS[1],
+                        }}
+                      />
+                    )}
+                    {/* Hex cell */}
                     <div
-                      className="absolute -inset-[3px]"
+                      className="relative flex h-full w-full items-center justify-center overflow-hidden"
                       style={{
                         clipPath: HEX_CLIP,
-                        backgroundColor: COST_COLORS[getChampionCost?.(cell.championId) ?? 1] ?? COST_COLORS[1],
+                        backgroundColor: cell ? undefined : "#2a2a30",
                       }}
-                    />
-                  )}
-                  {/* Hex cell */}
-                  <div
-                    className="relative flex h-full w-full items-center justify-center overflow-hidden"
-                    style={{
-                      clipPath: HEX_CLIP,
-                      backgroundColor: cell ? undefined : "#2a2a30",
-                    }}
-                    title={cell?.name}
-                  >
-                    {cell ? (
-                      <GameIcon
-                        championId={cell.championId}
-                        name={cell.name}
-                        size={Math.round(HEX_SIZE * 1.3)}
-                        variant="champion"
-                        className="min-h-full min-w-full rounded-none border-0 object-cover"
-                      />
-                    ) : null}
+                      title={cell?.name}
+                    >
+                      {cell ? (
+                        <GameIcon
+                          championId={cell.championId}
+                          name={cell.name}
+                          size={Math.round(HEX_SIZE * 1.3)}
+                          variant="champion"
+                          className="min-h-full min-w-full rounded-none border-0 object-cover"
+                        />
+                      ) : null}
+                    </div>
                   </div>
-                </div>
-              );
-            });
-          })}
+                );
+              });
+            })}
+          </div>
         </div>
       </CardContent>
     </Card>
