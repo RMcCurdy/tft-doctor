@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Menu, X } from "lucide-react";
@@ -27,6 +28,14 @@ export function Navbar() {
       <nav className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
+          <Image
+            src="/eyes.png"
+            alt=""
+            width={28}
+            height={28}
+            className="h-7 w-7"
+            unoptimized
+          />
           <span className="text-lg font-bold tracking-tight text-foreground">
             TFT <span className="text-accent">Doctor</span>
           </span>

@@ -110,41 +110,43 @@ interface CompDef {
   primaryTrait: string;
   secondaryTrait?: string;
   targetSize: number;
-  carryIndex: number; // index in sorted-by-cost list (from end, so -1 = highest cost)
+  carryIndex: number;
+  /** Champion ID that MUST be included and set as carry */
+  requiredChampion?: string;
 }
 
 // Define 30 comp archetypes
 const COMP_DEFS: CompDef[] = [
-  { name: "6 Yordle Arcanists", primaryTrait: "Yordle", secondaryTrait: "Arcanist", targetSize: 8, carryIndex: -2 },
-  { name: "Void Bel'Veth", primaryTrait: "Void", secondaryTrait: "Slayer", targetSize: 8, carryIndex: -3 },
-  { name: "Ionia Slayer Yone", primaryTrait: "Ionia", secondaryTrait: "Slayer", targetSize: 8, carryIndex: -2 },
-  { name: "Zaun Gunslingers", primaryTrait: "Zaun", secondaryTrait: "Gunslinger", targetSize: 8, carryIndex: -3 },
-  { name: "Demacia Defenders", primaryTrait: "Demacia", secondaryTrait: "Defender", targetSize: 8, carryIndex: -2 },
-  { name: "Noxus Draven Carry", primaryTrait: "Noxus", secondaryTrait: "Quickstriker", targetSize: 8, carryIndex: -3 },
-  { name: "Freljord Bruisers", primaryTrait: "Freljord", secondaryTrait: "Bruiser", targetSize: 8, carryIndex: -2 },
-  { name: "Targon Aphelios", primaryTrait: "Targon", secondaryTrait: "Longshot", targetSize: 7, carryIndex: -4 },
-  { name: "Bilgewater Pirates", primaryTrait: "Bilgewater", secondaryTrait: "Vanquisher", targetSize: 8, carryIndex: -2 },
+  { name: "6 Yordle Arcanists", primaryTrait: "Yordle", secondaryTrait: "Arcanist", targetSize: 8, carryIndex: -2, requiredChampion: "TFT16_Veigar" },
+  { name: "Void Bel'Veth", primaryTrait: "Void", secondaryTrait: "Slayer", targetSize: 8, carryIndex: -3, requiredChampion: "TFT16_BelVeth" },
+  { name: "Ionia Slayer Yone", primaryTrait: "Ionia", secondaryTrait: "Slayer", targetSize: 8, carryIndex: -2, requiredChampion: "TFT16_Yone" },
+  { name: "Zaun Gunslingers", primaryTrait: "Zaun", secondaryTrait: "Gunslinger", targetSize: 8, carryIndex: -3, requiredChampion: "TFT16_Jinx" },
+  { name: "Demacia Defenders", primaryTrait: "Demacia", secondaryTrait: "Defender", targetSize: 8, carryIndex: -2, requiredChampion: "TFT16_Garen" },
+  { name: "Noxus Draven Carry", primaryTrait: "Noxus", secondaryTrait: "Quickstriker", targetSize: 8, carryIndex: -3, requiredChampion: "TFT16_Draven" },
+  { name: "Freljord Bruisers", primaryTrait: "Freljord", secondaryTrait: "Bruiser", targetSize: 8, carryIndex: -2, requiredChampion: "TFT16_Volibear" },
+  { name: "Targon Aphelios", primaryTrait: "Targon", secondaryTrait: "Longshot", targetSize: 7, carryIndex: -4, requiredChampion: "TFT16_Aphelios" },
+  { name: "Bilgewater Pirates", primaryTrait: "Bilgewater", secondaryTrait: "Vanquisher", targetSize: 8, carryIndex: -2, requiredChampion: "TFT16_MissFortune" },
   { name: "Shadow Isles Reapers", primaryTrait: "Shadow Isles", secondaryTrait: "Slayer", targetSize: 7, carryIndex: -2 },
-  { name: "Piltover Tech", primaryTrait: "Piltover", secondaryTrait: "Invoker", targetSize: 7, carryIndex: -2 },
+  { name: "Piltover Tech", primaryTrait: "Piltover", secondaryTrait: "Invoker", targetSize: 7, carryIndex: -2, requiredChampion: "TFT16_THex" },
   { name: "Ixtal Explorers", primaryTrait: "Ixtal", secondaryTrait: "Bruiser", targetSize: 7, carryIndex: -2 },
-  { name: "Shurima Ascended", primaryTrait: "Shurima", secondaryTrait: "Disruptor", targetSize: 7, carryIndex: -1 },
+  { name: "Shurima Ascended", primaryTrait: "Shurima", secondaryTrait: "Disruptor", targetSize: 7, carryIndex: -1, requiredChampion: "TFT16_Xerath" },
   { name: "Juggernaut Frontline", primaryTrait: "Juggernaut", secondaryTrait: "Defender", targetSize: 8, carryIndex: -1 },
   { name: "Invoker Mages", primaryTrait: "Invoker", secondaryTrait: "Arcanist", targetSize: 8, carryIndex: -2 },
   { name: "Warden Wall", primaryTrait: "Warden", secondaryTrait: "Bruiser", targetSize: 8, carryIndex: -1 },
   { name: "Longshot Snipers", primaryTrait: "Longshot", secondaryTrait: "Gunslinger", targetSize: 7, carryIndex: -2 },
   { name: "Quickstriker Assassins", primaryTrait: "Quickstriker", secondaryTrait: "Slayer", targetSize: 7, carryIndex: -1 },
-  { name: "Disruptor Control", primaryTrait: "Disruptor", secondaryTrait: "Invoker", targetSize: 7, carryIndex: -1 },
-  { name: "Vanquisher Bruisers", primaryTrait: "Vanquisher", secondaryTrait: "Bruiser", targetSize: 7, carryIndex: -1 },
-  { name: "Gunslinger MF Carry", primaryTrait: "Gunslinger", secondaryTrait: "Bilgewater", targetSize: 8, carryIndex: -2 },
-  { name: "Arcanist Annie", primaryTrait: "Arcanist", secondaryTrait: "Juggernaut", targetSize: 8, carryIndex: -1 },
-  { name: "Defender Garen", primaryTrait: "Defender", secondaryTrait: "Demacia", targetSize: 8, carryIndex: -3 },
-  { name: "Bruiser Volibear", primaryTrait: "Bruiser", secondaryTrait: "Freljord", targetSize: 8, carryIndex: -1 },
-  { name: "Slayer Aatrox", primaryTrait: "Slayer", secondaryTrait: "Noxus", targetSize: 8, carryIndex: -1 },
-  { name: "Void Kai'Sa", primaryTrait: "Void", secondaryTrait: "Longshot", targetSize: 7, carryIndex: -2 },
-  { name: "Ionia Sett Reroll", primaryTrait: "Ionia", secondaryTrait: "Bruiser", targetSize: 8, carryIndex: -1 },
-  { name: "Zaun Singed Tech", primaryTrait: "Zaun", secondaryTrait: "Juggernaut", targetSize: 7, carryIndex: -2 },
-  { name: "Noxus Ambessa", primaryTrait: "Noxus", secondaryTrait: "Vanquisher", targetSize: 8, carryIndex: -2 },
-  { name: "Yordle Reroll", primaryTrait: "Yordle", secondaryTrait: "Defender", targetSize: 8, carryIndex: -3 },
+  { name: "Disruptor Control", primaryTrait: "Disruptor", secondaryTrait: "Invoker", targetSize: 7, carryIndex: -1, requiredChampion: "TFT16_Mel" },
+  { name: "Vanquisher Bruisers", primaryTrait: "Vanquisher", secondaryTrait: "Bruiser", targetSize: 8, carryIndex: -1 },
+  { name: "Gunslinger MF Carry", primaryTrait: "Gunslinger", secondaryTrait: "Bilgewater", targetSize: 8, carryIndex: -2, requiredChampion: "TFT16_MissFortune" },
+  { name: "Arcanist Annie", primaryTrait: "Arcanist", secondaryTrait: "Juggernaut", targetSize: 8, carryIndex: -1, requiredChampion: "TFT16_Annie" },
+  { name: "Defender Garen", primaryTrait: "Defender", secondaryTrait: "Demacia", targetSize: 8, carryIndex: -3, requiredChampion: "TFT16_Garen" },
+  { name: "Bruiser Volibear", primaryTrait: "Bruiser", secondaryTrait: "Freljord", targetSize: 8, carryIndex: -1, requiredChampion: "TFT16_Volibear" },
+  { name: "Slayer Aatrox", primaryTrait: "Slayer", secondaryTrait: "Noxus", targetSize: 8, carryIndex: -1, requiredChampion: "TFT16_Aatrox" },
+  { name: "Void Kai'Sa", primaryTrait: "Void", secondaryTrait: "Longshot", targetSize: 7, carryIndex: -2, requiredChampion: "TFT16_Kaisa" },
+  { name: "Ionia Sett Reroll", primaryTrait: "Ionia", secondaryTrait: "Bruiser", targetSize: 8, carryIndex: -1, requiredChampion: "TFT16_Sett" },
+  { name: "Zaun Singed Tech", primaryTrait: "Zaun", secondaryTrait: "Juggernaut", targetSize: 7, carryIndex: -2, requiredChampion: "TFT16_Singed" },
+  { name: "Noxus Ambessa", primaryTrait: "Noxus", secondaryTrait: "Vanquisher", targetSize: 8, carryIndex: -2, requiredChampion: "TFT16_Ambessa" },
+  { name: "Yordle Reroll", primaryTrait: "Yordle", secondaryTrait: "Defender", targetSize: 8, carryIndex: -3, requiredChampion: "TFT16_Tristana" },
 ];
 
 function buildComp(def: CompDef) {
@@ -178,8 +180,15 @@ function buildComp(def: CompDef) {
   primaryOnly.sort(byCostDesc);
   secondaryOnly.sort(byCostDesc);
 
-  // Fill the comp: both-trait champs first, then alternate primary/secondary
+  // Fill the comp: required champion first, then both-trait, then alternate
   const selected = new Map<string, Champion>();
+
+  // Guarantee the required champion is included
+  if (def.requiredChampion) {
+    const required = champions.find((c) => c.id === def.requiredChampion);
+    if (required) selected.set(required.id, required);
+  }
+
   for (const c of bothTraits) selected.set(c.id, c);
   // Interleave primary and secondary to ensure both traits are well-represented
   let pi = 0, si = 0;
@@ -208,14 +217,17 @@ function buildComp(def: CompDef) {
   // Sort by cost ascending for display
   const sortedChamps = [...selected.values()].sort((a, b) => a.cost - b.cost);
 
-  // Trim to target size (remove lowest cost first if over)
+  // Trim to target size (remove lowest cost first, but never remove required champion)
   while (sortedChamps.length > def.targetSize) {
-    sortedChamps.shift();
+    const removeIdx = sortedChamps.findIndex((c) => c.id !== def.requiredChampion);
+    if (removeIdx === -1) break;
+    sortedChamps.splice(removeIdx, 1);
   }
 
-  // Determine carry (from the end, by cost)
-  const carryIdx = sortedChamps.length + def.carryIndex;
-  const carry = sortedChamps[Math.max(0, Math.min(carryIdx, sortedChamps.length - 1))];
+  // Determine carry: required champion if set, otherwise by cost index
+  const carry = def.requiredChampion
+    ? sortedChamps.find((c) => c.id === def.requiredChampion) ?? sortedChamps[sortedChamps.length - 1]
+    : sortedChamps[Math.max(0, Math.min(sortedChamps.length + def.carryIndex, sortedChamps.length - 1))];
 
   // Count traits
   const traitCounts = new Map<string, number>();

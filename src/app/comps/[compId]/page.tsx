@@ -27,6 +27,7 @@ export default function CompDetailPage({
         );
         if (found) {
           setComp(found);
+          document.title = `TFT Doctor - ${found.name}`;
         } else {
           setNotFoundState(true);
         }

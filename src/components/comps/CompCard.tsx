@@ -21,17 +21,17 @@ const TIER_COLORS: Record<string, string> = {
 };
 
 const COST_BORDER: Record<number, string> = {
-  1: "ring-zinc-500/50",
-  2: "ring-emerald-500/50",
-  3: "ring-sky-500/50",
-  4: "ring-purple-500/50",
-  5: "ring-amber-500/50",
+  1: "ring-zinc-400",
+  2: "ring-emerald-600",
+  3: "ring-sky-600",
+  4: "ring-pink-500",
+  5: "ring-amber-400",
 };
 
 function getDifficulty(playRate: number) {
-  if (playRate > 0.05) return { label: "Easy", className: "text-success" };
-  if (playRate > 0.02) return { label: "Medium", className: "text-warning" };
-  return { label: "Hard", className: "text-accent" };
+  if (playRate > 0.05) return { label: "Easy", className: "bg-success/15 text-success" };
+  if (playRate > 0.02) return { label: "Medium", className: "bg-warning/15 text-warning" };
+  return { label: "Hard", className: "bg-accent/15 text-accent" };
 }
 
 export function CompCard({ comp, getTraitIcon, getChampionCost }: CompCardProps) {
@@ -60,11 +60,11 @@ export function CompCard({ comp, getTraitIcon, getChampionCost }: CompCardProps)
               >
                 {comp.tier}
               </div>
-              <h3 className="text-base font-bold leading-snug text-foreground">
+              <h3 className="text-lg font-bold leading-snug text-foreground">
                 {comp.name}
               </h3>
             </div>
-            <span className={cn("shrink-0 text-xs font-medium", difficulty.className)}>
+            <span className={cn("shrink-0 rounded-sm px-2.5 py-0.5 text-xs font-medium", difficulty.className)}>
               {difficulty.label}
             </span>
           </div>

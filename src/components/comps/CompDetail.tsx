@@ -26,9 +26,9 @@ const TIER_COLORS: Record<string, string> = {
 };
 
 function getDifficulty(playRate: number) {
-  if (playRate > 0.05) return { label: "Easy", className: "text-success" };
-  if (playRate > 0.02) return { label: "Medium", className: "text-warning" };
-  return { label: "Hard", className: "text-accent" };
+  if (playRate > 0.05) return { label: "Easy", className: "bg-success/15 text-success" };
+  if (playRate > 0.02) return { label: "Medium", className: "bg-warning/15 text-warning" };
+  return { label: "Hard", className: "bg-accent/15 text-accent" };
 }
 
 function formatItemName(itemId: string, getItemName?: (id: string) => string | undefined) {
@@ -42,14 +42,14 @@ function formatItemName(itemId: string, getItemName?: (id: string) => string | u
 
 const HEX_SIZE = 56;
 const HEX_CLIP = "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)";
-const HEX_GAP = 8;
+const HEX_GAP = 12;
 
 const COST_COLORS: Record<number, string> = {
-  1: "#71717a", // zinc-500
-  2: "#10b981", // emerald-500
-  3: "#0ea5e9", // sky-500
-  4: "#a855f7", // purple-500
-  5: "#f59e0b", // amber-500
+  1: "#a1a1aa", // zinc-400
+  2: "#059669", // emerald-600
+  3: "#0284c7", // sky-600
+  4: "#ec4899", // pink-500
+  5: "#fbbf24", // amber-400
 };
 
 /**
@@ -136,9 +136,9 @@ function BoardPlacement({
                       <GameIcon
                         championId={cell.championId}
                         name={cell.name}
-                        size={HEX_SIZE}
+                        size={Math.round(HEX_SIZE * 1.3)}
                         variant="champion"
-                        className="rounded-none border-0"
+                        className="min-h-full min-w-full rounded-none border-0 object-cover"
                       />
                     ) : null}
                   </div>
@@ -188,7 +188,7 @@ export function CompDetail({
             </div>
             <h1 className="text-3xl font-extrabold sm:text-4xl">{comp.name}</h1>
           </div>
-          <span className={cn("shrink-0 text-sm font-medium", difficulty.className)}>
+          <span className={cn("shrink-0 rounded-sm px-2.5 py-0.5 text-sm font-medium", difficulty.className)}>
             {difficulty.label}
           </span>
         </div>
