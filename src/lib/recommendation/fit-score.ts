@@ -74,8 +74,6 @@ export function computeFitScore(
 
   if (input.items.length > 0) {
     // Check if the user's items align with the comp's carry items
-    const carryChampion = comp.primaryCarry;
-
     for (const itemId of input.items) {
       const compPerf = itemCompMap.get(itemId);
       if (compPerf && comp.id && compPerf.has(comp.id)) {

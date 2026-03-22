@@ -30,7 +30,7 @@ export default function PrivacyPage() {
 
         <h3>1.2 Publicly Available Match Data</h3>
         <p>
-          We collect publicly available match data from Riot Games' official API.
+          We collect publicly available match data from Riot Games&apos; official API.
           This includes:
         </p>
         <ul>
@@ -44,7 +44,7 @@ export default function PrivacyPage() {
           </li>
         </ul>
         <p>
-          This data is public, provided by Riot Games' official API, and is used
+          This data is public, provided by Riot Games&apos; official API, and is used
           exclusively for generating aggregate statistics. We do not display
           individual player data or match histories.
         </p>
@@ -170,7 +170,7 @@ export default function PrivacyPage() {
           rights, contact us at the email below.
         </p>
 
-        <h2>6. Children's Privacy</h2>
+        <h2>6. Children&apos;s Privacy</h2>
         <p>
           TFT Doctor is not directed at children under 13. We do not knowingly
           collect personal information from children under 13. If you believe a
@@ -224,7 +224,7 @@ export default function PrivacyPage() {
         <h2>8. Changes to This Policy</h2>
         <p>
           We may update this Privacy Policy from time to time. Changes will be
-          posted on this page with an updated "Last updated" date.
+          posted on this page with an updated &quot;Last updated&quot; date.
         </p>
 
         <h2>9. Contact</h2>

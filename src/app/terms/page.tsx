@@ -62,7 +62,7 @@ export default function TermsPage() {
           </li>
           <li>
             Use the service to gain an unfair competitive advantage in violation
-            of Riot Games' Terms of Service
+            of Riot Games&apos; Terms of Service
           </li>
         </ul>
 
@@ -92,7 +92,7 @@ export default function TermsPage() {
           your decision-making, not as a guarantee of results.
         </p>
         <p>
-          THE SERVICE IS PROVIDED "AS IS" AND "AS AVAILABLE" WITHOUT WARRANTIES
+          THE SERVICE IS PROVIDED &quot;AS IS&quot; AND &quot;AS AVAILABLE&quot; WITHOUT WARRANTIES
           OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
           IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
           PURPOSE, AND NON-INFRINGEMENT.
@@ -109,7 +109,7 @@ export default function TermsPage() {
         <h2>9. Changes to Terms</h2>
         <p>
           We reserve the right to modify these Terms of Service at any time.
-          Changes will be posted on this page with an updated "Last updated"
+          Changes will be posted on this page with an updated &quot;Last updated&quot;
           date. Your continued use of the service after changes constitutes
           acceptance of the revised terms.
         </p>

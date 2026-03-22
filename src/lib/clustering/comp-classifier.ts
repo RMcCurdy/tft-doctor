@@ -13,7 +13,6 @@
  * Pass 3 — Unclassified: Board doesn't match any known comp.
  */
 
-import type { RiotUnit, RiotTrait } from "@/types/riot";
 import type {
   ClassificationResult,
   CompDefinition,

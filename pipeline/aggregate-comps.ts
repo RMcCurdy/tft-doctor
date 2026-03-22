@@ -10,7 +10,7 @@
  */
 
 import { db } from "../src/lib/db";
-import { compArchetypes, augmentStats, emblemStats, itemStats } from "../src/lib/db/schema";
+import { compArchetypes, augmentStats, itemStats } from "../src/lib/db/schema";
 import { getCurrentPatch } from "../src/lib/db/queries/patches";
 import {
   getUnprocessedMatches,
@@ -22,7 +22,6 @@ import { SET_16_COMP_DEFINITIONS } from "../src/lib/clustering/comp-definitions"
 import type { ParticipantBoard } from "../src/lib/clustering/types";
 import type { ClassificationResult } from "../src/lib/clustering/types";
 import type { RiotUnit, RiotTrait } from "../src/types/riot";
-import { eq, and, sql } from "drizzle-orm";
 import { logger } from "./utils/logger";
 
 const BATCH_SIZE = 500; // Process matches in batches
@@ -78,14 +77,6 @@ async function aggregateComps() {
   // Upsert comp archetype stats
   for (const [compId, group] of Object.entries(compGroups)) {
     if (compId === "unclassified") continue;
-
-    const placements = group.map((r) => r.carry); // We need the board placement
-    const boardPlacements = group.map((r) => {
-      const board = boards.find(
-        (b) => b.matchId === r.carry.primary // match by carry for now
-      );
-      return board?.placement ?? 4; // fallback to median
-    });
 
     // Get actual placements from the boards array
     const groupBoards = group.map((r) => {

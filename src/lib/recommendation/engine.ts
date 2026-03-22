@@ -16,8 +16,8 @@ import type { CompArchetype, CompRecommendation } from "@/types/comp";
 import { computeFitScore, type FitScoreResult } from "./fit-score";
 import { generateExplanation } from "./explanation";
 import { db } from "@/lib/db";
-import { compArchetypes, itemStats, emblemStats } from "@/lib/db/schema";
-import { eq, desc } from "drizzle-orm";
+import { compArchetypes, itemStats } from "@/lib/db/schema";
+import { eq } from "drizzle-orm";
 import { getCurrentPatch } from "@/lib/db/queries/patches";
 
 const MAX_RECOMMENDATIONS = 5;
@@ -132,6 +132,7 @@ export async function getRecommendations(
   };
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function emptyResponse(message: string): RecommendationResponse {
   return {
     recommendations: [],
