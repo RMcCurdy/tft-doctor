@@ -25,6 +25,7 @@ export async function upsertCompArchetype(data: {
   traitSignature: unknown;
   coreChampions: unknown;
   flexSlots?: unknown;
+  earlyBoard?: unknown;
   primaryCarry?: string;
   secondaryCarry?: string;
   isReroll?: boolean;

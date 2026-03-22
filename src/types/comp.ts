@@ -7,9 +7,15 @@ export interface CompArchetype {
   traits: ActiveTrait[];
   coreChampions: CompChampion[]; // Must-have champions
   flexChampions: CompChampion[]; // Champions that can vary
+  earlyBoard?: EarlyBoardChampion[]; // 5 cheap units for stages 2-1 to 3-2
   stats: CompStats;
   tier: CompTier;
   lastUpdated: string; // ISO timestamp
+}
+
+export interface EarlyBoardChampion {
+  championId: string;
+  championName: string;
 }
 
 export type CompTier = "S" | "A" | "B" | "C";

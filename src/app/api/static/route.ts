@@ -18,7 +18,7 @@ const CACHE_HEADERS = {
 function getMockStaticData() {
   return {
     champions: getMockChampions().map((c) => ({ id: c.id, name: c.name, icon: c.icon, cost: c.cost })),
-    items: getMockItems().map((i) => ({ id: i.id, name: i.name, icon: i.icon })),
+    items: getMockItems().map((i) => ({ id: i.id, name: i.name, icon: i.icon, isEmblem: i.isEmblem, components: i.components })),
     traits: getMockTraits().map((t) => ({ id: t.id, name: t.name, icon: t.icon })),
   };
 }
@@ -48,12 +48,14 @@ export async function GET() {
     };
 
     for (const row of rows) {
-      const entities = (row.data as Array<{ id: string; name: string; icon: string; cost?: number }>) ?? [];
+      const entities = (row.data as Array<{ id: string; name: string; icon: string; cost?: number; isEmblem?: boolean; components?: string[] }>) ?? [];
       result[row.dataType] = entities.map((e) => ({
         id: e.id,
         name: e.name,
         icon: e.icon,
         ...(e.cost !== undefined && { cost: e.cost }),
+        ...(e.isEmblem !== undefined && { isEmblem: e.isEmblem }),
+        ...(e.components !== undefined && { components: e.components }),
       }));
     }
 

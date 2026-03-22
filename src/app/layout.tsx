@@ -16,9 +16,28 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.VERCEL_PROJECT_PRODUCTION_URL
+      ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+      : process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"
+  ),
   title: "TFT Doctor",
   description:
-    "Get ranked TFT comp recommendations based on your augments, emblems, items, and artifacts. Powered by high-elo match data.",
+    "Stop coinflipping your comps. Tell us your augments, emblems, and artifacts — we'll show you what high-elo players are actually running.",
+  openGraph: {
+    title: "TFT Doctor",
+    description:
+      "Stop coinflipping your comps. Tell us your augments, emblems, and artifacts — we'll show you what high-elo players are actually running.",
+    siteName: "TFT Doctor",
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "TFT Doctor",
+    description:
+      "Stop coinflipping your comps. Tell us your augments, emblems, and artifacts — we'll show you what high-elo players are actually running.",
+  },
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },

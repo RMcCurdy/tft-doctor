@@ -7,7 +7,7 @@ import { GameIcon } from "@/components/shared/GameIcon";
 import { TraitBadge, sortTraits } from "@/components/shared/TraitBadge";
 import type { CompArchetype, BoardPosition } from "@/types/comp";
 import { cn } from "@/lib/utils";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ChevronRight, Star } from "lucide-react";
 import { useRef, useState, useEffect, useCallback } from "react";
 
 interface CompDetailProps {
@@ -16,6 +16,7 @@ interface CompDetailProps {
   getItemIcon?: (id: string) => string | undefined;
   getItemName?: (id: string) => string | undefined;
   getChampionCost?: (id: string) => number | undefined;
+  getItemComponents?: (id: string) => string[];
 }
 
 const TIER_COLORS: Record<string, string> = {
@@ -52,6 +53,14 @@ const COST_COLORS: Record<number, string> = {
   5: "#fbbf24", // amber-400
 };
 
+const COST_BORDER: Record<number, string> = {
+  1: "ring-zinc-400",
+  2: "ring-emerald-600",
+  3: "ring-sky-600",
+  4: "ring-pink-500",
+  5: "ring-amber-400",
+};
+
 /**
  * TFT hex board: 4 rows x 7 cols
  * Odd rows are offset right by half a hex.
@@ -60,14 +69,18 @@ const COST_COLORS: Record<number, string> = {
 function BoardPlacement({
   champions,
   getChampionCost,
+  getItemIcon,
 }: {
   champions: {
     name: string;
     championId: string;
     position?: BoardPosition;
     isCarry: boolean;
+    recommendedItems: string[];
+    threeStarRate?: number;
   }[];
   getChampionCost?: (id: string) => number | undefined;
+  getItemIcon?: (id: string) => string | undefined;
 }) {
   // Build 4x7 grid
   type ChampCell = (typeof champions)[number] | undefined;
@@ -84,10 +97,10 @@ function BoardPlacement({
   const hexW = HEX_SIZE;
   const hexH = HEX_SIZE * 1.1547;
   const hSpacing = hexW + HEX_GAP;
-  const vSpacing = hexH * 0.75 + HEX_GAP;
+  const vSpacing = hexH * 0.75 + HEX_GAP + 8; // extra room for stars + items
   const rowOffset = hSpacing / 2;
   const totalWidth = hSpacing * 7 + rowOffset;
-  const totalHeight = vSpacing * 3 + hexH;
+  const totalHeight = vSpacing * 3 + hexH + 16; // pad for top stars + bottom items
 
   // Responsive scaling: measure container and shrink board to fit
   const containerRef = useRef<HTMLDivElement>(null);
@@ -126,10 +139,12 @@ function BoardPlacement({
             {grid.map((row, rowIdx) => {
               const isOdd = rowIdx % 2 === 1;
               const offX = isOdd ? rowOffset : 0;
-              const y = rowIdx * vSpacing;
+              const y = rowIdx * vSpacing + 12; // offset for top-row star indicators
 
               return row.map((cell, colIdx) => {
                 const x = offX + colIdx * hSpacing;
+                const hasThreeStar = cell && (cell.threeStarRate ?? 0) >= 0.5;
+                const hasItems = cell && cell.recommendedItems.length > 0;
 
                 return (
                   <div
@@ -137,6 +152,14 @@ function BoardPlacement({
                     className="absolute"
                     style={{ left: x, top: y, width: hexW, height: hexH }}
                   >
+                    {/* 3-star indicator */}
+                    {hasThreeStar && (
+                      <div className="absolute -top-0.5 left-1/2 z-10 flex -translate-x-1/2 -space-x-0.5">
+                        <Star className="h-4 w-4 fill-yellow-400 text-black drop-shadow-sm" strokeWidth={1} />
+                        <Star className="h-4 w-4 fill-yellow-400 text-black drop-shadow-sm" strokeWidth={1} />
+                        <Star className="h-4 w-4 fill-yellow-400 text-black drop-shadow-sm" strokeWidth={1} />
+                      </div>
+                    )}
                     {/* Cost-colored ring (rendered behind the hex) */}
                     {cell && (
                       <div
@@ -166,6 +189,24 @@ function BoardPlacement({
                         />
                       ) : null}
                     </div>
+                    {/* Item icons below hex */}
+                    {hasItems && (
+                      <div className="absolute -bottom-2.5 left-1/2 z-10 flex -translate-x-1/2 -space-x-0.5">
+                        {cell.recommendedItems.slice(0, 3).map((itemId) => {
+                          const iconPath = getItemIcon?.(itemId);
+                          return iconPath ? (
+                            <GameIcon
+                              key={itemId}
+                              iconPath={iconPath}
+                              name={itemId}
+                              size={22}
+                              variant="item"
+                              className="drop-shadow-sm"
+                            />
+                          ) : null;
+                        })}
+                      </div>
+                    )}
                   </div>
                 );
               });
@@ -177,16 +218,52 @@ function BoardPlacement({
   );
 }
 
+/**
+ * Build carousel pickup priority from the comp's recommended items.
+ * Carries first, then tanks — each completed item is broken into its 2 components.
+ * Returns deduplicated components in priority order with counts.
+ */
+function buildCarouselPriority(
+  champions: CompArchetype["coreChampions"],
+  getItemComponents?: (id: string) => string[],
+): { componentId: string; count: number }[] {
+  if (!getItemComponents) return [];
+
+  // Collect completed items: carries first, then non-carries
+  const carries = champions.filter((c) => c.isCarry && c.recommendedItems.length > 0);
+  const tanks = champions.filter((c) => !c.isCarry && c.recommendedItems.length > 0);
+  const orderedItems = [
+    ...carries.flatMap((c) => c.recommendedItems),
+    ...tanks.flatMap((c) => c.recommendedItems),
+  ];
+
+  // Break each completed item into its component items
+  const componentCounts = new Map<string, number>();
+  const componentOrder: string[] = [];
+
+  for (const itemId of orderedItems) {
+    const components = getItemComponents(itemId);
+    for (const compId of components) {
+      if (!componentCounts.has(compId)) componentOrder.push(compId);
+      componentCounts.set(compId, (componentCounts.get(compId) ?? 0) + 1);
+    }
+  }
+
+  return componentOrder
+    .map((id) => ({ componentId: id, count: componentCounts.get(id) ?? 1 }))
+    .slice(0, 4);
+}
+
 export function CompDetail({
   comp,
   getTraitIcon,
   getItemIcon,
   getItemName,
   getChampionCost,
+  getItemComponents,
 }: CompDetailProps) {
   const difficulty = getDifficulty(comp.stats.playRate);
-  const carries = comp.coreChampions.filter((c) => c.isCarry);
-  const nonCarries = comp.coreChampions.filter((c) => !c.isCarry);
+  const carouselPriority = buildCarouselPriority(comp.coreChampions, getItemComponents);
 
   return (
     <div className="space-y-6">
@@ -236,174 +313,80 @@ export function CompDetail({
           championId: c.championId,
           position: c.position,
           isCarry: c.isCarry,
+          recommendedItems: c.recommendedItems,
+          threeStarRate: c.threeStarRate,
         }))}
         getChampionCost={getChampionCost}
+        getItemIcon={getItemIcon}
       />
 
-      {/* Carries & Items */}
-      <Card>
-        <CardHeader className="pb-3">
-          <h2 className="text-base font-bold">Carries & Items</h2>
-        </CardHeader>
-        <CardContent className="space-y-4 pt-0">
-          {carries.map((carry) => (
-            <div
-              key={carry.championId}
-              className="rounded-lg border border-accent/20 bg-accent/5 p-3"
-            >
-              <div className="flex items-center gap-3">
-                <GameIcon
-                  championId={carry.championId}
-                  name={carry.championName}
-                  size={36}
-                  variant="champion"
-                />
-                <div>
-                  <span className="text-sm font-bold text-foreground">
-                    {carry.championName}
-                  </span>
-                  <Badge variant="default" className="ml-2 text-xs">
-                    <span className="text-yellow-400 drop-shadow-[0_0_1px_rgba(0,0,0,1)]">{"★".repeat(carry.starLevel)}</span> Carry
-                  </Badge>
-                </div>
-              </div>
-              {carry.recommendedItems.length > 0 && (
-                <div className="mt-2 flex flex-wrap gap-1.5">
-                  {carry.recommendedItems.map((itemId) => {
-                    const itemIconPath = getItemIcon?.(itemId);
+      {/* Early Game + Carousel Priority */}
+      {(comp.earlyBoard?.length || carouselPriority.length > 0) && (
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+          {/* Early Game */}
+          {comp.earlyBoard && comp.earlyBoard.length > 0 && (
+            <Card>
+              <CardHeader className="pb-3">
+                <h2 className="text-base font-bold">Early Game</h2>
+              </CardHeader>
+              <CardContent className="pt-0">
+                <div className="flex flex-wrap gap-3">
+                  {comp.earlyBoard.map((champ) => {
+                    const cost = getChampionCost?.(champ.championId) ?? 1;
                     return (
-                      <Badge
-                        key={itemId}
-                        variant="secondary"
-                        className="gap-1.5 text-xs"
+                      <div
+                        key={champ.championId}
+                        className={cn("relative rounded-sm ring-2", COST_BORDER[cost] ?? "ring-border")}
+                        title={`${champ.championName} (${cost} cost)`}
                       >
-                        {itemIconPath && (
-                          <GameIcon
-                            iconPath={itemIconPath}
-                            name={formatItemName(itemId, getItemName)}
-                            size={18}
-                            variant="item"
-                          />
-                        )}
-                        {formatItemName(itemId, getItemName)}
-                      </Badge>
+                        <GameIcon
+                          championId={champ.championId}
+                          name={champ.championName}
+                          size={48}
+                          variant="champion"
+                        />
+                      </div>
                     );
                   })}
                 </div>
-              )}
-            </div>
-          ))}
-
-          {/* Carry alternatives */}
-          {comp.flexChampions.filter((c) => c.isCarry).length > 0 && (
-            <div className="rounded-lg border border-border bg-elevated/50 p-3">
-              <div className="mb-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                Alternative Carries
-              </div>
-              <div className="flex flex-wrap gap-3">
-                {comp.flexChampions
-                  .filter((c) => c.isCarry)
-                  .map((champ) => (
-                    <div key={champ.championId} className="flex items-center gap-2">
-                      <GameIcon
-                        championId={champ.championId}
-                        name={champ.championName}
-                        size={28}
-                        variant="champion"
-                      />
-                      <div>
-                        <Badge variant="outline" className="text-xs">
-                          {champ.championName}
-                        </Badge>
-                        {champ.recommendedItems.length > 0 && (
-                          <div className="mt-1 flex gap-1">
-                            {champ.recommendedItems.map((itemId) => {
-                              const itemIconPath = getItemIcon?.(itemId);
-                              return (
-                                <Badge
-                                  key={itemId}
-                                  variant="secondary"
-                                  className="gap-1 text-[10px]"
-                                >
-                                  {itemIconPath && (
-                                    <GameIcon
-                                      iconPath={itemIconPath}
-                                      name={formatItemName(itemId, getItemName)}
-                                      size={14}
-                                      variant="item"
-                                    />
-                                  )}
-                                  {formatItemName(itemId, getItemName)}
-                                </Badge>
-                              );
-                            })}
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  ))}
-              </div>
-            </div>
+              </CardContent>
+            </Card>
           )}
-        </CardContent>
-      </Card>
 
-      {/* Support / Tank Champions */}
-      {nonCarries.length > 0 && (
-        <Card>
-          <CardHeader className="pb-3">
-            <h2 className="text-base font-bold">Support & Tanks</h2>
-          </CardHeader>
-          <CardContent className="pt-0">
-            <div className="space-y-2">
-              {nonCarries.map((champ) => (
-                <div
-                  key={champ.championId}
-                  className="flex items-center justify-between rounded-lg border border-border p-3"
-                >
-                  <div className="flex items-center gap-3">
-                    <GameIcon
-                      championId={champ.championId}
-                      name={champ.championName}
-                      size={32}
-                      variant="champion"
-                    />
-                    <span className="text-sm font-medium">
-                      {champ.championName}
-                    </span>
-                    <span className="text-xs text-yellow-400 drop-shadow-[0_0_1px_rgba(0,0,0,1)]">
-                      {"★".repeat(champ.starLevel)}
-                    </span>
-                  </div>
-                  {champ.recommendedItems.length > 0 && (
-                    <div className="flex gap-1">
-                      {champ.recommendedItems.map((itemId) => {
-                        const itemIconPath = getItemIcon?.(itemId);
-                        return (
-                          <Badge
-                            key={itemId}
-                            variant="secondary"
-                            className="gap-1 text-xs"
-                          >
-                            {itemIconPath && (
-                              <GameIcon
-                                iconPath={itemIconPath}
-                                name={formatItemName(itemId, getItemName)}
-                                size={16}
-                                variant="item"
-                              />
-                            )}
-                            {formatItemName(itemId, getItemName)}
-                          </Badge>
-                        );
-                      })}
-                    </div>
-                  )}
+          {/* Carousel Priority */}
+          {carouselPriority.length > 0 && (
+            <Card>
+              <CardHeader className="pb-3">
+                <h2 className="text-base font-bold">Carousel Priority</h2>
+              </CardHeader>
+              <CardContent className="pt-0">
+                <div className="flex flex-wrap items-center gap-1.5">
+                  {carouselPriority.map(({ componentId, count }, idx) => {
+                    const iconPath = getItemIcon?.(componentId);
+                    const name = getItemName?.(componentId) ?? componentId;
+                    return (
+                      <div key={componentId} className="flex items-center gap-1.5">
+                        {idx > 0 && (
+                          <ChevronRight className="h-4 w-4 text-muted-foreground" />
+                        )}
+                        <div title={`${name}${count > 1 ? ` ×${count}` : ""}`}>
+                          {iconPath && (
+                            <GameIcon
+                              iconPath={iconPath}
+                              name={name}
+                              size={48}
+                              variant="item"
+                            />
+                          )}
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
+              </CardContent>
+            </Card>
+          )}
+        </div>
       )}
 
       {/* Flex Options */}
@@ -434,52 +417,13 @@ export function CompDetail({
         </Card>
       )}
 
-      {/* Augment Recommendations — placeholder */}
-      <Card>
-        <CardHeader className="pb-3">
-          <h2 className="text-base font-bold">Augment Recommendations</h2>
-        </CardHeader>
-        <CardContent className="pt-0">
-          <p className="text-sm text-muted-foreground">
-            Augment synergy data for this comp is coming soon.
-          </p>
-        </CardContent>
-      </Card>
-
-      {/* Leveling Guide — placeholder */}
-      <Card>
-        <CardHeader className="pb-3">
-          <h2 className="text-base font-bold">Leveling Guide</h2>
-        </CardHeader>
-        <CardContent className="pt-0">
-          <p className="text-sm text-muted-foreground">
-            Level-up timing and rolling strategy data is coming soon.
-          </p>
-        </CardContent>
-      </Card>
-
-      {/* Early / Mid Game Plan — placeholder */}
-      <Card>
-        <CardHeader className="pb-3">
-          <h2 className="text-base font-bold">Early & Mid Game Plan</h2>
-        </CardHeader>
-        <CardContent className="pt-0">
-          <p className="text-sm text-muted-foreground">
-            Transition champion and early game board data is coming soon.
-          </p>
-        </CardContent>
-      </Card>
-
-      {/* Ad banner placeholder */}
-      <div className="flex h-24 items-center justify-center rounded-xl border border-dashed border-border text-xs text-muted-foreground/40">
-        Ad Space
-      </div>
-
-      {/* Patch info */}
-      <p className="text-center text-xs text-muted-foreground">
-        Patch {comp.patchId} &middot; Last updated{" "}
-        {new Date(comp.lastUpdated).toLocaleDateString()}
-      </p>
+      {/* TODO: Re-introduce these sections once we have a production API key:
+         - Augment Recommendations
+         - Leveling Guide
+         - Early & Mid Game Plan
+         - Ad Space
+         - Patch info
+      */}
     </div>
   );
 }

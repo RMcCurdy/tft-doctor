@@ -106,7 +106,7 @@ function DropdownShell({
         {label}
       </label>
       <div ref={containerRef} className="relative">
-        <div className="flex h-8 items-center gap-2 rounded-lg border border-border px-2.5">
+        <div className="flex h-10 items-center gap-2 rounded-lg border border-border px-2.5">
           {selected ? (
             <>
               <div className="flex flex-1 items-center">
@@ -117,7 +117,7 @@ function DropdownShell({
                 onClick={onClear}
                 className="cursor-pointer text-muted-foreground hover:text-foreground"
               >
-                <X className="h-3.5 w-3.5" />
+                <X className="h-4.5 w-4.5" />
               </button>
             </>
           ) : (

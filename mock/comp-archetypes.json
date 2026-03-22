@@ -11,7 +11,7 @@
     "coreChampions": [
       { "championId": "TFT16_Lulu", "championName": "Lulu", "starLevel": 2, "threeStarRate": 0.78, "recommendedItems": [], "isCarry": false },
       { "championId": "TFT16_Rumble", "championName": "Rumble", "starLevel": 2, "threeStarRate": 0.45, "recommendedItems": [], "isCarry": false },
-      { "championId": "TFT16_Poppy", "championName": "Poppy", "starLevel": 2, "threeStarRate": 0.82, "recommendedItems": ["TFT_Item_SunfireCape", "TFT_Item_WarmogsArmor"], "isCarry": false },
+      { "championId": "TFT16_Poppy", "championName": "Poppy", "starLevel": 2, "threeStarRate": 0.82, "recommendedItems": ["TFT_Item_SunfireCape", "TFT_Item_WarmogsArmor", "TFT_Item_DragonsClaw"], "isCarry": false },
       { "championId": "TFT16_Teemo", "championName": "Teemo", "starLevel": 2, "threeStarRate": 0.42, "recommendedItems": [], "isCarry": false },
       { "championId": "TFT16_Tristana", "championName": "Tristana", "starLevel": 2, "threeStarRate": 0.75, "recommendedItems": [], "isCarry": false },
       { "championId": "TFT16_Kennen", "championName": "Kennen", "starLevel": 2, "threeStarRate": 0.15, "recommendedItems": [], "isCarry": false },
@@ -20,6 +20,13 @@
     "flexChampions": [
       { "championId": "TFT16_Fizz", "championName": "Fizz", "starLevel": 2, "threeStarRate": 0.38, "recommendedItems": [], "isCarry": false },
       { "championId": "TFT16_Ziggs", "championName": "Ziggs", "starLevel": 1, "threeStarRate": 0.70, "recommendedItems": [], "isCarry": false }
+    ],
+    "earlyBoard": [
+      { "championId": "TFT16_Lulu", "championName": "Lulu" },
+      { "championId": "TFT16_Rumble", "championName": "Rumble" },
+      { "championId": "TFT16_Poppy", "championName": "Poppy" },
+      { "championId": "TFT16_Teemo", "championName": "Teemo" },
+      { "championId": "TFT16_Tristana", "championName": "Tristana" }
     ],
     "stats": { "avgPlacement": 3.4, "top4Rate": 0.62, "winRate": 0.15, "playRate": 0.07, "sampleSize": 2340 },
     "tier": "A",
@@ -35,15 +42,22 @@
     ],
     "coreChampions": [
       { "championId": "TFT16_KogMaw", "championName": "Kog'Maw", "starLevel": 2, "threeStarRate": 0.72, "recommendedItems": [], "isCarry": false },
-      { "championId": "TFT16_ChoGath", "championName": "Cho'Gath", "starLevel": 2, "threeStarRate": 0.12, "recommendedItems": ["TFT_Item_SunfireCape", "TFT_Item_DragonsClaw"], "isCarry": false },
+      { "championId": "TFT16_ChoGath", "championName": "Cho'Gath", "starLevel": 2, "threeStarRate": 0.12, "recommendedItems": ["TFT_Item_SunfireCape", "TFT_Item_DragonsClaw", "TFT_Item_WarmogsArmor"], "isCarry": false },
       { "championId": "TFT16_RekSai", "championName": "Rek'Sai", "starLevel": 2, "threeStarRate": 0.35, "recommendedItems": [], "isCarry": false },
       { "championId": "TFT16_Malzahar", "championName": "Malzahar", "starLevel": 2, "threeStarRate": 0.10, "recommendedItems": [], "isCarry": false },
       { "championId": "TFT16_BelVeth", "championName": "Bel'Veth", "starLevel": 2, "threeStarRate": 0.05, "recommendedItems": ["TFT_Item_GuinsoosRageblade", "TFT_Item_TitansResolve", "TFT_Item_Bloodthirster"], "isCarry": true },
-      { "championId": "TFT16_KaiSa", "championName": "Kai'Sa", "starLevel": 2, "threeStarRate": 0.04, "recommendedItems": ["TFT_Item_InfinityEdge", "TFT_Item_GiantSlayer"], "isCarry": true }
+      { "championId": "TFT16_KaiSa", "championName": "Kai'Sa", "starLevel": 2, "threeStarRate": 0.04, "recommendedItems": [], "isCarry": true }
     ],
     "flexChampions": [
       { "championId": "TFT16_RiftHerald", "championName": "Rift Herald", "starLevel": 1, "threeStarRate": 0.65, "recommendedItems": [], "isCarry": false },
       { "championId": "TFT16_BaronNashor", "championName": "Baron Nashor", "starLevel": 1, "threeStarRate": 0.01, "recommendedItems": [], "isCarry": false }
+    ],
+    "earlyBoard": [
+      { "championId": "TFT16_KogMaw", "championName": "Kog'Maw" },
+      { "championId": "TFT16_ChoGath", "championName": "Cho'Gath" },
+      { "championId": "TFT16_RekSai", "championName": "Rek'Sai" },
+      { "championId": "TFT16_Malzahar", "championName": "Malzahar" },
+      { "championId": "TFT16_Briar", "championName": "Briar" }
     ],
     "stats": { "avgPlacement": 3.1, "top4Rate": 0.67, "winRate": 0.19, "playRate": 0.09, "sampleSize": 3120 },
     "tier": "S",
@@ -59,7 +73,7 @@
     ],
     "coreChampions": [
       { "championId": "TFT16_Jhin", "championName": "Jhin", "starLevel": 2, "threeStarRate": 0.68, "recommendedItems": [], "isCarry": false },
-      { "championId": "TFT16_Shen", "championName": "Shen", "starLevel": 2, "threeStarRate": 0.40, "recommendedItems": ["TFT_Item_SunfireCape"], "isCarry": false },
+      { "championId": "TFT16_Shen", "championName": "Shen", "starLevel": 2, "threeStarRate": 0.40, "recommendedItems": ["TFT_Item_SunfireCape", "TFT_Item_WarmogsArmor", "TFT_Item_DragonsClaw"], "isCarry": false },
       { "championId": "TFT16_Yasuo", "championName": "Yasuo", "starLevel": 2, "threeStarRate": 0.73, "recommendedItems": [], "isCarry": false },
       { "championId": "TFT16_Ahri", "championName": "Ahri", "starLevel": 2, "threeStarRate": 0.14, "recommendedItems": [], "isCarry": false },
       { "championId": "TFT16_Wukong", "championName": "Wukong", "starLevel": 2, "threeStarRate": 0.38, "recommendedItems": [], "isCarry": false },
@@ -68,6 +82,13 @@
     "flexChampions": [
       { "championId": "TFT16_Sett", "championName": "Sett", "starLevel": 1, "threeStarRate": 0.02, "recommendedItems": [], "isCarry": false },
       { "championId": "TFT16_Yunara", "championName": "Yunara", "starLevel": 1, "threeStarRate": 0.01, "recommendedItems": [], "isCarry": false }
+    ],
+    "earlyBoard": [
+      { "championId": "TFT16_Jhin", "championName": "Jhin" },
+      { "championId": "TFT16_Shen", "championName": "Shen" },
+      { "championId": "TFT16_Yasuo", "championName": "Yasuo" },
+      { "championId": "TFT16_XinZhao", "championName": "Xin Zhao" },
+      { "championId": "TFT16_Ahri", "championName": "Ahri" }
     ],
     "stats": { "avgPlacement": 3.3, "top4Rate": 0.64, "winRate": 0.17, "playRate": 0.08, "sampleSize": 2780 },
     "tier": "S",
@@ -86,12 +107,19 @@
       { "championId": "TFT16_Ekko", "championName": "Ekko", "starLevel": 2, "threeStarRate": 0.12, "recommendedItems": [], "isCarry": false },
       { "championId": "TFT16_Vi", "championName": "Vi", "starLevel": 2, "threeStarRate": 0.42, "recommendedItems": [], "isCarry": false },
       { "championId": "TFT16_Jinx", "championName": "Jinx", "starLevel": 2, "threeStarRate": 0.06, "recommendedItems": ["TFT_Item_InfinityEdge", "TFT_Item_GiantSlayer", "TFT_Item_LastWhisper"], "isCarry": true },
-      { "championId": "TFT16_Singed", "championName": "Singed", "starLevel": 2, "threeStarRate": 0.38, "recommendedItems": ["TFT_Item_SunfireCape", "TFT_Item_DragonsClaw"], "isCarry": false },
+      { "championId": "TFT16_Singed", "championName": "Singed", "starLevel": 2, "threeStarRate": 0.38, "recommendedItems": ["TFT_Item_SunfireCape", "TFT_Item_DragonsClaw", "TFT_Item_WarmogsArmor"], "isCarry": false },
       { "championId": "TFT16_Warwick", "championName": "Warwick", "starLevel": 2, "threeStarRate": 0.75, "recommendedItems": [], "isCarry": false }
     ],
     "flexChampions": [
       { "championId": "TFT16_Graves", "championName": "Graves", "starLevel": 2, "threeStarRate": 0.40, "recommendedItems": [], "isCarry": false },
       { "championId": "TFT16_Tristana", "championName": "Tristana", "starLevel": 2, "threeStarRate": 0.72, "recommendedItems": [], "isCarry": false }
+    ],
+    "earlyBoard": [
+      { "championId": "TFT16_Blitzcrank", "championName": "Blitzcrank" },
+      { "championId": "TFT16_Ekko", "championName": "Ekko" },
+      { "championId": "TFT16_Vi", "championName": "Vi" },
+      { "championId": "TFT16_Jinx", "championName": "Jinx" },
+      { "championId": "TFT16_DrMundo", "championName": "Dr. Mundo" }
     ],
     "stats": { "avgPlacement": 3.5, "top4Rate": 0.60, "winRate": 0.14, "playRate": 0.06, "sampleSize": 1980 },
     "tier": "A",
@@ -110,12 +138,19 @@
       { "championId": "TFT16_Sona", "championName": "Sona", "starLevel": 2, "threeStarRate": 0.70, "recommendedItems": [], "isCarry": false },
       { "championId": "TFT16_Poppy", "championName": "Poppy", "starLevel": 2, "threeStarRate": 0.80, "recommendedItems": [], "isCarry": false },
       { "championId": "TFT16_XinZhao", "championName": "Xin Zhao", "starLevel": 2, "threeStarRate": 0.44, "recommendedItems": [], "isCarry": false },
-      { "championId": "TFT16_Garen", "championName": "Garen", "starLevel": 2, "threeStarRate": 0.08, "recommendedItems": ["TFT_Item_WarmogsArmor", "TFT_Item_SunfireCape", "TFT_Item_DragonsClaw"], "isCarry": true },
-      { "championId": "TFT16_Lux", "championName": "Lux", "starLevel": 2, "threeStarRate": 0.16, "recommendedItems": ["TFT_Item_RabadonsDeathcap", "TFT_Item_JeweledGauntlet"], "isCarry": true }
+      { "championId": "TFT16_Garen", "championName": "Garen", "starLevel": 2, "threeStarRate": 0.08, "recommendedItems": ["TFT_Item_WarmogsArmor", "TFT_Item_SunfireCape", "TFT_Item_DragonsClaw"], "isCarry": false },
+      { "championId": "TFT16_Lux", "championName": "Lux", "starLevel": 2, "threeStarRate": 0.16, "recommendedItems": ["TFT_Item_RabadonsDeathcap", "TFT_Item_JeweledGauntlet", "TFT_Item_ArchangelsStaff"], "isCarry": true }
     ],
     "flexChampions": [
       { "championId": "TFT16_Galio", "championName": "Galio", "starLevel": 1, "threeStarRate": 0.02, "recommendedItems": [], "isCarry": false },
       { "championId": "TFT16_Vayne", "championName": "Vayne", "starLevel": 2, "threeStarRate": 0.36, "recommendedItems": [], "isCarry": false }
+    ],
+    "earlyBoard": [
+      { "championId": "TFT16_JarvanIV", "championName": "Jarvan IV" },
+      { "championId": "TFT16_Sona", "championName": "Sona" },
+      { "championId": "TFT16_Poppy", "championName": "Poppy" },
+      { "championId": "TFT16_XinZhao", "championName": "Xin Zhao" },
+      { "championId": "TFT16_Vayne", "championName": "Vayne" }
     ],
     "stats": { "avgPlacement": 3.6, "top4Rate": 0.58, "winRate": 0.13, "playRate": 0.05, "sampleSize": 1650 },
     "tier": "A",
@@ -131,15 +166,22 @@
     ],
     "coreChampions": [
       { "championId": "TFT16_Briar", "championName": "Briar", "starLevel": 2, "threeStarRate": 0.72, "recommendedItems": [], "isCarry": false },
-      { "championId": "TFT16_Sion", "championName": "Sion", "starLevel": 2, "threeStarRate": 0.38, "recommendedItems": ["TFT_Item_SunfireCape"], "isCarry": false },
+      { "championId": "TFT16_Sion", "championName": "Sion", "starLevel": 2, "threeStarRate": 0.38, "recommendedItems": ["TFT_Item_SunfireCape", "TFT_Item_WarmogsArmor", "TFT_Item_DragonsClaw"], "isCarry": false },
       { "championId": "TFT16_Darius", "championName": "Darius", "starLevel": 2, "threeStarRate": 0.42, "recommendedItems": [], "isCarry": false },
       { "championId": "TFT16_Draven", "championName": "Draven", "starLevel": 2, "threeStarRate": 0.05, "recommendedItems": ["TFT_Item_InfinityEdge", "TFT_Item_Bloodthirster", "TFT_Item_GiantSlayer"], "isCarry": true },
-      { "championId": "TFT16_Ambessa", "championName": "Ambessa", "starLevel": 2, "threeStarRate": 0.04, "recommendedItems": ["TFT_Item_TitansResolve"], "isCarry": false },
+      { "championId": "TFT16_Ambessa", "championName": "Ambessa", "starLevel": 2, "threeStarRate": 0.04, "recommendedItems": [], "isCarry": false },
       { "championId": "TFT16_Swain", "championName": "Swain", "starLevel": 2, "threeStarRate": 0.11, "recommendedItems": [], "isCarry": false }
     ],
     "flexChampions": [
       { "championId": "TFT16_LeBlanc", "championName": "LeBlanc", "starLevel": 2, "threeStarRate": 0.13, "recommendedItems": [], "isCarry": false },
       { "championId": "TFT16_Mel", "championName": "Mel", "starLevel": 1, "threeStarRate": 0.01, "recommendedItems": [], "isCarry": false }
+    ],
+    "earlyBoard": [
+      { "championId": "TFT16_Briar", "championName": "Briar" },
+      { "championId": "TFT16_Sion", "championName": "Sion" },
+      { "championId": "TFT16_Draven", "championName": "Draven" },
+      { "championId": "TFT16_Darius", "championName": "Darius" },
+      { "championId": "TFT16_LeBlanc", "championName": "LeBlanc" }
     ],
     "stats": { "avgPlacement": 3.7, "top4Rate": 0.56, "winRate": 0.12, "playRate": 0.04, "sampleSize": 1420 },
     "tier": "B",
@@ -157,12 +199,19 @@
       { "championId": "TFT16_Anivia", "championName": "Anivia", "starLevel": 2, "threeStarRate": 0.74, "recommendedItems": [], "isCarry": false },
       { "championId": "TFT16_Ashe", "championName": "Ashe", "starLevel": 2, "threeStarRate": 0.40, "recommendedItems": [], "isCarry": false },
       { "championId": "TFT16_Tryndamere", "championName": "Tryndamere", "starLevel": 2, "threeStarRate": 0.36, "recommendedItems": [], "isCarry": false },
-      { "championId": "TFT16_Sejuani", "championName": "Sejuani", "starLevel": 2, "threeStarRate": 0.14, "recommendedItems": ["TFT_Item_SunfireCape", "TFT_Item_WarmogsArmor"], "isCarry": false },
+      { "championId": "TFT16_Sejuani", "championName": "Sejuani", "starLevel": 2, "threeStarRate": 0.14, "recommendedItems": ["TFT_Item_SunfireCape", "TFT_Item_WarmogsArmor", "TFT_Item_DragonsClaw"], "isCarry": false },
       { "championId": "TFT16_Braum", "championName": "Braum", "starLevel": 2, "threeStarRate": 0.78, "recommendedItems": [], "isCarry": false },
       { "championId": "TFT16_Lissandra", "championName": "Lissandra", "starLevel": 2, "threeStarRate": 0.06, "recommendedItems": ["TFT_Item_RabadonsDeathcap", "TFT_Item_JeweledGauntlet", "TFT_Item_ArchangelsStaff"], "isCarry": true }
     ],
     "flexChampions": [
       { "championId": "TFT16_Volibear", "championName": "Volibear", "starLevel": 1, "threeStarRate": 0.04, "recommendedItems": [], "isCarry": false }
+    ],
+    "earlyBoard": [
+      { "championId": "TFT16_Anivia", "championName": "Anivia" },
+      { "championId": "TFT16_Ashe", "championName": "Ashe" },
+      { "championId": "TFT16_Tryndamere", "championName": "Tryndamere" },
+      { "championId": "TFT16_Shen", "championName": "Shen" },
+      { "championId": "TFT16_Sejuani", "championName": "Sejuani" }
     ],
     "stats": { "avgPlacement": 3.8, "top4Rate": 0.55, "winRate": 0.11, "playRate": 0.04, "sampleSize": 1290 },
     "tier": "B",
@@ -178,14 +227,21 @@
     ],
     "coreChampions": [
       { "championId": "TFT16_Aphelios", "championName": "Aphelios", "starLevel": 2, "threeStarRate": 0.52, "recommendedItems": ["TFT_Item_GuinsoosRageblade", "TFT_Item_InfinityEdge", "TFT_Item_GiantSlayer"], "isCarry": true },
-      { "championId": "TFT16_Leona", "championName": "Leona", "starLevel": 2, "threeStarRate": 0.13, "recommendedItems": ["TFT_Item_SunfireCape"], "isCarry": false },
+      { "championId": "TFT16_Leona", "championName": "Leona", "starLevel": 2, "threeStarRate": 0.13, "recommendedItems": ["TFT_Item_SunfireCape", "TFT_Item_WarmogsArmor", "TFT_Item_DragonsClaw"], "isCarry": false },
       { "championId": "TFT16_Zoe", "championName": "Zoe", "starLevel": 2, "threeStarRate": 0.11, "recommendedItems": [], "isCarry": false },
       { "championId": "TFT16_Diana", "championName": "Diana", "starLevel": 2, "threeStarRate": 0.05, "recommendedItems": [], "isCarry": false },
-      { "championId": "TFT16_Taric", "championName": "Taric", "starLevel": 2, "threeStarRate": 0.04, "recommendedItems": ["TFT_Item_WarmogsArmor"], "isCarry": false }
+      { "championId": "TFT16_Taric", "championName": "Taric", "starLevel": 2, "threeStarRate": 0.04, "recommendedItems": [], "isCarry": false }
     ],
     "flexChampions": [
       { "championId": "TFT16_AurelionSol", "championName": "Aurelion Sol", "starLevel": 1, "threeStarRate": 0.01, "recommendedItems": [], "isCarry": false },
       { "championId": "TFT16_Caitlyn", "championName": "Caitlyn", "starLevel": 2, "threeStarRate": 0.35, "recommendedItems": [], "isCarry": false }
+    ],
+    "earlyBoard": [
+      { "championId": "TFT16_Aphelios", "championName": "Aphelios" },
+      { "championId": "TFT16_Leona", "championName": "Leona" },
+      { "championId": "TFT16_Zoe", "championName": "Zoe" },
+      { "championId": "TFT16_KogMaw", "championName": "Kog'Maw" },
+      { "championId": "TFT16_Caitlyn", "championName": "Caitlyn" }
     ],
     "stats": { "avgPlacement": 3.2, "top4Rate": 0.65, "winRate": 0.18, "playRate": 0.06, "sampleSize": 2150 },
     "tier": "S",

@@ -12,6 +12,8 @@ interface CompCardProps {
   comp: CompArchetype;
   getTraitIcon?: (id: string) => string | undefined;
   getChampionCost?: (id: string) => number | undefined;
+  getItemIcon?: (id: string) => string | undefined;
+  isItemEmblem?: (id: string) => boolean;
 }
 
 const TIER_COLORS: Record<string, string> = {
@@ -35,7 +37,7 @@ function getDifficulty(playRate: number) {
   return { label: "Hard", className: "bg-accent/15 text-accent" };
 }
 
-export function CompCard({ comp, getTraitIcon, getChampionCost }: CompCardProps) {
+export function CompCard({ comp, getTraitIcon, getChampionCost, getItemIcon, isItemEmblem }: CompCardProps) {
   const difficulty = getDifficulty(comp.stats.playRate);
 
   const allChampions = [...comp.coreChampions, ...comp.flexChampions].sort(
@@ -46,10 +48,22 @@ export function CompCard({ comp, getTraitIcon, getChampionCost }: CompCardProps)
     }
   );
 
+  // Identify primary carry (first isCarry with items) and primary tank (first non-carry with items)
+  const primaryCarry = allChampions.find((c) => c.isCarry && c.recommendedItems.length > 0);
+  const primaryTank = allChampions.find((c) => !c.isCarry && c.recommendedItems.length > 0);
+  const itemChampIds = new Set<string>();
+  if (primaryCarry) itemChampIds.add(primaryCarry.championId);
+  if (primaryTank) itemChampIds.add(primaryTank.championId);
+
+  // Check if any champion in the comp requires an emblem
+  const requiresEmblem = allChampions.some((c) =>
+    c.recommendedItems.some((itemId) => isItemEmblem?.(itemId))
+  );
+
   return (
     <Link href={`/comps/${comp.id}`}>
       <Card className="h-full transition-colors hover:border-accent/30">
-        <CardContent className="space-y-3 p-4">
+        <CardContent className="space-y-4 p-4">
           {/* Header */}
           <div className="flex items-center justify-between gap-2">
             <div className="flex items-center gap-2">
@@ -65,15 +79,23 @@ export function CompCard({ comp, getTraitIcon, getChampionCost }: CompCardProps)
                 {comp.name}
               </h3>
             </div>
-            <span className={cn("shrink-0 rounded-sm px-2.5 py-0.5 text-xs font-medium", difficulty.className)}>
-              {difficulty.label}
-            </span>
+            <div className="flex shrink-0 items-center gap-1.5">
+              {requiresEmblem && (
+                <span className="rounded-sm bg-sky-500/15 px-2.5 py-0.5 text-xs font-medium text-sky-400">
+                  Emblem
+                </span>
+              )}
+              <span className={cn("rounded-sm px-2.5 py-0.5 text-xs font-medium", difficulty.className)}>
+                {difficulty.label}
+              </span>
+            </div>
           </div>
 
           {/* Champion portraits */}
           <div className="flex flex-wrap gap-3">
             {allChampions.map((champ) => {
               const cost = getChampionCost?.(champ.championId) ?? 1;
+              const showItems = itemChampIds.has(champ.championId);
               return (
                 <div
                   key={champ.championId}
@@ -87,10 +109,27 @@ export function CompCard({ comp, getTraitIcon, getChampionCost }: CompCardProps)
                     variant="champion"
                   />
                   {(champ.threeStarRate ?? 0) >= 0.5 && (
-                    <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 flex -space-x-0.5">
+                    <div className="absolute -top-2.5 left-1/2 -translate-x-1/2 flex -space-x-0.5">
                       <Star className="h-4 w-4 fill-yellow-400 text-black drop-shadow-sm" strokeWidth={1} />
                       <Star className="h-4 w-4 fill-yellow-400 text-black drop-shadow-sm" strokeWidth={1} />
                       <Star className="h-4 w-4 fill-yellow-400 text-black drop-shadow-sm" strokeWidth={1} />
+                    </div>
+                  )}
+                  {showItems && (
+                    <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 flex -space-x-0.5">
+                      {champ.recommendedItems.slice(0, 3).map((itemId) => {
+                        const iconPath = getItemIcon?.(itemId);
+                        return iconPath ? (
+                          <GameIcon
+                            key={itemId}
+                            iconPath={iconPath}
+                            name={itemId}
+                            size={20}
+                            variant="item"
+                            className="drop-shadow-sm"
+                          />
+                        ) : null;
+                      })}
                     </div>
                   )}
                 </div>

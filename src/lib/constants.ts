@@ -111,6 +111,24 @@ export const OFFENSIVE_ITEM_IDS = new Set([
   "TFT_Item_NashorsTooth",
 ]);
 
+/** Items classified as defensive/tank (for tank identification) */
+export const DEFENSIVE_ITEM_IDS = new Set([
+  "TFT_Item_SunfireCape",
+  "TFT_Item_WarmogsArmor",
+  "TFT_Item_DragonsClaw",
+  "TFT_Item_BrambleVest",
+  "TFT_Item_Redemption",
+  "TFT_Item_GargoyleStoneplate",
+  "TFT_Item_IonicSpark",
+  "TFT_Item_ZephyrGale",
+  "TFT_Item_FrozenHeart",
+  "TFT_Item_Crownguard",
+  "TFT_Item_SteraksGage",
+]);
+
+/** Thief's Gloves consumes all 3 item slots — must be the sole recommended item */
+export const THIEFS_GLOVES_ID = "TFT_Item_ThiefsGloves";
+
 /** Game stages where augments are offered */
 export const AUGMENT_STAGES = ["2-1", "3-2", "4-2"] as const;
 

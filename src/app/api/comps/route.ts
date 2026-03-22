@@ -4,7 +4,7 @@ import { db } from "@/lib/db";
 import { compArchetypes } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
 import { getCurrentPatch } from "@/lib/db/queries/patches";
-import type { CompChampion, ActiveTrait } from "@/types/comp";
+import type { CompChampion, ActiveTrait, EarlyBoardChampion } from "@/types/comp";
 
 const useMockData = process.env.USE_MOCK_DATA === "true";
 
@@ -100,6 +100,7 @@ export async function GET() {
           c.coreChampions as CompChampion[]
         ),
         flexChampions: (c.flexSlots as CompChampion[] | null) ?? [],
+        earlyBoard: (c.earlyBoard as EarlyBoardChampion[] | null) ?? undefined,
         stats: {
           avgPlacement: parseFloat(c.avgPlacement ?? "4.5"),
           top4Rate: parseFloat(c.top4Rate ?? "0.5"),

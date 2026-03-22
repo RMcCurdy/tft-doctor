@@ -15,18 +15,27 @@ export interface StaticEntity {
   icon: string;
 }
 
+export interface StaticItem {
+  id: string;
+  name: string;
+  icon: string;
+  isEmblem?: boolean;
+  components?: string[];
+}
+
 interface StaticDataResponse {
   champions: StaticChampion[];
-  items: StaticEntity[];
+  items: StaticItem[];
   traits: StaticEntity[];
 }
 
 type ChampionEntry = { name: string; icon: string; cost: number };
 type EntityEntry = { name: string; icon: string };
+type ItemEntry = { name: string; icon: string; isEmblem: boolean; components: string[] };
 
 export function useStaticData() {
   const [championMap, setChampionMap] = useState<Record<string, ChampionEntry>>({});
-  const [itemMap, setItemMap] = useState<Record<string, EntityEntry>>({});
+  const [itemMap, setItemMap] = useState<Record<string, ItemEntry>>({});
   const [traitMap, setTraitMap] = useState<Record<string, EntityEntry>>({});
   const [champions, setChampions] = useState<StaticChampion[]>([]);
   const [traits, setTraits] = useState<StaticEntity[]>([]);
@@ -43,9 +52,9 @@ export function useStaticData() {
         setChampionMap(champs);
         setChampions(data.champions);
 
-        const items: Record<string, EntityEntry> = {};
+        const items: Record<string, ItemEntry> = {};
         for (const i of data.items) {
-          items[i.id] = { name: i.name, icon: i.icon };
+          items[i.id] = { name: i.name, icon: i.icon, isEmblem: i.isEmblem ?? false, components: i.components ?? [] };
         }
         setItemMap(items);
 
@@ -71,6 +80,8 @@ export function useStaticData() {
     getItemIcon: (id: string) => itemMap[id]?.icon,
     getTraitIcon: (id: string) => traitMap[id]?.icon,
     getItemName: (id: string) => itemMap[id]?.name,
+    getItemComponents: (id: string) => itemMap[id]?.components ?? [],
+    isItemEmblem: (id: string) => itemMap[id]?.isEmblem ?? false,
     champions,
     traits,
     isLoaded,

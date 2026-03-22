@@ -9,7 +9,7 @@ import { useStaticData } from "@/hooks/useStaticData";
 import type { CompArchetype } from "@/types/comp";
 
 export default function HomePage() {
-  const { champions, traits, getTraitIcon, getChampionCost, isLoaded } =
+  const { champions, traits, getTraitIcon, getChampionCost, getItemIcon, isItemEmblem, isLoaded } =
     useStaticData();
 
   const [comps, setComps] = useState<CompArchetype[]>([]);
@@ -84,6 +84,8 @@ export default function HomePage() {
                 comp={comp}
                 getTraitIcon={getTraitIcon}
                 getChampionCost={getChampionCost}
+                getItemIcon={getItemIcon}
+                isItemEmblem={isItemEmblem}
               />
             ))}
           </div>

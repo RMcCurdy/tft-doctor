@@ -19,10 +19,11 @@ import {
 } from "../src/lib/db/schema.js";
 import { eq, and } from "drizzle-orm";
 import { getCurrentPatch } from "../src/lib/db/queries/patches.js";
-import { isSummonedUnit } from "../src/lib/constants.js";
+import { isSummonedUnit, DEFENSIVE_ITEM_IDS, THIEFS_GLOVES_ID } from "../src/lib/constants.js";
 import { upsertCompArchetype } from "../src/lib/db/queries/comps.js";
 import { classifyBoards } from "../src/lib/clustering/comp-classifier.js";
 import { SET_16_COMP_DEFINITIONS } from "../src/lib/clustering/comp-definitions.js";
+import { generateEarlyBoard } from "../src/lib/clustering/early-board.js";
 import type { ParticipantBoard } from "../src/lib/clustering/types.js";
 import type { RiotUnit, RiotTrait } from "../src/types/riot.js";
 import { logger } from "./utils/logger.js";
@@ -32,7 +33,7 @@ import { logger } from "./utils/logger.js";
 const MIN_COMP_SAMPLE_SIZE = 5;
 const CORE_LINEUP_SIZE = 8;
 const MAX_CARRY_ITEMS = 3;
-const MAX_NON_CARRY_ITEMS = 2;
+const MAX_TANK_ITEMS = 3;
 
 // ─── Static data types ──────────────────────────────────────────────────────
 
@@ -307,23 +308,63 @@ async function buildCompsFromData() {
       position?: { row: number; col: number };
     }> = [];
 
+    // Build sorted items per champion for later assignment
+    const champItemFreq = new Map<string, string[]>();
     for (const champId of selectedIds) {
       const stats = champStats.get(champId)!;
-      const staticChamp = championMap.get(champId);
-      const isCarry = isCarryId.has(champId);
-
-      // Item frequency for this champion
       const itemCounts = new Map<string, number>();
       for (const items of stats.itemSets) {
         for (const item of items) {
           itemCounts.set(item, (itemCounts.get(item) ?? 0) + 1);
         }
       }
-      const sortedItems = [...itemCounts.entries()]
-        .sort((a, b) => b[1] - a[1])
-        .map(([item]) => item);
-      const maxItems = isCarry ? MAX_CARRY_ITEMS : MAX_NON_CARRY_ITEMS;
-      const recommendedItems = sortedItems.slice(0, maxItems);
+      champItemFreq.set(
+        champId,
+        [...itemCounts.entries()].sort((a, b) => b[1] - a[1]).map(([item]) => item)
+      );
+    }
+
+    // Identify primary tank: non-carry with the highest defensive item frequency
+    const primaryCarryId = compDef.primaryCarry;
+    let primaryTankId: string | undefined;
+    let bestTankScore = 0;
+    for (const champId of selectedIds) {
+      if (isCarryId.has(champId)) continue;
+      const stats = champStats.get(champId)!;
+      // Score by total defensive items seen across all games
+      let defensiveCount = 0;
+      for (const items of stats.itemSets) {
+        for (const item of items) {
+          if (DEFENSIVE_ITEM_IDS.has(item)) defensiveCount++;
+        }
+      }
+      if (defensiveCount > bestTankScore) {
+        bestTankScore = defensiveCount;
+        primaryTankId = champId;
+      }
+    }
+
+    for (const champId of selectedIds) {
+      const stats = champStats.get(champId)!;
+      const staticChamp = championMap.get(champId);
+      const isCarry = isCarryId.has(champId);
+      const sortedItems = champItemFreq.get(champId) ?? [];
+
+      // Only the primary carry and primary tank get items.
+      // Prefer 3 distinct items over Thief's Gloves — only use TG if it's the #1 item.
+      let recommendedItems: string[] = [];
+      if (champId === primaryCarryId || champId === primaryTankId) {
+        const maxItems = champId === primaryCarryId ? MAX_CARRY_ITEMS : MAX_TANK_ITEMS;
+        if (sortedItems[0] === THIEFS_GLOVES_ID) {
+          // TG is the most common item — it fills all 3 slots, so it's the only recommendation
+          recommendedItems = [THIEFS_GLOVES_ID];
+        } else {
+          // Filter out TG and take the top 3 real items
+          recommendedItems = sortedItems
+            .filter((id) => id !== THIEFS_GLOVES_ID)
+            .slice(0, maxItems);
+        }
+      }
 
       coreChampions.push({
         championId: champId,
@@ -350,7 +391,13 @@ async function buildCompsFromData() {
       champ.position = positions[champ.championId];
     }
 
-    // ── 7e. Trait signature from canonical lineup ─────────────────────────
+    // ── 7e. Early board ─────────────────────────────────────────────────
+    const earlyBoard = generateEarlyBoard(
+      coreChampions.map((c) => c.championId),
+      championMap,
+    );
+
+    // ── 7f. Trait signature from canonical lineup ──────────────────────────
     const traitUnitCounts = new Map<string, number>();
     for (const champ of coreChampions) {
       const staticChamp = championMap.get(champ.championId);
@@ -421,20 +468,21 @@ async function buildCompsFromData() {
         return b.activeUnits - a.activeUnits;
       });
 
-    // ── 7f. Performance stats ─────────────────────────────────────────────
+    // ── 7g. Performance stats ─────────────────────────────────────────────
     const placements = group.map((g) => g.board.placement);
     const avgPlacement = average(placements);
     const top4Rate = placements.filter((p) => p <= 4).length / placements.length;
     const winRate = placements.filter((p) => p === 1).length / placements.length;
     const playRate = group.length / totalClassified;
 
-    // ── 7g. Upsert ───────────────────────────────────────────────────────
+    // ── 7h. Upsert ───────────────────────────────────────────────────────
     await upsertCompArchetype({
       patchId: currentPatch.id,
       compName: compDef.name,
       traitSignature,
       coreChampions,
       flexSlots: null,
+      earlyBoard,
       primaryCarry: compDef.primaryCarry,
       secondaryCarry: compDef.secondaryCarry ?? undefined,
       isReroll: compDef.isReroll ?? false,

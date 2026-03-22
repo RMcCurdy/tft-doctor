@@ -98,6 +98,7 @@ export const compArchetypes = pgTable(
     traitSignature: jsonb("trait_signature").notNull(), // key traits defining this comp
     coreChampions: jsonb("core_champions").notNull(), // must-have champions
     flexSlots: jsonb("flex_slots"), // variable champion slots
+    earlyBoard: jsonb("early_board"), // 5 cheap units for early game
     primaryCarry: varchar("primary_carry", { length: 128 }),
     secondaryCarry: varchar("secondary_carry", { length: 128 }),
     isReroll: boolean("is_reroll").default(false),

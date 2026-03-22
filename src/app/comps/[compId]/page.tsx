@@ -16,7 +16,7 @@ export default function CompDetailPage({
   const [comp, setComp] = useState<CompArchetype | null>(null);
   const [loading, setLoading] = useState(true);
   const [notFoundState, setNotFoundState] = useState(false);
-  const { getTraitIcon, getItemIcon, getItemName, getChampionCost } = useStaticData();
+  const { getTraitIcon, getItemIcon, getItemName, getItemComponents, getChampionCost } = useStaticData();
 
   useEffect(() => {
     fetch("/api/comps")
@@ -58,6 +58,7 @@ export default function CompDetailPage({
         getItemIcon={getItemIcon}
         getItemName={getItemName}
         getChampionCost={getChampionCost}
+        getItemComponents={getItemComponents}
       />
     </div>
   );
