@@ -10,12 +10,14 @@ import {
   CommandList,
 } from "@/components/ui/command";
 import { Badge } from "@/components/ui/badge";
+import { GameIcon } from "@/components/shared/GameIcon";
 import { X } from "lucide-react";
 
 export interface SelectableEntity {
   id: string;
   name: string;
-  subtitle?: string; // e.g., augment tier, item components, champion cost
+  subtitle?: string;
+  icon?: string; // .tex icon path from game data
 }
 
 interface GameEntitySelectorProps {
@@ -62,8 +64,16 @@ export function GameEntitySelector({
             <Badge
               key={entity.id}
               variant="secondary"
-              className="gap-1 pr-1 text-xs"
+              className="gap-1.5 pr-1 text-xs"
             >
+              {entity.icon && (
+                <GameIcon
+                  iconPath={entity.icon}
+                  name={entity.name}
+                  size={16}
+                  className="rounded-sm"
+                />
+              )}
               {entity.name}
               <button
                 type="button"
@@ -87,7 +97,6 @@ export function GameEntitySelector({
               onValueChange={setSearch}
               onFocus={() => setOpen(true)}
               onBlur={() => {
-                // Delay to allow click on items
                 setTimeout(() => setOpen(false), 200);
               }}
             />
@@ -112,13 +121,23 @@ export function GameEntitySelector({
                         }}
                         className="cursor-pointer"
                       >
-                        <div className="flex flex-col">
-                          <span className="text-sm">{entity.name}</span>
-                          {entity.subtitle && (
-                            <span className="text-xs text-muted-foreground">
-                              {entity.subtitle}
-                            </span>
+                        <div className="flex items-center gap-2">
+                          {entity.icon && (
+                            <GameIcon
+                              iconPath={entity.icon}
+                              name={entity.name}
+                              size={20}
+                              className="rounded-sm"
+                            />
                           )}
+                          <div className="flex flex-col">
+                            <span className="text-sm">{entity.name}</span>
+                            {entity.subtitle && (
+                              <span className="text-xs text-muted-foreground">
+                                {entity.subtitle}
+                              </span>
+                            )}
+                          </div>
                         </div>
                       </CommandItem>
                     ))}

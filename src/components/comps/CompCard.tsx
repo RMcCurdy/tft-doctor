@@ -1,0 +1,108 @@
+"use client";
+
+import Link from "next/link";
+import { Card, CardContent } from "@/components/ui/card";
+import { GameIcon } from "@/components/shared/GameIcon";
+import { TraitBadge, sortTraits } from "@/components/shared/TraitBadge";
+import type { CompArchetype } from "@/types/comp";
+import { cn } from "@/lib/utils";
+
+interface CompCardProps {
+  comp: CompArchetype;
+  getTraitIcon?: (id: string) => string | undefined;
+  getChampionCost?: (id: string) => number | undefined;
+}
+
+const TIER_COLORS: Record<string, string> = {
+  S: "bg-[#ff7f7e] text-black border-transparent",
+  A: "bg-[#ffbf7f] text-black border-transparent",
+  B: "bg-[#feff7f] text-black border-transparent",
+  C: "bg-[#beff7f] text-black border-transparent",
+};
+
+const COST_BORDER: Record<number, string> = {
+  1: "ring-zinc-500/50",
+  2: "ring-emerald-500/50",
+  3: "ring-sky-500/50",
+  4: "ring-purple-500/50",
+  5: "ring-amber-500/50",
+};
+
+function getDifficulty(playRate: number) {
+  if (playRate > 0.05) return { label: "Easy", className: "text-success" };
+  if (playRate > 0.02) return { label: "Medium", className: "text-warning" };
+  return { label: "Hard", className: "text-accent" };
+}
+
+export function CompCard({ comp, getTraitIcon, getChampionCost }: CompCardProps) {
+  const difficulty = getDifficulty(comp.stats.playRate);
+
+  const allChampions = [...comp.coreChampions, ...comp.flexChampions].sort(
+    (a, b) => {
+      const costA = getChampionCost?.(a.championId) ?? 1;
+      const costB = getChampionCost?.(b.championId) ?? 1;
+      return costA - costB;
+    }
+  );
+
+  return (
+    <Link href={`/comps/${comp.id}`}>
+      <Card className="h-full transition-colors hover:border-accent/30">
+        <CardContent className="space-y-3 p-4">
+          {/* Header */}
+          <div className="flex items-center justify-between gap-2">
+            <div className="flex items-center gap-2">
+              <div
+                className={cn(
+                  "flex h-6 w-6 shrink-0 items-center justify-center rounded-full border text-xs font-bold",
+                  TIER_COLORS[comp.tier]
+                )}
+              >
+                {comp.tier}
+              </div>
+              <h3 className="text-base font-bold leading-snug text-foreground">
+                {comp.name}
+              </h3>
+            </div>
+            <span className={cn("shrink-0 text-xs font-medium", difficulty.className)}>
+              {difficulty.label}
+            </span>
+          </div>
+
+          {/* Champion portraits */}
+          <div className="flex flex-wrap gap-3">
+            {allChampions.map((champ) => {
+              const cost = getChampionCost?.(champ.championId) ?? 1;
+              return (
+                <div
+                  key={champ.championId}
+                  className={cn("rounded-sm ring-2", COST_BORDER[cost] ?? "ring-border")}
+                  title={`${champ.championName} (${cost} cost)${champ.isCarry ? " — Carry" : ""}`}
+                >
+                  <GameIcon
+                    championId={champ.championId}
+                    name={champ.championName}
+                    size={48}
+                    variant="champion"
+                  />
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Traits */}
+          <div className="flex flex-wrap gap-3">
+            {sortTraits(comp.traits).map((trait) => (
+              <TraitBadge
+                key={trait.traitId}
+                trait={trait}
+                iconPath={getTraitIcon?.(trait.traitId)}
+                size="sm"
+              />
+            ))}
+          </div>
+        </CardContent>
+      </Card>
+    </Link>
+  );
+}

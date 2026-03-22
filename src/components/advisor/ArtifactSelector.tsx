@@ -24,6 +24,7 @@ export function ArtifactSelector({
         id: a.id,
         name: a.name,
         subtitle: a.type.charAt(0).toUpperCase() + a.type.slice(1),
+        icon: a.icon,
       })),
     []
   );

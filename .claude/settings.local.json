@@ -2,7 +2,16 @@
   "permissions": {
     "allow": [
       "Bash(npx tsc:*)",
-      "Bash(pnpm build:*)"
+      "Bash(pnpm build:*)",
+      "Bash(npx next:*)",
+      "Bash(rm -f src/components/ui/skeleton.tsx)",
+      "Bash(rm -f src/app/advisor/page.tsx)",
+      "Bash(rmdir src/app/advisor)",
+      "Bash(rm -f src/app/meta/page.tsx)",
+      "Bash(rmdir src/app/meta)",
+      "WebFetch(domain:raw.communitydragon.org)",
+      "WebFetch(domain:ddragon.leagueoflegends.com)",
+      "Bash(npx tsx:*)"
     ]
   }
 }

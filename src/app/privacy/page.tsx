@@ -187,7 +187,7 @@ export default function PrivacyPage() {
             <strong>Riot Games API</strong> — for match data (
             <a
               href="https://developer.riotgames.com/policies/general"
-              className="text-primary"
+              className="text-accent"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -199,7 +199,7 @@ export default function PrivacyPage() {
             <strong>Vercel</strong> — hosting (
             <a
               href="https://vercel.com/legal/privacy-policy"
-              className="text-primary"
+              className="text-accent"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -211,7 +211,7 @@ export default function PrivacyPage() {
             <strong>Supabase</strong> — database (
             <a
               href="https://supabase.com/privacy"
-              className="text-primary"
+              className="text-accent"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -230,7 +230,7 @@ export default function PrivacyPage() {
         <h2>9. Contact</h2>
         <p>
           For privacy-related questions or requests, contact us at{" "}
-          <a href="mailto:contact@tftdoctor.gg" className="text-primary">
+          <a href="mailto:contact@tftdoctor.gg" className="text-accent">
             contact@tftdoctor.gg
           </a>
           .

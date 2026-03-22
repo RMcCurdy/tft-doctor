@@ -3,7 +3,8 @@
 import { use, useEffect, useState } from "react";
 import { notFound } from "next/navigation";
 import { CompDetail } from "@/components/comps/CompDetail";
-import { Skeleton } from "@/components/ui/skeleton";
+import { LoadingOverlay } from "@/components/ui/spinner";
+import { useStaticData } from "@/hooks/useStaticData";
 import type { CompArchetype } from "@/types/comp";
 
 export default function CompDetailPage({
@@ -15,6 +16,7 @@ export default function CompDetailPage({
   const [comp, setComp] = useState<CompArchetype | null>(null);
   const [loading, setLoading] = useState(true);
   const [notFoundState, setNotFoundState] = useState(false);
+  const { getTraitIcon, getItemIcon, getItemName, getChampionCost } = useStaticData();
 
   useEffect(() => {
     fetch("/api/comps")
@@ -39,11 +41,8 @@ export default function CompDetailPage({
 
   if (loading) {
     return (
-      <div className="mx-auto w-full max-w-3xl space-y-4 px-4 py-6 sm:px-6 lg:px-8">
-        <Skeleton className="h-10 w-64" />
-        <Skeleton className="h-6 w-48" />
-        <Skeleton className="h-24 w-full rounded-lg" />
-        <Skeleton className="h-48 w-full rounded-lg" />
+      <div className="mx-auto w-full max-w-4xl px-4 py-6 sm:px-6 lg:px-8">
+        <LoadingOverlay />
       </div>
     );
   }
@@ -51,8 +50,14 @@ export default function CompDetailPage({
   if (!comp) return null;
 
   return (
-    <div className="mx-auto w-full max-w-3xl px-4 py-6 sm:px-6 lg:px-8">
-      <CompDetail comp={comp} />
+    <div className="mx-auto w-full max-w-4xl px-4 py-6 sm:px-6 lg:px-8">
+      <CompDetail
+        comp={comp}
+        getTraitIcon={getTraitIcon}
+        getItemIcon={getItemIcon}
+        getItemName={getItemName}
+        getChampionCost={getChampionCost}
+      />
     </div>
   );
 }

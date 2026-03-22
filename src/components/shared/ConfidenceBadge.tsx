@@ -7,9 +7,9 @@ interface ConfidenceBadgeProps {
 }
 
 const CONFIDENCE_STYLES = {
-  high: "bg-emerald-500/15 text-emerald-400 border-emerald-500/30",
-  medium: "bg-amber-500/15 text-amber-400 border-amber-500/30",
-  low: "bg-red-500/15 text-red-400 border-red-500/30",
+  high: "bg-success/15 text-success border-success/30",
+  medium: "bg-warning/15 text-warning border-warning/30",
+  low: "bg-destructive/15 text-destructive border-destructive/30",
 } as const;
 
 export function ConfidenceBadge({

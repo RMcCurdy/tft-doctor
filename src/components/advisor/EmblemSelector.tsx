@@ -24,6 +24,7 @@ export function EmblemSelector({
         id: e.id,
         name: e.name,
         subtitle: `Grants ${e.traitId.replace("TFT16_", "")} trait`,
+        icon: e.icon,
       })),
     []
   );

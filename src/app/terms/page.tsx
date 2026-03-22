@@ -118,7 +118,7 @@ export default function TermsPage() {
         <p>
           If you have questions about these Terms of Service, please contact us
           at{" "}
-          <a href="mailto:contact@tftdoctor.gg" className="text-primary">
+          <a href="mailto:contact@tftdoctor.gg" className="text-accent">
             contact@tftdoctor.gg
           </a>
           .

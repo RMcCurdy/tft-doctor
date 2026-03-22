@@ -24,6 +24,7 @@ export function AugmentSelector({
         id: a.id,
         name: a.name,
         subtitle: a.tier.charAt(0).toUpperCase() + a.tier.slice(1),
+        icon: a.icon,
       })),
     []
   );

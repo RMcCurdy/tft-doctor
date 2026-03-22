@@ -2,18 +2,22 @@
 
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { GameIcon } from "@/components/shared/GameIcon";
 import { ConfidenceBadge } from "@/components/shared/ConfidenceBadge";
 import { StatDisplay } from "@/components/shared/StatDisplay";
 import type { CompRecommendation } from "@/types/comp";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { useState } from "react";
+import { cn } from "@/lib/utils";
 
 interface RecommendationCardProps {
   recommendation: CompRecommendation;
+  getTraitIcon?: (id: string) => string | undefined;
 }
 
 export function RecommendationCard({
   recommendation,
+  getTraitIcon,
 }: RecommendationCardProps) {
   const [expanded, setExpanded] = useState(false);
   const { comp, fitScore, fitExplanation, confidence, emblemApplication } =
@@ -31,15 +35,26 @@ export function RecommendationCard({
               <h3 className="truncate text-base font-semibold">{comp.name}</h3>
             </div>
             <div className="mt-1.5 flex flex-wrap gap-1">
-              {comp.traits.map((trait) => (
-                <Badge
-                  key={trait.traitId}
-                  variant="outline"
-                  className="text-xs"
-                >
-                  {trait.activeUnits} {trait.traitName}
-                </Badge>
-              ))}
+              {comp.traits.map((trait) => {
+                const traitIconPath = getTraitIcon?.(trait.traitId);
+                return (
+                  <Badge
+                    key={trait.traitId}
+                    variant="outline"
+                    className="gap-1 text-xs"
+                  >
+                    {traitIconPath && (
+                      <GameIcon
+                        iconPath={traitIconPath}
+                        name={trait.traitName}
+                        size={14}
+                        variant="trait"
+                      />
+                    )}
+                    {trait.activeUnits} {trait.traitName}
+                  </Badge>
+                );
+              })}
             </div>
           </div>
           <div className="flex shrink-0 flex-col items-end gap-1">
@@ -53,7 +68,7 @@ export function RecommendationCard({
 
       <CardContent className="space-y-3 pt-0">
         {/* Stats row */}
-        <div className="flex justify-between rounded-lg bg-muted/50 px-3 py-2">
+        <div className="flex flex-wrap justify-between gap-2 rounded-lg bg-elevated/50 px-3 py-2">
           <StatDisplay label="Avg Place" value={comp.stats.avgPlacement.toFixed(1)} />
           <StatDisplay
             label="Top 4"
@@ -76,14 +91,21 @@ export function RecommendationCard({
           </div>
           <div className="flex flex-wrap gap-1">
             {comp.coreChampions.map((champ) => (
-              <Badge
+              <div
                 key={champ.championId}
-                variant={champ.isCarry ? "default" : "secondary"}
-                className="text-xs"
+                className={cn(
+                  "relative",
+                  champ.isCarry && "ring-1 ring-accent/60 rounded-sm"
+                )}
+                title={`${champ.championName}${champ.isCarry ? " (Carry)" : ""}`}
               >
-                {champ.championName}
-                {champ.isCarry && " ★"}
-              </Badge>
+                <GameIcon
+                  championId={champ.championId}
+                  name={champ.championName}
+                  size={28}
+                  variant="champion"
+                />
+              </div>
             ))}
           </div>
         </div>
@@ -105,19 +127,19 @@ export function RecommendationCard({
         </button>
 
         {expanded && (
-          <div className="space-y-2 rounded-lg bg-muted/30 p-3">
+          <div className="space-y-2 rounded-lg bg-elevated/30 p-3">
             <ul className="space-y-1">
               {fitExplanation.map((reason, i) => (
                 <li key={i} className="flex gap-2 text-sm">
-                  <span className="shrink-0 text-primary">•</span>
+                  <span className="shrink-0 text-accent">•</span>
                   <span>{reason}</span>
                 </li>
               ))}
             </ul>
 
             {emblemApplication && (
-              <div className="mt-2 rounded border border-primary/20 bg-primary/5 p-2">
-                <div className="text-xs font-medium text-primary">
+              <div className="mt-2 rounded border border-accent/20 bg-accent/5 p-2">
+                <div className="text-xs font-medium text-accent">
                   Emblem Tip
                 </div>
                 <p className="mt-0.5 text-sm">
