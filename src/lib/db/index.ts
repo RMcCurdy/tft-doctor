@@ -16,7 +16,9 @@ import * as schema from "./schema";
  * (port 6543) for serverless environments like Vercel.
  */
 
-function createDb() {
+type DrizzleDb = ReturnType<typeof drizzle<typeof schema>>;
+
+function createDb(): DrizzleDb {
   const connectionString = process.env.DATABASE_URL;
 
   if (!connectionString) {
@@ -37,13 +39,20 @@ function createDb() {
 
 // Reuse the DB instance across hot reloads in development
 const globalForDb = globalThis as unknown as {
-  db: ReturnType<typeof createDb> | undefined;
+  db: DrizzleDb | undefined;
 };
 
-export const db = globalForDb.db ?? createDb();
+/**
+ * Lazy DB accessor — only creates the connection on first use.
+ * This allows builds with USE_MOCK_DATA=true to succeed without DATABASE_URL.
+ */
+export const db: DrizzleDb = new Proxy({} as DrizzleDb, {
+  get(_target, prop, receiver) {
+    if (!globalForDb.db) {
+      globalForDb.db = createDb();
+    }
+    return Reflect.get(globalForDb.db, prop, receiver);
+  },
+});
 
-if (process.env.NODE_ENV !== "production") {
-  globalForDb.db = db;
-}
-
-export type Database = typeof db;
+export type Database = DrizzleDb;

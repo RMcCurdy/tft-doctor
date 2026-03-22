@@ -5,7 +5,6 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { GameIcon } from "@/components/shared/GameIcon";
 import { TraitBadge, sortTraits } from "@/components/shared/TraitBadge";
-import { StatDisplay } from "@/components/shared/StatDisplay";
 import type { CompArchetype, BoardPosition } from "@/types/comp";
 import { cn } from "@/lib/utils";
 import { ArrowLeft } from "lucide-react";

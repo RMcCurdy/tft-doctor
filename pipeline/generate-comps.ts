@@ -14,7 +14,6 @@ import { eq } from "drizzle-orm";
 import { logger } from "./utils/logger";
 
 import championsData from "../mock/champions.json";
-import itemsData from "../mock/items.json";
 import traitsData from "../mock/traits.json";
 
 const PATCH_ID = 1;

@@ -132,6 +132,7 @@ function mode(values: number[]): number {
   return best;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function topN<T>(items: T[], n: number, keyFn: (item: T) => number): T[] {
   return [...items].sort((a, b) => keyFn(b) - keyFn(a)).slice(0, n);
 }
@@ -429,7 +430,7 @@ async function buildCompsFromData() {
       coreChampions,
       flexSlots: null,
       primaryCarry: compDef.primaryCarry,
-      secondaryCarry: compDef.secondaryCarry ?? null,
+      secondaryCarry: compDef.secondaryCarry ?? undefined,
       isReroll: compDef.isReroll ?? false,
       avgPlacement: avgPlacement.toFixed(2),
       top4Rate: top4Rate.toFixed(3),

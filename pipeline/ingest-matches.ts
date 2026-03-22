@@ -94,7 +94,8 @@ async function ingestMatches() {
 
         // Extract patch version from game_version
         // Format: "Version 14.23.123.456" → "14.23"
-        const patchVersion = extractPatchVersion(info.game_version);
+        // TODO: use patchVersion for per-patch tracking
+        extractPatchVersion(info.game_version);
 
         await insertMatch({
           matchId: matchData.metadata.match_id,
