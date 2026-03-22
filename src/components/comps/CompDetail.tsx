@@ -263,7 +263,7 @@ export function CompDetail({
                     {carry.championName}
                   </span>
                   <Badge variant="default" className="ml-2 text-xs">
-                    {"★".repeat(carry.starLevel)} Carry
+                    <span className="text-yellow-400 drop-shadow-[0_0_1px_rgba(0,0,0,1)]">{"★".repeat(carry.starLevel)}</span> Carry
                   </Badge>
                 </div>
               </div>
@@ -371,7 +371,7 @@ export function CompDetail({
                     <span className="text-sm font-medium">
                       {champ.championName}
                     </span>
-                    <span className="text-xs text-muted-foreground">
+                    <span className="text-xs text-yellow-400 drop-shadow-[0_0_1px_rgba(0,0,0,1)]">
                       {"★".repeat(champ.starLevel)}
                     </span>
                   </div>

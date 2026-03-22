@@ -106,10 +106,10 @@ export function RecommendationCard({
                   variant="champion"
                 />
                 {(champ.threeStarRate ?? 0) >= 0.5 && (
-                  <div className="absolute -top-1 left-1/2 -translate-x-1/2 flex gap-px">
-                    <Star className="h-2 w-2 fill-warning text-warning" />
-                    <Star className="h-2 w-2 fill-warning text-warning" />
-                    <Star className="h-2 w-2 fill-warning text-warning" />
+                  <div className="absolute -top-1 left-1/2 -translate-x-1/2 flex gap-0">
+                    <Star className="h-3 w-3 fill-yellow-400 text-black" strokeWidth={1} />
+                    <Star className="h-3 w-3 fill-yellow-400 text-black" strokeWidth={1} />
+                    <Star className="h-3 w-3 fill-yellow-400 text-black" strokeWidth={1} />
                   </div>
                 )}
               </div>

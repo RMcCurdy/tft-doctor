@@ -87,10 +87,10 @@ export function CompCard({ comp, getTraitIcon, getChampionCost }: CompCardProps)
                     variant="champion"
                   />
                   {(champ.threeStarRate ?? 0) >= 0.5 && (
-                    <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 flex gap-px">
-                      <Star className="h-3 w-3 fill-warning text-warning drop-shadow-sm" />
-                      <Star className="h-3 w-3 fill-warning text-warning drop-shadow-sm" />
-                      <Star className="h-3 w-3 fill-warning text-warning drop-shadow-sm" />
+                    <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 flex -space-x-0.5">
+                      <Star className="h-4 w-4 fill-yellow-400 text-black drop-shadow-sm" strokeWidth={1} />
+                      <Star className="h-4 w-4 fill-yellow-400 text-black drop-shadow-sm" strokeWidth={1} />
+                      <Star className="h-4 w-4 fill-yellow-400 text-black drop-shadow-sm" strokeWidth={1} />
                     </div>
                   )}
                 </div>

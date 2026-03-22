@@ -1,35 +1,20 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { FilterBar } from "@/components/comps/FilterBar";
+import type { FilterSelection } from "@/components/comps/FilterBar";
 import { CompCard } from "@/components/comps/CompCard";
-import { RecommendationCard } from "@/components/advisor/RecommendationCard";
 import { LoadingOverlay } from "@/components/ui/spinner";
-import { useGameState } from "@/hooks/useGameState";
-import { useRecommendations } from "@/hooks/useRecommendations";
 import { useStaticData } from "@/hooks/useStaticData";
 import type { CompArchetype } from "@/types/comp";
 
 export default function HomePage() {
-  const {
-    gameState,
-    hasInput,
-    addAugment,
-    removeAugment,
-    addEmblem,
-    removeEmblem,
-    addArtifact,
-    removeArtifact,
-    reset,
-  } = useGameState();
-
-  const { data: recommendations, isLoading: recsLoading, error: recsError } =
-    useRecommendations(gameState);
-
-  const { getTraitIcon, getChampionCost } = useStaticData();
+  const { champions, traits, getTraitIcon, getChampionCost, isLoaded } =
+    useStaticData();
 
   const [comps, setComps] = useState<CompArchetype[]>([]);
   const [compsLoading, setCompsLoading] = useState(true);
+  const [selections, setSelections] = useState<FilterSelection[]>([]);
 
   useEffect(() => {
     fetch("/api/comps")
@@ -38,80 +23,71 @@ export default function HomePage() {
       .finally(() => setCompsLoading(false));
   }, []);
 
+  const addSelection = useCallback((selection: FilterSelection) => {
+    setSelections((prev) => {
+      // Single-select per type: replace any existing selection of the same type
+      const without = prev.filter((s) => s.type !== selection.type);
+      return [...without, selection];
+    });
+  }, []);
+
+  const removeSelection = useCallback((id: string) => {
+    setSelections((prev) => prev.filter((s) => s.id !== id));
+  }, []);
+
+  const filteredComps = useMemo(() => {
+    if (selections.length === 0) return comps;
+
+    return comps.filter((comp) => {
+      return selections.every((sel) => {
+        if (sel.type === "champion") {
+          const allChampionIds = [
+            ...comp.coreChampions.map((c) => c.championId),
+            ...comp.flexChampions.map((c) => c.championId),
+          ];
+          return allChampionIds.includes(sel.id);
+        }
+        // trait
+        return comp.traits.some((t) => t.traitId === sel.id);
+      });
+    });
+  }, [comps, selections]);
+
   return (
     <>
       <FilterBar
-        augmentIds={gameState.augments}
-        emblemIds={gameState.emblems}
-        artifactIds={gameState.artifacts}
-        onAddAugment={addAugment}
-        onRemoveAugment={removeAugment}
-        onAddEmblem={addEmblem}
-        onRemoveEmblem={removeEmblem}
-        onAddArtifact={addArtifact}
-        onRemoveArtifact={removeArtifact}
-        onReset={reset}
-        hasInput={hasInput}
+        champions={champions}
+        traits={traits}
+        selections={selections}
+        onAdd={addSelection}
+        onRemove={removeSelection}
       />
 
       <main className="mx-auto w-full max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-        {hasInput ? (
-          /* Recommended for You view */
-          <div className="space-y-4">
-            {recsLoading && <LoadingOverlay />}
+        <div className="space-y-4">
+          {compsLoading && <LoadingOverlay />}
 
-            {recsError && (
-              <div className="py-12 text-center">
-                <p className="text-sm text-destructive">{recsError}</p>
-              </div>
-            )}
-
-            {recommendations && recommendations.recommendations.length === 0 && (
-              <div className="py-12 text-center">
-                <p className="text-sm text-muted-foreground">
-                  No recommendations found. Try adjusting your filters.
-                </p>
-              </div>
-            )}
-
-            {recommendations &&
-              recommendations.recommendations.map((rec) => (
-                <RecommendationCard
-                  key={rec.comp.id}
-                  recommendation={rec}
-                  getTraitIcon={getTraitIcon}
-                />
-              ))}
-
-            {recommendations && (
-              <p className="text-center text-xs text-muted-foreground">
-                Patch {recommendations.meta.patchVersion} &middot; Data as of{" "}
-                {new Date(
-                  recommendations.meta.dataFreshness
-                ).toLocaleDateString()}
+          {!compsLoading && filteredComps.length === 0 && (
+            <div className="py-12 text-center">
+              <p className="text-sm text-muted-foreground">
+                {selections.length > 0
+                  ? "No comps match your filters. Try removing some."
+                  : "No comp data available yet."}
               </p>
-            )}
-          </div>
-        ) : (
-          /* All Comps view */
-          <div className="space-y-4">
-            {compsLoading && <LoadingOverlay />}
-
-            {!compsLoading && comps.length === 0 && (
-              <div className="py-12 text-center">
-                <p className="text-sm text-muted-foreground">
-                  No comp data available yet.
-                </p>
-              </div>
-            )}
-
-            <div className="grid gap-4 lg:grid-cols-2">
-              {comps.map((comp) => (
-                <CompCard key={comp.id} comp={comp} getTraitIcon={getTraitIcon} getChampionCost={getChampionCost} />
-              ))}
             </div>
+          )}
+
+          <div className="grid gap-4 lg:grid-cols-2">
+            {filteredComps.map((comp) => (
+              <CompCard
+                key={comp.id}
+                comp={comp}
+                getTraitIcon={getTraitIcon}
+                getChampionCost={getChampionCost}
+              />
+            ))}
           </div>
-        )}
+        </div>
       </main>
     </>
   );

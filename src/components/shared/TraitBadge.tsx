@@ -17,7 +17,7 @@ const ALWAYS_GOLD_TRAITS = new Set(["Targon"]);
 
 const STYLE_ORDER: Record<string, number> = {
   chromatic: 0,
-  gold: 2,
+  gold: 1,
   silver: 3,
   bronze: 4,
 };
@@ -89,13 +89,13 @@ export function TraitBadge({ trait, iconPath, size = "sm" }: TraitBadgeProps) {
   );
 }
 
-/** Sort traits by tier: chromatic → unique → gold → silver → bronze */
+/** Sort traits by tier: chromatic → gold → unique → silver → bronze */
 export function sortTraits(traits: ActiveTrait[]): ActiveTrait[] {
   return [...traits].sort((a, b) => {
     const aUnique = a.style === "chromatic" && a.maxBreakpoint === 1;
     const bUnique = b.style === "chromatic" && b.maxBreakpoint === 1;
-    const aOrder = aUnique ? 1 : (STYLE_ORDER[a.style] ?? 4);
-    const bOrder = bUnique ? 1 : (STYLE_ORDER[b.style] ?? 4);
+    const aOrder = aUnique ? 2 : (STYLE_ORDER[a.style] ?? 4);
+    const bOrder = bUnique ? 2 : (STYLE_ORDER[b.style] ?? 4);
     return aOrder - bOrder;
   });
 }
