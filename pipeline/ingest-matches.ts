@@ -114,9 +114,9 @@ async function ingestMatches() {
           goldLeft: p.gold_left,
           lastRound: p.last_round,
           playersEliminated: p.players_eliminated,
-          augments: p.augments,
-          traits: p.traits,
-          units: p.units,
+          augments: JSON.stringify(p.augments ?? []),
+          traits: JSON.stringify(p.traits ?? []),
+          units: JSON.stringify(p.units ?? []),
         }));
 
         await insertParticipants(participantRows);
