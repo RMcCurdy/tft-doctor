@@ -6,7 +6,7 @@ import { GameIcon } from "@/components/shared/GameIcon";
 import { ConfidenceBadge } from "@/components/shared/ConfidenceBadge";
 import { StatDisplay } from "@/components/shared/StatDisplay";
 import type { CompRecommendation } from "@/types/comp";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { ChevronDown, ChevronUp, Star } from "lucide-react";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 
@@ -105,6 +105,13 @@ export function RecommendationCard({
                   size={28}
                   variant="champion"
                 />
+                {(champ.threeStarRate ?? 0) >= 0.5 && (
+                  <div className="absolute -top-1 left-1/2 -translate-x-1/2 flex gap-px">
+                    <Star className="h-2 w-2 fill-warning text-warning" />
+                    <Star className="h-2 w-2 fill-warning text-warning" />
+                    <Star className="h-2 w-2 fill-warning text-warning" />
+                  </div>
+                )}
               </div>
             ))}
           </div>

@@ -12,6 +12,9 @@ const TRAIT_STYLE: Record<string, string> = {
   unique: "bg-gradient-to-r from-[#e8833a] to-[#d4627a]",
 };
 
+/** Traits that always display as gold regardless of unit count */
+const ALWAYS_GOLD_TRAITS = new Set(["Targon"]);
+
 const STYLE_ORDER: Record<string, number> = {
   chromatic: 0,
   gold: 2,
@@ -26,10 +29,13 @@ interface TraitBadgeProps {
 }
 
 export function TraitBadge({ trait, iconPath, size = "sm" }: TraitBadgeProps) {
+  const isAlwaysGold = ALWAYS_GOLD_TRAITS.has(trait.traitName);
   const isUnique = trait.style === "chromatic" && trait.maxBreakpoint === 1;
-  const style = isUnique
-    ? TRAIT_STYLE.unique
-    : TRAIT_STYLE[trait.style] ?? TRAIT_STYLE.bronze;
+  const style = isAlwaysGold
+    ? TRAIT_STYLE.gold
+    : isUnique
+      ? TRAIT_STYLE.unique
+      : TRAIT_STYLE[trait.style] ?? TRAIT_STYLE.bronze;
 
   const hexSize = size === "lg" ? "h-[38px] w-9" : "h-[30px] w-7";
   const iconSize = size === "lg" ? 24 : 20;
