@@ -20,7 +20,7 @@ import type {
   RiotRegion,
 } from "@/types/riot";
 import * as endpoints from "./endpoints";
-import { RateLimiter, DEV_KEY_LIMITS, PROD_KEY_LIMITS } from "../../../pipeline/utils/rate-limiter";
+import { RateLimiter, DEV_KEY_LIMITS, PROD_KEY_LIMITS, type RateLimitConfig } from "../../../pipeline/utils/rate-limiter";
 
 const MAX_RETRIES = 3;
 const RETRY_BASE_MS = 1000;
@@ -40,16 +40,15 @@ export class RiotClient {
   private apiKey: string;
   private rateLimiter: RateLimiter;
 
-  constructor(apiKey?: string, production = false) {
+  constructor(apiKey?: string, options?: { production?: boolean; rateLimits?: RateLimitConfig }) {
     this.apiKey = apiKey ?? process.env.RIOT_API_KEY ?? "";
     if (!this.apiKey) {
       throw new Error(
         "RIOT_API_KEY is not set. Pass it to the constructor or set it in env vars."
       );
     }
-    this.rateLimiter = new RateLimiter(
-      production ? PROD_KEY_LIMITS : DEV_KEY_LIMITS
-    );
+    const defaultLimits = options?.production ? PROD_KEY_LIMITS : DEV_KEY_LIMITS;
+    this.rateLimiter = new RateLimiter(options?.rateLimits ?? defaultLimits);
   }
 
   // ─── League Endpoints ───────────────────────────────────────────────────
@@ -110,6 +109,7 @@ export class RiotClient {
             "X-Riot-Token": this.apiKey,
             Accept: "application/json",
           },
+          signal: AbortSignal.timeout(30_000),
         });
 
         // Rate limited — wait and retry

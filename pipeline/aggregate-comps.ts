@@ -36,100 +36,112 @@ async function aggregateComps() {
     process.exit(1);
   }
 
-  // Get unprocessed matches
-  const unprocessedMatches = await getUnprocessedMatches(currentPatch.id, BATCH_SIZE);
-  if (unprocessedMatches.length === 0) {
-    logger.info("No unprocessed matches found. Nothing to aggregate.");
-    return;
-  }
+  let totalMatchesProcessed = 0;
+  let totalParticipants = 0;
+  let batchNumber = 0;
 
-  logger.info(`Found ${unprocessedMatches.length} unprocessed matches`);
+  // Process all unprocessed matches in batches
+  while (true) {
+    const unprocessedMatches = await getUnprocessedMatches(currentPatch.id, BATCH_SIZE);
+    if (unprocessedMatches.length === 0) {
+      if (batchNumber === 0) {
+        logger.info("No unprocessed matches found. Nothing to aggregate.");
+      }
+      break;
+    }
 
-  const matchIds = unprocessedMatches.map((m) => m.matchId);
-  const rawParticipants = await getParticipantsForMatches(matchIds);
+    batchNumber++;
+    logger.info(`Batch ${batchNumber}: processing ${unprocessedMatches.length} matches`);
 
-  logger.info(`Loaded ${rawParticipants.length} participants`);
+    const matchIds = unprocessedMatches.map((m) => m.matchId);
+    const rawParticipants = await getParticipantsForMatches(matchIds);
 
-  // Parse JSONB fields into typed boards
-  const boards: ParticipantBoard[] = rawParticipants.map((p) => ({
-    matchId: p.matchId,
-    puuid: p.puuid ?? "",
-    placement: p.placement,
-    units: (typeof p.units === "string" ? JSON.parse(p.units) : p.units) as RiotUnit[],
-    traits: (typeof p.traits === "string" ? JSON.parse(p.traits) : p.traits) as RiotTrait[],
-    augments: (typeof p.augments === "string" ? JSON.parse(p.augments) : p.augments) as string[],
-  }));
+    logger.info(`Loaded ${rawParticipants.length} participants`);
 
-  // Classify all boards
-  const { results, stats: classStats } = classifyBoards(boards, SET_16_COMP_DEFINITIONS);
+    // Parse JSONB fields into typed boards
+    const boards: ParticipantBoard[] = rawParticipants.map((p) => ({
+      matchId: p.matchId,
+      puuid: p.puuid ?? "",
+      placement: p.placement,
+      units: (typeof p.units === "string" ? JSON.parse(p.units) : p.units) as RiotUnit[],
+      traits: (typeof p.traits === "string" ? JSON.parse(p.traits) : p.traits) as RiotTrait[],
+      augments: (typeof p.augments === "string" ? JSON.parse(p.augments) : p.augments) as string[],
+    }));
 
-  logger.info("Classification complete", {
-    total: results.length,
-    carryLookup: classStats.carryLookup,
-    traitFallback: classStats.traitFallback,
-    unclassified: classStats.unclassified,
-    classificationRate: `${(((classStats.carryLookup + classStats.traitFallback) / results.length) * 100).toFixed(1)}%`,
-  });
+    // Classify all boards
+    const { results, stats: classStats } = classifyBoards(boards, SET_16_COMP_DEFINITIONS);
 
-  // Group results by comp for aggregation
-  const compGroups = groupBy(results, (r) => r.compId);
-
-  // Upsert comp archetype stats
-  for (const [compId, group] of Object.entries(compGroups)) {
-    if (compId === "unclassified") continue;
-
-    // Get actual placements from the boards array
-    const groupBoards = group.map((r) => {
-      const idx = results.indexOf(r);
-      return boards[idx];
+    logger.info("Classification complete", {
+      total: results.length,
+      carryLookup: classStats.carryLookup,
+      traitFallback: classStats.traitFallback,
+      unclassified: classStats.unclassified,
+      classificationRate: `${(((classStats.carryLookup + classStats.traitFallback) / results.length) * 100).toFixed(1)}%`,
     });
 
-    const placementValues = groupBoards.map((b) => b.placement);
-    const avgPlacement = average(placementValues);
-    const top4Rate = placementValues.filter((p) => p <= 4).length / placementValues.length;
-    const winRate = placementValues.filter((p) => p === 1).length / placementValues.length;
+    // Group results by comp for aggregation
+    const compGroups = groupBy(results, (r) => r.compId);
 
-    const compDef = SET_16_COMP_DEFINITIONS.find((d) => d.id === compId);
+    // Upsert comp archetype stats
+    for (const [compId, group] of Object.entries(compGroups)) {
+      if (compId === "unclassified") continue;
 
-    await db
-      .insert(compArchetypes)
-      .values({
-        patchId: currentPatch.id,
-        compName: compDef?.name ?? compId,
-        traitSignature: compDef?.requiredTraits ?? {},
-        coreChampions: [],
-        primaryCarry: compDef?.primaryCarry,
-        isReroll: compDef?.isReroll ?? false,
+      // Get actual placements from the boards array
+      const groupBoards = group.map((r) => {
+        const idx = results.indexOf(r);
+        return boards[idx];
+      });
+
+      const placementValues = groupBoards.map((b) => b.placement);
+      const avgPlacement = average(placementValues);
+      const top4Rate = placementValues.filter((p) => p <= 4).length / placementValues.length;
+      const winRate = placementValues.filter((p) => p === 1).length / placementValues.length;
+
+      const compDef = SET_16_COMP_DEFINITIONS.find((d) => d.id === compId);
+
+      await db
+        .insert(compArchetypes)
+        .values({
+          patchId: currentPatch.id,
+          compName: compDef?.name ?? compId,
+          traitSignature: compDef?.requiredTraits ?? {},
+          coreChampions: [],
+          primaryCarry: compDef?.primaryCarry,
+          isReroll: compDef?.isReroll ?? false,
+          avgPlacement: avgPlacement.toFixed(2),
+          top4Rate: top4Rate.toFixed(3),
+          winRate: winRate.toFixed(3),
+          playRate: (group.length / results.length).toFixed(3),
+          sampleSize: group.length,
+        })
+        .onConflictDoNothing();
+
+      logger.info(`Comp: ${compDef?.name ?? compId}`, {
+        games: group.length,
         avgPlacement: avgPlacement.toFixed(2),
-        top4Rate: top4Rate.toFixed(3),
-        winRate: winRate.toFixed(3),
-        playRate: (group.length / results.length).toFixed(3),
-        sampleSize: group.length,
-      })
-      .onConflictDoNothing();
+        top4Rate: `${(top4Rate * 100).toFixed(0)}%`,
+        winRate: `${(winRate * 100).toFixed(0)}%`,
+      });
+    }
 
-    logger.info(`Comp: ${compDef?.name ?? compId}`, {
-      games: group.length,
-      avgPlacement: avgPlacement.toFixed(2),
-      top4Rate: `${(top4Rate * 100).toFixed(0)}%`,
-      winRate: `${(winRate * 100).toFixed(0)}%`,
-    });
+    // Aggregate augment stats
+    await aggregateAugmentStats(results, boards, currentPatch.id);
+
+    // Aggregate item stats
+    await aggregateItemStats(results, boards, currentPatch.id);
+
+    // Mark matches as processed
+    await markMatchesProcessed(matchIds);
+
+    totalMatchesProcessed += matchIds.length;
+    totalParticipants += rawParticipants.length;
   }
-
-  // Aggregate augment stats
-  await aggregateAugmentStats(results, boards, currentPatch.id);
-
-  // Aggregate item stats
-  await aggregateItemStats(results, boards, currentPatch.id);
-
-  // Mark matches as processed
-  await markMatchesProcessed(matchIds);
 
   const durationMs = Date.now() - startTime;
   logger.info("Aggregation complete", {
-    matchesProcessed: matchIds.length,
-    participantsClassified: results.length,
-    compsFound: Object.keys(compGroups).filter((k) => k !== "unclassified").length,
+    totalMatchesProcessed,
+    totalParticipants,
+    batches: batchNumber,
     durationMs,
   });
 }

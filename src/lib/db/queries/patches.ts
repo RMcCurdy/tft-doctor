@@ -1,4 +1,4 @@
-import { eq } from "drizzle-orm";
+import { eq, sql } from "drizzle-orm";
 import { db } from "@/lib/db";
 import { patches } from "@/lib/db/schema";
 
@@ -53,15 +53,8 @@ export async function markPatchAsCurrent(patchId: number) {
 }
 
 export async function incrementMatchCount(patchId: number, count: number) {
-  const [patch] = await db
-    .select()
-    .from(patches)
-    .where(eq(patches.id, patchId))
-    .limit(1);
-  if (patch) {
-    await db
-      .update(patches)
-      .set({ matchCount: (patch.matchCount ?? 0) + count })
-      .where(eq(patches.id, patchId));
-  }
+  await db
+    .update(patches)
+    .set({ matchCount: sql`COALESCE(${patches.matchCount}, 0) + ${count}` })
+    .where(eq(patches.id, patchId));
 }

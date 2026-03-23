@@ -8,7 +8,7 @@
  * This limiter enforces both windows and waits when either is exhausted.
  */
 
-interface RateLimitConfig {
+export interface RateLimitConfig {
   /** Max requests in the short window */
   shortLimit: number;
   /** Short window duration in ms */

@@ -1,4 +1,4 @@
-import { eq, sql, lt, asc } from "drizzle-orm";
+import { eq, sql, lt, asc, and, inArray } from "drizzle-orm";
 import { db } from "@/lib/db";
 import { players } from "@/lib/db/schema";
 
@@ -63,12 +63,18 @@ export async function upsertPlayers(
 /** Get players that need match ingestion (oldest fetched first) */
 export async function getPlayersForIngestion(
   region: string,
-  limit = 100
+  limit = 100,
+  tiers?: string[]
 ): Promise<{ puuid: string; region: string }[]> {
+  const whereClause =
+    tiers && tiers.length > 0
+      ? and(eq(players.region, region), inArray(players.tier, tiers))
+      : eq(players.region, region);
+
   return db
     .select({ puuid: players.puuid, region: players.region })
     .from(players)
-    .where(eq(players.region, region))
+    .where(whereClause)
     .orderBy(asc(players.lastFetchedAt))
     .limit(limit);
 }
@@ -86,6 +92,26 @@ export async function getPlayerCount(): Promise<number> {
   const [result] = await db
     .select({ count: sql<number>`count(*)` })
     .from(players);
+  return result?.count ?? 0;
+}
+
+/** Update lastFetchedAt to advance the ingestion cursor */
+export async function markPlayerFetched(puuid: string): Promise<void> {
+  await db
+    .update(players)
+    .set({ lastFetchedAt: new Date() })
+    .where(eq(players.puuid, puuid));
+}
+
+/** Get count of players matching region and tiers */
+export async function getPlayerCountByRegionAndTiers(
+  region: string,
+  tiers: string[]
+): Promise<number> {
+  const [result] = await db
+    .select({ count: sql<number>`count(*)` })
+    .from(players)
+    .where(and(eq(players.region, region), inArray(players.tier, tiers)));
   return result?.count ?? 0;
 }
 
