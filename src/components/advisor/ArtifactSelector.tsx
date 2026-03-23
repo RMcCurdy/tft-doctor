@@ -5,7 +5,7 @@ import {
   GameEntitySelector,
   type SelectableEntity,
 } from "./GameEntitySelector";
-import { getArtifacts } from "@/lib/mock-data";
+import { useStaticData } from "@/hooks/useStaticData";
 
 interface ArtifactSelectorProps {
   selectedIds: string[];
@@ -18,15 +18,16 @@ export function ArtifactSelector({
   onSelect,
   onRemove,
 }: ArtifactSelectorProps) {
+  const { artifacts } = useStaticData();
+
   const entities: SelectableEntity[] = useMemo(
     () =>
-      getArtifacts().map((a) => ({
+      artifacts.map((a) => ({
         id: a.id,
         name: a.name,
-        subtitle: a.type.charAt(0).toUpperCase() + a.type.slice(1),
         icon: a.icon,
       })),
-    []
+    [artifacts]
   );
 
   return (

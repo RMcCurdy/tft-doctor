@@ -1,12 +1,9 @@
 import { NextResponse } from "next/server";
-import { getCompArchetypes as getMockComps } from "@/lib/mock-data";
 import { db } from "@/lib/db";
 import { compArchetypes } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
 import { getCurrentPatch } from "@/lib/db/queries/patches";
 import type { CompChampion, ActiveTrait, EarlyBoardChampion } from "@/types/comp";
-
-const useMockData = process.env.USE_MOCK_DATA === "true";
 
 /** Build coreChampions from available DB data */
 function buildCoreChampions(
@@ -67,10 +64,6 @@ function parseTraits(traitSignature: unknown): ActiveTrait[] {
 }
 
 export async function GET() {
-  if (useMockData) {
-    return NextResponse.json({ comps: getMockComps() });
-  }
-
   try {
     const currentPatch = await getCurrentPatch();
     if (!currentPatch) {
@@ -85,7 +78,7 @@ export async function GET() {
 
     const seen = new Set<string>();
     const mapped = comps.map((c) => {
-      let slug = c.compName?.toLowerCase().replace(/\s+/g, "-") ?? `comp-${c.id}`;
+      let slug = c.compName?.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") ?? `comp-${c.id}`;
       if (seen.has(slug)) slug = `${slug}-${c.id}`;
       seen.add(slug);
 

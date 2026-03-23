@@ -48,12 +48,10 @@ export function CompCard({ comp, getTraitIcon, getChampionCost, getItemIcon, isI
     }
   );
 
-  // Identify primary carry (first isCarry with items) and primary tank (first non-carry with items)
-  const primaryCarry = allChampions.find((c) => c.isCarry && c.recommendedItems.length > 0);
-  const primaryTank = allChampions.find((c) => !c.isCarry && c.recommendedItems.length > 0);
-  const itemChampIds = new Set<string>();
-  if (primaryCarry) itemChampIds.add(primaryCarry.championId);
-  if (primaryTank) itemChampIds.add(primaryTank.championId);
+  // Show items on all champions that have recommended items (consistent with detail page)
+  const itemChampIds = new Set(
+    allChampions.filter((c) => c.recommendedItems.length > 0).map((c) => c.championId)
+  );
 
   // Check if any champion in the comp requires an emblem
   const requiresEmblem = allChampions.some((c) =>

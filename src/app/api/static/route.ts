@@ -1,74 +1,73 @@
 import { NextResponse } from "next/server";
-import {
-  getChampions as getMockChampions,
-  getItems as getMockItems,
-  getTraits as getMockTraits,
-} from "@/lib/mock-data";
 
 interface StaticEntity {
   id: string;
   name: string;
   icon: string;
+  cost?: number;
+  isEmblem?: boolean;
+  components?: string[];
+  traits?: string[];
+  tier?: string;
+  description?: string;
 }
 
 const CACHE_HEADERS = {
   "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=86400",
 };
 
-function getMockStaticData() {
-  return {
-    champions: getMockChampions().map((c) => ({ id: c.id, name: c.name, icon: c.icon, cost: c.cost })),
-    items: getMockItems().map((i) => ({ id: i.id, name: i.name, icon: i.icon, isEmblem: i.isEmblem, components: i.components })),
-    traits: getMockTraits().map((t) => ({ id: t.id, name: t.name, icon: t.icon })),
-  };
-}
-
 export async function GET() {
-  const useMockData = process.env.USE_MOCK_DATA === "true";
-
-  if (useMockData) {
-    return NextResponse.json(getMockStaticData(), { headers: CACHE_HEADERS });
-  }
-
-  // Real DB mode — query staticData table, fall back to mock if empty
   try {
     const { db } = await import("@/lib/db");
     const { staticData } = await import("@/lib/db/schema");
-    const { inArray } = await import("drizzle-orm");
 
-    const rows = await db
-      .select()
-      .from(staticData)
-      .where(inArray(staticData.dataType, ["champions", "items", "traits"]));
+    const rows = await db.select().from(staticData);
 
     const result: Record<string, StaticEntity[]> = {
       champions: [],
       items: [],
       traits: [],
+      augments: [],
+      emblems: [],
+      artifacts: [],
     };
 
     for (const row of rows) {
-      const entities = (row.data as Array<{ id: string; name: string; icon: string; cost?: number; isEmblem?: boolean; components?: string[] }>) ?? [];
-      result[row.dataType] = entities.map((e) => ({
-        id: e.id,
-        name: e.name,
-        icon: e.icon,
-        ...(e.cost !== undefined && { cost: e.cost }),
-        ...(e.isEmblem !== undefined && { isEmblem: e.isEmblem }),
-        ...(e.components !== undefined && { components: e.components }),
-      }));
-    }
+      if (!(row.dataType in result)) continue;
 
-    // Fall back to mock data if DB has no static data
-    const hasData = result.champions.length > 0 || result.items.length > 0 || result.traits.length > 0;
-    if (!hasData) {
-      return NextResponse.json(getMockStaticData(), { headers: CACHE_HEADERS });
+      // Handle both flat array format and DDragon's { type, version, data: { [key]: entry } } format
+      let entities: Array<Record<string, unknown>>;
+
+      if (Array.isArray(row.data)) {
+        entities = row.data as Array<Record<string, unknown>>;
+      } else {
+        const raw = row.data as Record<string, unknown>;
+        const dataObj = (raw.data ?? raw) as Record<string, Record<string, unknown>>;
+        entities = Object.values(dataObj);
+      }
+
+      result[row.dataType] = entities.map((e) => {
+        const image = e.image as Record<string, unknown> | undefined;
+        return {
+          id: (e.id ?? e.apiName) as string,
+          name: e.name as string,
+          icon: (e.icon ?? image?.full ?? "") as string,
+          ...(e.cost !== undefined && { cost: e.cost as number }),
+          ...(e.isEmblem !== undefined && { isEmblem: e.isEmblem as boolean }),
+          ...(e.components !== undefined && { components: e.components as string[] }),
+          ...(e.traits !== undefined && { traits: e.traits as string[] }),
+          ...(e.tier !== undefined && { tier: e.tier as string }),
+          ...(e.description !== undefined && { description: e.description as string }),
+        };
+      });
     }
 
     return NextResponse.json(result, { headers: CACHE_HEADERS });
   } catch (err) {
     console.error("Static data API error:", err);
-    // Fall back to mock data on error
-    return NextResponse.json(getMockStaticData(), { headers: CACHE_HEADERS });
+    return NextResponse.json(
+      { champions: [], items: [], traits: [], augments: [], emblems: [], artifacts: [] },
+      { status: 500 }
+    );
   }
 }

@@ -7,8 +7,7 @@
  *   Tier 2 — Partial decomposition: score comps by individual input matches
  *   Tier 3 — Meta inference: fit score against top meta comps
  *
- * When connected to the DB, uses real comp/augment/item stats.
- * Falls back to mock data when USE_MOCK_DATA=true.
+ * Uses real comp/augment/item stats from the DB.
  */
 
 import type { GameStateInput, RecommendationResponse } from "@/types/api";

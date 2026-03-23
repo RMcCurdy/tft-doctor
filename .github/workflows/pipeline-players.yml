@@ -1,9 +1,7 @@
 name: Pipeline — Discover Players
 
 on:
-  schedule:
-    - cron: "0 */12 * * *" # Every 12 hours
-  workflow_dispatch: {} # Manual trigger
+  workflow_dispatch: {} # Manual trigger only — cron disabled (no reliable API key)
 
 concurrency:
   group: pipeline-players

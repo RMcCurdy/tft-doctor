@@ -42,10 +42,7 @@ const globalForDb = globalThis as unknown as {
   db: DrizzleDb | undefined;
 };
 
-/**
- * Lazy DB accessor — only creates the connection on first use.
- * This allows builds with USE_MOCK_DATA=true to succeed without DATABASE_URL.
- */
+/** Lazy DB accessor — only creates the connection on first use. */
 export const db: DrizzleDb = new Proxy({} as DrizzleDb, {
   get(_target, prop, receiver) {
     if (!globalForDb.db) {

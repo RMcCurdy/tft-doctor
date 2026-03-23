@@ -332,13 +332,30 @@ async function buildCompsFromData() {
       champAvgItems.set(champId, totalCompletedItems / stats.count);
     }
 
-    // Identify item holders: champions who average >= 1.5 completed items per game
-    // Sort by score descending, cap at 3
+    // Identify item holders: data-driven, with TG-aware cap and minimum 2
+    const sortedByItems = [...champAvgItems.entries()]
+      .filter(([, avg]) => avg > 0.5)
+      .sort((a, b) => b[1] - a[1]);
+
+    // Start with champions averaging >= 1.5 completed items
+    const primaryHolders = sortedByItems.filter(([, avg]) => avg >= 1.5);
+
+    // Count how many primary holders use Thief's Gloves (frees item budget for others)
+    const tgCount = primaryHolders.filter(([id]) => {
+      const topItem = champItemFreq.get(id)?.[0];
+      return topItem === THIEFS_GLOVES_ID;
+    }).length;
+
+    // Cap: base 3 + 1 per TG holder (TG frees up item components for others)
+    const cap = Math.min(3 + tgCount, 5);
+
+    // Guarantee minimum 2 item holders even if threshold isn't met
+    const minHolders = Math.min(2, sortedByItems.length);
+    const holderCount = Math.max(primaryHolders.length, minHolders);
+
     const itemHolderIds = new Set(
-      [...champAvgItems.entries()]
-        .filter(([, avg]) => avg >= 1.5)
-        .sort((a, b) => b[1] - a[1])
-        .slice(0, 3)
+      sortedByItems
+        .slice(0, Math.min(holderCount, cap))
         .map(([id]) => id)
     );
 

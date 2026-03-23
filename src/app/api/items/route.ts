@@ -1,17 +1,10 @@
 import { NextResponse } from "next/server";
-import { getCompletedItems as getMockItems } from "@/lib/mock-data";
 import { db } from "@/lib/db";
 import { itemStats } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
 import { getCurrentPatch } from "@/lib/db/queries/patches";
 
-const useMockData = process.env.USE_MOCK_DATA === "true";
-
 export async function GET() {
-  if (useMockData) {
-    return NextResponse.json({ items: getMockItems() });
-  }
-
   try {
     const currentPatch = await getCurrentPatch();
     if (!currentPatch) {

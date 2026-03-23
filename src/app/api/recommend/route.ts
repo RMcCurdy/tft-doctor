@@ -1,9 +1,6 @@
 import { NextResponse } from "next/server";
 import type { GameStateInput } from "@/types/api";
-import { getRecommendations as getMockRecommendations } from "@/lib/mock-data";
 import { getRecommendations as getRealRecommendations } from "@/lib/recommendation/engine";
-
-const useMockData = process.env.USE_MOCK_DATA === "true";
 
 export async function POST(request: Request) {
   try {
@@ -16,9 +13,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const response = useMockData
-      ? getMockRecommendations(input)
-      : await getRealRecommendations(input);
+    const response = await getRealRecommendations(input);
 
     return NextResponse.json(response);
   } catch (err) {

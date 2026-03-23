@@ -43,7 +43,7 @@ export function getItemIconUrl(itemId: string, version: string): string {
 
 /** Get trait icon URL from Community Dragon (more reliable for traits) */
 export function getTraitIconUrl(traitId: string): string {
-  const cleanId = traitId.toLowerCase().replace("set13_", "").replace("set14_", "");
+  const cleanId = traitId.toLowerCase().replace(/^tft\d+_/, "").replace(/^set\d+_/, "");
   return `${CDRAGON_BASE_URL}/game/assets/ux/traiticons/trait_icon_${cleanId}.png`;
 }
 

@@ -1,14 +1,25 @@
-import { CDRAGON_BASE_URL } from "@/lib/constants";
+import { CDRAGON_BASE_URL, DDRAGON_BASE_URL } from "@/lib/constants";
 
 /**
- * Convert a CDragon .tex asset path to a CDN image URL.
- *
- * Example:
- *   "ASSETS/UX/TraitIcons/Trait_Icon_6_Arcanist.tex"
- *   → "https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_6_arcanist.png"
+ * Convert an icon path to a CDN image URL.
+ * Handles both:
+ * - CDragon .tex paths: "ASSETS/UX/TraitIcons/Trait_Icon_6_Arcanist.tex"
+ * - DDragon filenames: "TFT_Item_InfinityEdge.png"
  */
-export function texPathToUrl(texPath: string): string {
-  const pngPath = texPath.toLowerCase().replace(/\.tex$/, ".png");
+export function texPathToUrl(iconPath: string): string {
+  // CDragon .tex asset path (contains directory separators)
+  if (iconPath.includes("/")) {
+    const pngPath = iconPath.toLowerCase().replace(/\.tex$/, ".png");
+    return `${CDRAGON_BASE_URL}/game/${pngPath}`;
+  }
+
+  // DDragon item/champion filename (e.g., "TFT_Item_InfinityEdge.png")
+  if (iconPath.endsWith(".png")) {
+    return `${DDRAGON_BASE_URL}/cdn/16.6.1/img/tft-item/${iconPath}`;
+  }
+
+  // Fallback: treat as CDragon path
+  const pngPath = iconPath.toLowerCase().replace(/\.tex$/, ".png");
   return `${CDRAGON_BASE_URL}/game/${pngPath}`;
 }
 

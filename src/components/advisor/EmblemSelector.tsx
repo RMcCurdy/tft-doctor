@@ -5,7 +5,7 @@ import {
   GameEntitySelector,
   type SelectableEntity,
 } from "./GameEntitySelector";
-import { getEmblems } from "@/lib/mock-data";
+import { useStaticData } from "@/hooks/useStaticData";
 
 interface EmblemSelectorProps {
   selectedIds: string[];
@@ -18,15 +18,16 @@ export function EmblemSelector({
   onSelect,
   onRemove,
 }: EmblemSelectorProps) {
+  const { emblems } = useStaticData();
+
   const entities: SelectableEntity[] = useMemo(
     () =>
-      getEmblems().map((e) => ({
+      emblems.map((e) => ({
         id: e.id,
         name: e.name,
-        subtitle: `Grants ${e.traitId.replace("TFT16_", "")} trait`,
         icon: e.icon,
       })),
-    []
+    [emblems]
   );
 
   return (

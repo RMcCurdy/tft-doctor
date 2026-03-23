@@ -13,6 +13,8 @@ export interface StaticEntity {
   id: string;
   name: string;
   icon: string;
+  tier?: string;
+  description?: string;
 }
 
 export interface StaticItem {
@@ -27,10 +29,13 @@ interface StaticDataResponse {
   champions: StaticChampion[];
   items: StaticItem[];
   traits: StaticEntity[];
+  augments: StaticEntity[];
+  emblems: StaticEntity[];
+  artifacts: StaticEntity[];
 }
 
 type ChampionEntry = { name: string; icon: string; cost: number };
-type EntityEntry = { name: string; icon: string };
+type EntityEntry = { name: string; icon: string; tier?: string };
 type ItemEntry = { name: string; icon: string; isEmblem: boolean; components: string[] };
 
 export function useStaticData() {
@@ -39,6 +44,9 @@ export function useStaticData() {
   const [traitMap, setTraitMap] = useState<Record<string, EntityEntry>>({});
   const [champions, setChampions] = useState<StaticChampion[]>([]);
   const [traits, setTraits] = useState<StaticEntity[]>([]);
+  const [augments, setAugments] = useState<StaticEntity[]>([]);
+  const [emblems, setEmblems] = useState<StaticEntity[]>([]);
+  const [artifacts, setArtifacts] = useState<StaticEntity[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
@@ -46,20 +54,20 @@ export function useStaticData() {
       .then((r) => r.json())
       .then((data: StaticDataResponse) => {
         const champs: Record<string, ChampionEntry> = {};
-        for (const c of data.champions) {
+        for (const c of data.champions ?? []) {
           champs[c.id] = { name: c.name, icon: c.icon, cost: c.cost ?? 1 };
         }
         setChampionMap(champs);
-        setChampions(data.champions);
+        setChampions(data.champions ?? []);
 
         const items: Record<string, ItemEntry> = {};
-        for (const i of data.items) {
+        for (const i of data.items ?? []) {
           items[i.id] = { name: i.name, icon: i.icon, isEmblem: i.isEmblem ?? false, components: i.components ?? [] };
         }
         setItemMap(items);
 
         const traitEntries: Record<string, EntityEntry> = {};
-        for (const t of data.traits) {
+        for (const t of data.traits ?? []) {
           traitEntries[t.id] = { name: t.name, icon: t.icon };
           const nameKey = `TFT16_${t.name.replace(/[^a-zA-Z]/g, "")}`;
           if (nameKey !== t.id) {
@@ -67,7 +75,11 @@ export function useStaticData() {
           }
         }
         setTraitMap(traitEntries);
-        setTraits(data.traits);
+        setTraits(data.traits ?? []);
+
+        setAugments(data.augments ?? []);
+        setEmblems(data.emblems ?? []);
+        setArtifacts(data.artifacts ?? []);
 
         setIsLoaded(true);
       })
@@ -84,6 +96,9 @@ export function useStaticData() {
     isItemEmblem: (id: string) => itemMap[id]?.isEmblem ?? false,
     champions,
     traits,
+    augments,
+    emblems,
+    artifacts,
     isLoaded,
   };
 }

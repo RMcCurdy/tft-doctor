@@ -5,7 +5,7 @@ import {
   GameEntitySelector,
   type SelectableEntity,
 } from "./GameEntitySelector";
-import { getAugments } from "@/lib/mock-data";
+import { useStaticData } from "@/hooks/useStaticData";
 
 interface AugmentSelectorProps {
   selectedIds: string[];
@@ -18,15 +18,17 @@ export function AugmentSelector({
   onSelect,
   onRemove,
 }: AugmentSelectorProps) {
+  const { augments } = useStaticData();
+
   const entities: SelectableEntity[] = useMemo(
     () =>
-      getAugments().map((a) => ({
+      augments.map((a) => ({
         id: a.id,
         name: a.name,
-        subtitle: a.tier.charAt(0).toUpperCase() + a.tier.slice(1),
+        subtitle: a.tier ? a.tier.charAt(0).toUpperCase() + a.tier.slice(1) : undefined,
         icon: a.icon,
       })),
-    []
+    [augments]
   );
 
   return (

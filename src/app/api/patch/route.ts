@@ -1,22 +1,7 @@
 import { NextResponse } from "next/server";
 import { getCurrentPatch } from "@/lib/db/queries/patches";
 
-const useMockData = process.env.USE_MOCK_DATA === "true";
-
 export async function GET() {
-  if (useMockData) {
-    return NextResponse.json({
-      patchVersion: "16.6",
-      setNumber: 16,
-      setName: "TFT Set 16",
-      isCurrent: true,
-      dataStatus: "mock",
-      matchCount: 48750,
-      lastUpdated: new Date().toISOString(),
-      message: "Using mock data. Connect the data pipeline to start ingesting real match data.",
-    });
-  }
-
   try {
     const patch = await getCurrentPatch();
     if (!patch) {
