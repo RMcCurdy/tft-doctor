@@ -38,6 +38,10 @@ export interface CompDefinition {
   optionalTraits?: string[];
   isReroll?: boolean;
   requiresEmblem?: string;
+  heroAugment?: {
+    augmentId: string;
+    augmentName: string;
+  };
 }
 
 /** Result of classifying a participant's board */

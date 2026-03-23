@@ -30,6 +30,7 @@ export async function upsertCompArchetype(data: {
   secondaryCarry?: string;
   isReroll?: boolean;
   requiresEmblem?: string;
+  heroAugmentName?: string;
   avgPlacement: string;
   top4Rate: string;
   winRate: string;

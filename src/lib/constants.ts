@@ -126,6 +126,24 @@ export const DEFENSIVE_ITEM_IDS = new Set([
   "TFT_Item_SteraksGage",
 ]);
 
+/** Base component items — not completed, should never be recommended */
+export const COMPONENT_ITEM_IDS = new Set([
+  "TFT_Item_BFSword",
+  "TFT_Item_RecurveBow",
+  "TFT_Item_NeedlesslyLargeRod",
+  "TFT_Item_TearOfTheGoddess",
+  "TFT_Item_ChainVest",
+  "TFT_Item_NegatronCloak",
+  "TFT_Item_GiantsBelt",
+  "TFT_Item_SparringGloves",
+  "TFT_Item_Spatula",
+]);
+
+/** Returns true if the item is a completed item (not a component) */
+export function isCompletedItem(itemId: string): boolean {
+  return itemId.length > 0 && !COMPONENT_ITEM_IDS.has(itemId);
+}
+
 /** Thief's Gloves consumes all 3 item slots — must be the sole recommended item */
 export const THIEFS_GLOVES_ID = "TFT_Item_ThiefsGloves";
 

@@ -109,13 +109,14 @@ export async function GET() {
           sampleSize: c.sampleSize ?? 0,
         },
         tier:
-          parseFloat(c.avgPlacement ?? "4.5") <= 3.5
+          parseFloat(c.avgPlacement ?? "4.5") <= 4.15
             ? "S"
-            : parseFloat(c.avgPlacement ?? "4.5") <= 4.0
+            : parseFloat(c.avgPlacement ?? "4.5") <= 4.35
               ? "A"
-              : parseFloat(c.avgPlacement ?? "4.5") <= 4.5
+              : parseFloat(c.avgPlacement ?? "4.5") <= 4.55
                 ? "B"
                 : "C",
+        heroAugment: c.heroAugmentName ?? undefined,
         lastUpdated: c.lastUpdated?.toISOString() ?? new Date().toISOString(),
       };
     });

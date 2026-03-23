@@ -103,6 +103,7 @@ export const compArchetypes = pgTable(
     secondaryCarry: varchar("secondary_carry", { length: 128 }),
     isReroll: boolean("is_reroll").default(false),
     requiresEmblem: varchar("requires_emblem", { length: 128 }),
+    heroAugmentName: varchar("hero_augment_name", { length: 128 }),
     avgPlacement: decimal("avg_placement", { precision: 4, scale: 2 }),
     top4Rate: decimal("top4_rate", { precision: 4, scale: 3 }),
     winRate: decimal("win_rate", { precision: 4, scale: 3 }),

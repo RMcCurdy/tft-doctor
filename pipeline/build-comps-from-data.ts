@@ -19,7 +19,7 @@ import {
 } from "../src/lib/db/schema.js";
 import { eq, and } from "drizzle-orm";
 import { getCurrentPatch } from "../src/lib/db/queries/patches.js";
-import { isSummonedUnit, DEFENSIVE_ITEM_IDS, THIEFS_GLOVES_ID } from "../src/lib/constants.js";
+import { isSummonedUnit, THIEFS_GLOVES_ID, isCompletedItem } from "../src/lib/constants.js";
 import { upsertCompArchetype } from "../src/lib/db/queries/comps.js";
 import { classifyBoards } from "../src/lib/clustering/comp-classifier.js";
 import { SET_16_COMP_DEFINITIONS } from "../src/lib/clustering/comp-definitions.js";
@@ -33,7 +33,6 @@ import { logger } from "./utils/logger.js";
 const MIN_COMP_SAMPLE_SIZE = 5;
 const CORE_LINEUP_SIZE = 8;
 const MAX_CARRY_ITEMS = 3;
-const MAX_TANK_ITEMS = 3;
 
 // ─── Static data types ──────────────────────────────────────────────────────
 
@@ -308,41 +307,40 @@ async function buildCompsFromData() {
       position?: { row: number; col: number };
     }> = [];
 
-    // Build sorted items per champion for later assignment
+    // Build sorted COMPLETED items per champion and compute item holder scores
     const champItemFreq = new Map<string, string[]>();
+    const champAvgItems = new Map<string, number>();
+
     for (const champId of selectedIds) {
       const stats = champStats.get(champId)!;
+
+      // Count frequency of each completed item
       const itemCounts = new Map<string, number>();
+      let totalCompletedItems = 0;
       for (const items of stats.itemSets) {
         for (const item of items) {
+          if (!isCompletedItem(item)) continue;
           itemCounts.set(item, (itemCounts.get(item) ?? 0) + 1);
+          totalCompletedItems++;
         }
       }
+
       champItemFreq.set(
         champId,
         [...itemCounts.entries()].sort((a, b) => b[1] - a[1]).map(([item]) => item)
       );
+      champAvgItems.set(champId, totalCompletedItems / stats.count);
     }
 
-    // Identify primary tank: non-carry with the highest defensive item frequency
-    const primaryCarryId = compDef.primaryCarry;
-    let primaryTankId: string | undefined;
-    let bestTankScore = 0;
-    for (const champId of selectedIds) {
-      if (isCarryId.has(champId)) continue;
-      const stats = champStats.get(champId)!;
-      // Score by total defensive items seen across all games
-      let defensiveCount = 0;
-      for (const items of stats.itemSets) {
-        for (const item of items) {
-          if (DEFENSIVE_ITEM_IDS.has(item)) defensiveCount++;
-        }
-      }
-      if (defensiveCount > bestTankScore) {
-        bestTankScore = defensiveCount;
-        primaryTankId = champId;
-      }
-    }
+    // Identify item holders: champions who average >= 1.5 completed items per game
+    // Sort by score descending, cap at 3
+    const itemHolderIds = new Set(
+      [...champAvgItems.entries()]
+        .filter(([, avg]) => avg >= 1.5)
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 3)
+        .map(([id]) => id)
+    );
 
     for (const champId of selectedIds) {
       const stats = champStats.get(champId)!;
@@ -350,19 +348,24 @@ async function buildCompsFromData() {
       const isCarry = isCarryId.has(champId);
       const sortedItems = champItemFreq.get(champId) ?? [];
 
-      // Only the primary carry and primary tank get items.
-      // Prefer 3 distinct items over Thief's Gloves — only use TG if it's the #1 item.
       let recommendedItems: string[] = [];
-      if (champId === primaryCarryId || champId === primaryTankId) {
-        const maxItems = champId === primaryCarryId ? MAX_CARRY_ITEMS : MAX_TANK_ITEMS;
+      if (itemHolderIds.has(champId)) {
+        // Data-driven item holder — assign top 3 completed items
         if (sortedItems[0] === THIEFS_GLOVES_ID) {
-          // TG is the most common item — it fills all 3 slots, so it's the only recommendation
           recommendedItems = [THIEFS_GLOVES_ID];
         } else {
-          // Filter out TG and take the top 3 real items
           recommendedItems = sortedItems
             .filter((id) => id !== THIEFS_GLOVES_ID)
-            .slice(0, maxItems);
+            .slice(0, MAX_CARRY_ITEMS);
+        }
+      } else {
+        // Non-item-holder — only include emblem items if commonly used
+        for (const itemId of sortedItems) {
+          if (!itemId.includes("EmblemItem")) continue;
+          const emblemCount = stats.itemSets.filter((items) => items.includes(itemId)).length;
+          if (emblemCount / stats.count >= 0.2) {
+            recommendedItems.push(itemId);
+          }
         }
       }
 
@@ -397,13 +400,32 @@ async function buildCompsFromData() {
       championMap,
     );
 
-    // ── 7f. Trait signature from canonical lineup ──────────────────────────
+    // ── 7f. Trait signature from canonical lineup + emblem items ────────────
     const traitUnitCounts = new Map<string, number>();
     for (const champ of coreChampions) {
       const staticChamp = championMap.get(champ.championId);
       if (!staticChamp) continue;
       for (const traitName of staticChamp.traits) {
         traitUnitCounts.set(traitName, (traitUnitCounts.get(traitName) ?? 0) + 1);
+      }
+
+      // Count emblem items as additional trait contributions
+      for (const itemId of champ.recommendedItems) {
+        if (!itemId.includes("EmblemItem")) continue;
+        // TFT16_Item_DemaciaEmblemItem → Demacia → find matching trait
+        const emblemPart = itemId
+          .replace("TFT16_Item_", "")
+          .replace("TFT_Item_", "")
+          .replace("EmblemItem", "");
+        const emblemTraitId = `TFT16_${emblemPart}`;
+        // Find the display name for this trait ID
+        const matchedTrait = staticTraits.find((t) => t.id === emblemTraitId);
+        if (matchedTrait && !staticChamp.traits.includes(matchedTrait.name)) {
+          traitUnitCounts.set(
+            matchedTrait.name,
+            (traitUnitCounts.get(matchedTrait.name) ?? 0) + 1
+          );
+        }
       }
     }
 
@@ -486,6 +508,7 @@ async function buildCompsFromData() {
       primaryCarry: compDef.primaryCarry,
       secondaryCarry: compDef.secondaryCarry ?? undefined,
       isReroll: compDef.isReroll ?? false,
+      heroAugmentName: compDef.heroAugment?.augmentName,
       avgPlacement: avgPlacement.toFixed(2),
       top4Rate: top4Rate.toFixed(3),
       winRate: winRate.toFixed(3),
