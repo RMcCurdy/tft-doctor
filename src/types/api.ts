@@ -42,4 +42,6 @@ export interface ApiError {
   error: string;
   message: string;
   statusCode: number;
+  /** Seconds until the rate limit resets (present on 429 responses) */
+  retryAfter?: number;
 }

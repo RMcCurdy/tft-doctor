@@ -1,11 +1,13 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { GameIcon } from "@/components/shared/GameIcon";
 import { TraitBadge, sortTraits } from "@/components/shared/TraitBadge";
 import type { CompArchetype, BoardPosition } from "@/types/comp";
+import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import { ArrowLeft, ChevronRight, Star } from "lucide-react";
 import { useRef, useState, useEffect, useCallback } from "react";
@@ -70,6 +72,7 @@ function BoardPlacement({
   champions,
   getChampionCost,
   getItemIcon,
+  onChampionClick,
 }: {
   champions: {
     name: string;
@@ -81,6 +84,7 @@ function BoardPlacement({
   }[];
   getChampionCost?: (id: string) => number | undefined;
   getItemIcon?: (id: string) => string | undefined;
+  onChampionClick?: (championId: string) => void;
 }) {
   // Build 4x7 grid
   type ChampCell = (typeof champions)[number] | undefined;
@@ -100,7 +104,7 @@ function BoardPlacement({
   const vSpacing = hexH * 0.75 + HEX_GAP + 8; // extra room for stars + items
   const rowOffset = hSpacing / 2;
   const totalWidth = hSpacing * 7 + rowOffset;
-  const totalHeight = vSpacing * 3 + hexH + 16; // pad for top stars + bottom items
+  const totalHeight = vSpacing * 3 + hexH + 28; // pad for top stars + bottom items
 
   // Responsive scaling: measure container and shrink board to fit
   const containerRef = useRef<HTMLDivElement>(null);
@@ -125,17 +129,23 @@ function BoardPlacement({
         <h2 className="text-base font-bold">Board Placement</h2>
       </CardHeader>
       <CardContent className="pt-0">
-        <div ref={containerRef} className="w-full">
+        <div ref={containerRef} className="w-full overflow-hidden">
           <div
             className="relative mx-auto"
             style={{
-              width: totalWidth,
-              height: totalHeight,
-              transform: `scale(${scale})`,
-              transformOrigin: "top center",
-              marginBottom: scale < 1 ? -(totalHeight * (1 - scale)) : 0,
+              width: totalWidth * scale,
+              height: totalHeight * scale,
             }}
           >
+            <div
+              className="absolute left-0 top-0"
+              style={{
+                width: totalWidth,
+                height: totalHeight,
+                transform: `scale(${scale})`,
+                transformOrigin: "top left",
+              }}
+            >
             {grid.map((row, rowIdx) => {
               const isOdd = rowIdx % 2 === 1;
               const offX = isOdd ? rowOffset : 0;
@@ -172,12 +182,20 @@ function BoardPlacement({
                     )}
                     {/* Hex cell */}
                     <div
-                      className="relative flex h-full w-full items-center justify-center overflow-hidden"
+                      className={cn(
+                        "relative flex h-full w-full items-center justify-center overflow-hidden",
+                        cell && onChampionClick && "cursor-pointer"
+                      )}
                       style={{
                         clipPath: HEX_CLIP,
                         backgroundColor: cell ? undefined : "#2a2a30",
                       }}
                       title={cell?.name}
+                      onClick={
+                        cell && onChampionClick
+                          ? () => onChampionClick(cell.championId)
+                          : undefined
+                      }
                     >
                       {cell ? (
                         <GameIcon
@@ -211,6 +229,7 @@ function BoardPlacement({
                 );
               });
             })}
+            </div>
           </div>
         </div>
       </CardContent>
@@ -262,8 +281,13 @@ export function CompDetail({
   getChampionCost,
   getItemComponents,
 }: CompDetailProps) {
+  const router = useRouter();
   const difficulty = getDifficulty(comp.stats.playRate);
   const carouselPriority = buildCarouselPriority(comp.coreChampions, getItemComponents);
+
+  const handleChampionClick = (championId: string) => {
+    router.push(`/champions/${championId}`);
+  };
 
   return (
     <div className="space-y-6">
@@ -318,26 +342,31 @@ export function CompDetail({
         }))}
         getChampionCost={getChampionCost}
         getItemIcon={getItemIcon}
+        onChampionClick={handleChampionClick}
       />
 
       {/* Early Game + Carousel Priority */}
-      {(comp.earlyBoard?.length || carouselPriority.length > 0) && (
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-          {/* Early Game */}
-          {comp.earlyBoard && comp.earlyBoard.length > 0 && (
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+        {/* Early Game */}
+        {comp.earlyBoard && comp.earlyBoard.length > 0 && (
             <Card>
               <CardHeader className="pb-3">
                 <h2 className="text-base font-bold">Early Game</h2>
               </CardHeader>
               <CardContent className="pt-0">
                 <div className="flex flex-wrap gap-3">
-                  {comp.earlyBoard.map((champ) => {
+                  {[...comp.earlyBoard].sort((a, b) => (getChampionCost?.(a.championId) ?? 1) - (getChampionCost?.(b.championId) ?? 1)).map((champ) => {
                     const cost = getChampionCost?.(champ.championId) ?? 1;
                     return (
-                      <div
+                      <button
                         key={champ.championId}
-                        className={cn("relative rounded-sm ring-2", COST_BORDER[cost] ?? "ring-border")}
+                        type="button"
+                        className={cn(
+                          "relative cursor-pointer rounded-sm ring-2 transition-opacity hover:opacity-80",
+                          COST_BORDER[cost] ?? "ring-border"
+                        )}
                         title={`${champ.championName} (${cost} cost)`}
+                        onClick={() => handleChampionClick(champ.championId)}
                       >
                         <GameIcon
                           championId={champ.championId}
@@ -345,7 +374,7 @@ export function CompDetail({
                           size={48}
                           variant="champion"
                         />
-                      </div>
+                      </button>
                     );
                   })}
                 </div>
@@ -353,15 +382,15 @@ export function CompDetail({
             </Card>
           )}
 
-          {/* Carousel Priority */}
-          {carouselPriority.length > 0 && (
-            <Card>
-              <CardHeader className="pb-3">
-                <h2 className="text-base font-bold">Carousel Priority</h2>
-              </CardHeader>
-              <CardContent className="pt-0">
-                <div className="flex flex-wrap items-center gap-1.5">
-                  {carouselPriority.map(({ componentId, count }, idx) => {
+        {/* Carousel Priority */}
+        <Card>
+          <CardHeader className="pb-3">
+            <h2 className="text-base font-bold">Carousel Priority</h2>
+          </CardHeader>
+          <CardContent className="pt-0">
+            <div className="flex flex-wrap items-center gap-1.5">
+              {carouselPriority.length > 0
+                ? carouselPriority.map(({ componentId, count }, idx) => {
                     const iconPath = getItemIcon?.(componentId);
                     const name = getItemName?.(componentId) ?? componentId;
                     return (
@@ -381,13 +410,19 @@ export function CompDetail({
                         </div>
                       </div>
                     );
-                  })}
-                </div>
-              </CardContent>
-            </Card>
-          )}
-        </div>
-      )}
+                  })
+                : Array.from({ length: 4 }, (_, idx) => (
+                    <div key={idx} className="flex items-center gap-1.5">
+                      {idx > 0 && (
+                        <ChevronRight className="h-4 w-4 text-muted-foreground" />
+                      )}
+                      <Skeleton className="h-12 w-12 rounded-md" />
+                    </div>
+                  ))}
+            </div>
+          </CardContent>
+        </Card>
+      </div>
 
       {/* Flex Options */}
       {comp.flexChampions.filter((c) => !c.isCarry).length > 0 && (
@@ -400,7 +435,12 @@ export function CompDetail({
               {comp.flexChampions
                 .filter((c) => !c.isCarry)
                 .map((champ) => (
-                  <div key={champ.championId} className="flex items-center gap-1.5">
+                  <button
+                    key={champ.championId}
+                    type="button"
+                    className="flex cursor-pointer items-center gap-1.5 transition-opacity hover:opacity-80"
+                    onClick={() => handleChampionClick(champ.championId)}
+                  >
                     <GameIcon
                       championId={champ.championId}
                       name={champ.championName}
@@ -410,7 +450,7 @@ export function CompDetail({
                     <Badge variant="secondary">
                       {champ.championName}
                     </Badge>
-                  </div>
+                  </button>
                 ))}
             </div>
           </CardContent>

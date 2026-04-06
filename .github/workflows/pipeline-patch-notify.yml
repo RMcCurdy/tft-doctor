@@ -1,0 +1,80 @@
+name: Pipeline — Patch Check & Notify
+
+# Lightweight daily check — no Riot API key needed.
+# Detects new TFT patches via Data Dragon, syncs static data,
+# and creates a GitHub issue so you get an email notification.
+
+on:
+  schedule:
+    - cron: "0 5 * * *" # 5:00 AM UTC (~midnight EST)
+  workflow_dispatch: {} # Allow manual trigger
+
+concurrency:
+  group: pipeline-patch-notify
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "pnpm"
+      - run: pnpm install --frozen-lockfile
+
+      - name: Check for new patch
+        id: patch
+        run: |
+          output=$(npx tsx pipeline/detect-patch.ts 2>&1)
+          echo "$output"
+          if echo "$output" | grep -q "New patch detected"; then
+            echo "new_patch=true" >> "$GITHUB_OUTPUT"
+            version=$(echo "$output" | grep -o '"patchVersion":"[^"]*"' | head -1 | cut -d'"' -f4)
+            echo "version=$version" >> "$GITHUB_OUTPUT"
+          else
+            echo "new_patch=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Sync static data
+        if: steps.patch.outputs.new_patch == 'true'
+        run: npx tsx pipeline/sync-static-data.ts
+
+      - name: Create notification issue
+        if: steps.patch.outputs.new_patch == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const version = '${{ steps.patch.outputs.version }}';
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `New TFT Patch ${version} — Re-ingestion needed`,
+              body: [
+                `## TFT Patch ${version} detected`,
+                '',
+                'A new patch has been detected via Data Dragon. Static data (champions, items, augments, traits) has been auto-synced.',
+                '',
+                '### Manual steps needed',
+                '',
+                '1. Set your dev API key in `.env.local`',
+                '2. Run the ingestion pipeline:',
+                '```bash',
+                'npx tsx pipeline/discover-players.ts',
+                'npx tsx pipeline/ingest-matches.ts',
+                'npx tsx pipeline/aggregate-comps.ts',
+                '```',
+                '3. Re-run ingestion daily for a few days to build up match data.',
+                '',
+                '> Once you have a production Riot API key, set the `PRODUCTION_PIPELINE` repository variable to `true` to enable fully automated ingestion.',
+                '',
+                '*This issue was created automatically by the daily patch check workflow.*',
+              ].join('\n'),
+              labels: ['patch-update'],
+            });

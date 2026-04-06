@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Card, CardContent } from "@/components/ui/card";
 import { GameIcon } from "@/components/shared/GameIcon";
 import { TraitBadge, sortTraits } from "@/components/shared/TraitBadge";
@@ -31,6 +32,10 @@ const COST_BORDER: Record<number, string> = {
   5: "ring-amber-400",
 };
 
+// Set 16 display overrides
+const COST_OVERRIDES: Record<string, number> = { TFT16_AnnieTibbers: 5 };
+const RAINBOW_CHAMPS = new Set(["TFT16_Sylas", "TFT16_Ryze", "TFT16_AurelionSol"]);
+
 function getDifficulty(playRate: number) {
   if (playRate > 0.05) return { label: "Easy", className: "bg-success/15 text-success" };
   if (playRate > 0.02) return { label: "Medium", className: "bg-warning/15 text-warning" };
@@ -38,12 +43,13 @@ function getDifficulty(playRate: number) {
 }
 
 export function CompCard({ comp, getTraitIcon, getChampionCost, getItemIcon, isItemEmblem }: CompCardProps) {
+  const router = useRouter();
   const difficulty = getDifficulty(comp.stats.playRate);
 
   const allChampions = [...comp.coreChampions, ...comp.flexChampions].sort(
     (a, b) => {
-      const costA = getChampionCost?.(a.championId) ?? 1;
-      const costB = getChampionCost?.(b.championId) ?? 1;
+      const costA = COST_OVERRIDES[a.championId] ?? getChampionCost?.(a.championId) ?? 1;
+      const costB = COST_OVERRIDES[b.championId] ?? getChampionCost?.(b.championId) ?? 1;
       return costA - costB;
     }
   );
@@ -92,13 +98,25 @@ export function CompCard({ comp, getTraitIcon, getChampionCost, getItemIcon, isI
           {/* Champion portraits */}
           <div className="flex flex-wrap gap-3">
             {allChampions.map((champ) => {
-              const cost = getChampionCost?.(champ.championId) ?? 1;
+              const baseCost = getChampionCost?.(champ.championId) ?? 1;
+              const cost = COST_OVERRIDES[champ.championId] ?? baseCost;
+              const isRainbow = RAINBOW_CHAMPS.has(champ.championId);
               const showItems = itemChampIds.has(champ.championId);
               return (
-                <div
+                <button
                   key={champ.championId}
-                  className={cn("relative rounded-sm ring-2", COST_BORDER[cost] ?? "ring-border")}
+                  type="button"
+                  className={cn(
+                    "relative cursor-pointer rounded-sm transition-opacity hover:opacity-80",
+                    isRainbow ? "ring-rainbow" : "ring-2",
+                    !isRainbow && (COST_BORDER[cost] ?? "ring-border"),
+                  )}
                   title={`${champ.championName} (${cost} cost)${champ.isCarry ? " — Carry" : ""}${(champ.threeStarRate ?? 0) >= 0.5 ? " — 3★" : ""}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    router.push(`/champions/${champ.championId}`);
+                  }}
                 >
                   <GameIcon
                     championId={champ.championId}
@@ -130,7 +148,7 @@ export function CompCard({ comp, getTraitIcon, getChampionCost, getItemIcon, isI
                       })}
                     </div>
                   )}
-                </div>
+                </button>
               );
             })}
           </div>

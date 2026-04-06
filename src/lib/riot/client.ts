@@ -36,6 +36,18 @@ export class RiotApiError extends Error {
   }
 }
 
+export class RiotRateLimitError extends Error {
+  constructor(
+    public retryAfterSeconds: number,
+    public url: string
+  ) {
+    super(
+      `Riot API rate limit exceeded. Retry after ${retryAfterSeconds}s: ${url}`
+    );
+    this.name = "RiotRateLimitError";
+  }
+}
+
 export class RiotClient {
   private apiKey: string;
   private rateLimiter: RateLimiter;
@@ -99,6 +111,7 @@ export class RiotClient {
 
   private async get<T>(url: string): Promise<T> {
     let lastError: Error | null = null;
+    let lastRetryAfter = 10;
 
     for (let attempt = 0; attempt < MAX_RETRIES; attempt++) {
       await this.rateLimiter.acquire();
@@ -114,11 +127,12 @@ export class RiotClient {
 
         // Rate limited — wait and retry
         if (res.status === 429) {
-          const retryAfter = parseInt(
+          lastRetryAfter = parseInt(
             res.headers.get("Retry-After") ?? "10",
             10
           );
-          await this.rateLimiter.handleRateLimit(retryAfter);
+          lastError = new RiotRateLimitError(lastRetryAfter, url);
+          await this.rateLimiter.handleRateLimit(lastRetryAfter);
           continue;
         }
 
@@ -137,12 +151,16 @@ export class RiotClient {
         return (await res.json()) as T;
       } catch (err) {
         if (err instanceof RiotApiError) throw err;
+        if (err instanceof RiotRateLimitError) throw err;
 
         // Network errors — retry
         lastError = err instanceof Error ? err : new Error(String(err));
         await sleep(RETRY_BASE_MS * Math.pow(2, attempt));
       }
     }
+
+    // If we exhausted retries due to rate limiting, throw specific error
+    if (lastError instanceof RiotRateLimitError) throw lastError;
 
     throw lastError ?? new Error(`Failed after ${MAX_RETRIES} retries: ${url}`);
   }

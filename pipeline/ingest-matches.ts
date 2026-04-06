@@ -15,7 +15,13 @@ import {
   insertMatch,
   insertParticipants,
 } from "../src/lib/db/queries/matches";
-import { getCurrentPatch, incrementMatchCount } from "../src/lib/db/queries/patches";
+import {
+  getCurrentPatch,
+  incrementMatchCount,
+  upsertPatch,
+  markPatchAsCurrent,
+  getPatchByVersion,
+} from "../src/lib/db/queries/patches";
 import { logger } from "./utils/logger";
 import type { RiotRegion } from "../src/types/riot";
 
@@ -33,7 +39,7 @@ async function ingestMatches() {
   logger.info("Starting match ingestion", { regions: REGIONS });
 
   const client = new RiotClient();
-  const currentPatch = await getCurrentPatch();
+  let currentPatch = await getCurrentPatch();
 
   if (!currentPatch) {
     logger.warn(
@@ -94,8 +100,33 @@ async function ingestMatches() {
 
         // Extract patch version from game_version
         // Format: "Version 14.23.123.456" → "14.23"
-        // TODO: use patchVersion for per-patch tracking
-        extractPatchVersion(info.game_version);
+        const matchPatch = extractPatchVersion(info.game_version);
+
+        // Auto-detect new patches from match metadata.
+        // This catches patches faster than Data Dragon, which often lags 1-2 days.
+        if (
+          currentPatch &&
+          matchPatch !== "unknown" &&
+          matchPatch !== currentPatch.patchVersion &&
+          isNewerPatch(matchPatch, currentPatch.patchVersion)
+        ) {
+          logger.info(
+            `Match data reveals newer patch: ${currentPatch.patchVersion} → ${matchPatch}`,
+            { matchId, gameVersion: info.game_version }
+          );
+          const setNumber = parseInt(matchPatch.split(".")[0], 10);
+          await upsertPatch({
+            patchVersion: matchPatch,
+            setNumber,
+            releaseDate: new Date(),
+            isCurrent: true,
+          });
+          const newPatch = await getPatchByVersion(matchPatch);
+          if (newPatch) {
+            await markPatchAsCurrent(newPatch.id);
+            currentPatch = newPatch;
+          }
+        }
 
         await insertMatch({
           matchId: matchData.metadata.match_id,
@@ -167,6 +198,13 @@ function extractPatchVersion(gameVersion: string): string {
   // "Version 14.23.123.456" → "14.23"
   const match = gameVersion.match(/(\d+\.\d+)/);
   return match?.[1] ?? "unknown";
+}
+
+/** Compare semver-style patch versions numerically (e.g. "16.10" > "16.9") */
+function isNewerPatch(a: string, b: string): boolean {
+  const [aMajor, aMinor] = a.split(".").map(Number);
+  const [bMajor, bMinor] = b.split(".").map(Number);
+  return aMajor > bMajor || (aMajor === bMajor && aMinor > bMinor);
 }
 
 // ─── Entry Point ────────────────────────────────────────────────────────────

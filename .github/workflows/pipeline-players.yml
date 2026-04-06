@@ -1,7 +1,7 @@
 name: Pipeline — Discover Players
 
 on:
-  workflow_dispatch: {} # Manual trigger only — cron disabled (no reliable API key)
+  workflow_dispatch: {} # Manual trigger — use with dev API key
 
 concurrency:
   group: pipeline-players

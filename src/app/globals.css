@@ -154,6 +154,20 @@
   }
 }
 
+/* Rainbow champion ring (Sylas, Ryze) */
+.ring-rainbow {
+  isolation: isolate;
+  position: relative;
+}
+.ring-rainbow::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: conic-gradient(from 0deg, #ff4444, #ff8844, #ffff44, #44ff44, #4488ff, #8844ff, #ff4444);
+  z-index: -1;
+}
+
 /* Minimal scrollbar */
 .scrollbar-thin {
   scrollbar-width: thin;

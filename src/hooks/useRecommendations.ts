@@ -3,10 +3,15 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { GameStateInput, RecommendationResponse } from "@/types/api";
 
+interface RateLimitInfo {
+  retryAfter: number;
+}
+
 interface UseRecommendationsResult {
   data: RecommendationResponse | null;
   isLoading: boolean;
   error: string | null;
+  rateLimit: RateLimitInfo | null;
   fetch: () => void;
 }
 
@@ -16,6 +21,7 @@ export function useRecommendations(
   const [data, setData] = useState<RecommendationResponse | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [rateLimit, setRateLimit] = useState<RateLimitInfo | null>(null);
   const abortRef = useRef<AbortController | null>(null);
 
   const fetchRecommendations = useCallback(async () => {
@@ -26,6 +32,7 @@ export function useRecommendations(
 
     setIsLoading(true);
     setError(null);
+    setRateLimit(null);
 
     try {
       const res = await fetch("/api/recommend", {
@@ -34,6 +41,16 @@ export function useRecommendations(
         body: JSON.stringify(gameState),
         signal: controller.signal,
       });
+
+      if (res.status === 429) {
+        const errorData = await res.json().catch(() => null);
+        const retryAfter =
+          errorData?.retryAfter ??
+          parseInt(res.headers.get("Retry-After") ?? "0", 10);
+        setRateLimit({ retryAfter: retryAfter || 120 });
+        setError("Rate limit reached");
+        return;
+      }
 
       if (!res.ok) {
         const errorData = await res.json().catch(() => null);
@@ -74,5 +91,5 @@ export function useRecommendations(
     return () => abortRef.current?.abort();
   }, []);
 
-  return { data, isLoading, error, fetch: fetchRecommendations };
+  return { data, isLoading, error, rateLimit, fetch: fetchRecommendations };
 }

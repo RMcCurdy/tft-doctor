@@ -5,6 +5,7 @@ import { FilterBar } from "@/components/comps/FilterBar";
 import type { FilterSelection } from "@/components/comps/FilterBar";
 import { CompCard } from "@/components/comps/CompCard";
 import { LoadingOverlay } from "@/components/ui/spinner";
+import { RateLimitBanner } from "@/components/shared/RateLimitBanner";
 import { useStaticData } from "@/hooks/useStaticData";
 import type { CompArchetype } from "@/types/comp";
 
@@ -14,14 +15,50 @@ export default function HomePage() {
 
   const [comps, setComps] = useState<CompArchetype[]>([]);
   const [compsLoading, setCompsLoading] = useState(true);
+  const [compsError, setCompsError] = useState<string | null>(null);
+  const [rateLimitRetryAfter, setRateLimitRetryAfter] = useState<number | null>(null);
   const [selections, setSelections] = useState<FilterSelection[]>([]);
 
-  useEffect(() => {
-    fetch("/api/comps")
-      .then((r) => r.json())
-      .then((data) => setComps(data.comps ?? []))
-      .finally(() => setCompsLoading(false));
+  const fetchComps = useCallback(async () => {
+    setCompsLoading(true);
+    setCompsError(null);
+    setRateLimitRetryAfter(null);
+
+    try {
+      const res = await fetch("/api/comps", {
+        signal: AbortSignal.timeout(15_000),
+      });
+
+      if (res.status === 429) {
+        const data = await res.json().catch(() => null);
+        const retryAfter =
+          data?.retryAfter ??
+          parseInt(res.headers.get("Retry-After") ?? "0", 10);
+        setRateLimitRetryAfter(retryAfter || 120);
+        setCompsError("Rate limit reached");
+        return;
+      }
+
+      if (!res.ok) {
+        throw new Error(`Failed to load comps (${res.status})`);
+      }
+
+      const data = await res.json();
+      setComps(data.comps ?? []);
+    } catch (err) {
+      if (err instanceof DOMException && err.name === "TimeoutError") {
+        setCompsError("Request timed out — the server may be starting up. Try refreshing.");
+      } else {
+        setCompsError(err instanceof Error ? err.message : "Failed to load comps");
+      }
+    } finally {
+      setCompsLoading(false);
+    }
   }, []);
+
+  useEffect(() => {
+    fetchComps();
+  }, [fetchComps]);
 
   const addSelection = useCallback((selection: FilterSelection) => {
     setSelections((prev) => {
@@ -65,14 +102,23 @@ export default function HomePage() {
 
       <main className="mx-auto w-full max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
         <div className="space-y-4">
+          {rateLimitRetryAfter && (
+            <RateLimitBanner
+              retryAfter={rateLimitRetryAfter}
+              onRetry={fetchComps}
+            />
+          )}
+
           {compsLoading && <LoadingOverlay />}
 
-          {!compsLoading && filteredComps.length === 0 && (
+          {!compsLoading && !rateLimitRetryAfter && filteredComps.length === 0 && (
             <div className="py-12 text-center">
               <p className="text-sm text-muted-foreground">
-                {selections.length > 0
-                  ? "No comps match your filters. Try removing some."
-                  : "No comp data available yet."}
+                {compsError
+                  ? compsError
+                  : selections.length > 0
+                    ? "No comps match your filters. Try removing some."
+                    : "No comp data available yet."}
               </p>
             </div>
           )}

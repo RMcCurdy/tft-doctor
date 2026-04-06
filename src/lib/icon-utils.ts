@@ -13,9 +13,10 @@ export function texPathToUrl(iconPath: string): string {
     return `${CDRAGON_BASE_URL}/game/${pngPath}`;
   }
 
-  // DDragon item/champion filename (e.g., "TFT_Item_InfinityEdge.png")
+  // DDragon filename — route to the correct subfolder
   if (iconPath.endsWith(".png")) {
-    return `${DDRAGON_BASE_URL}/cdn/16.6.1/img/tft-item/${iconPath}`;
+    const folder = iconPath.startsWith("Trait_Icon") ? "tft-trait" : "tft-item";
+    return `${DDRAGON_BASE_URL}/cdn/16.6.1/img/${folder}/${iconPath}`;
   }
 
   // Fallback: treat as CDragon path

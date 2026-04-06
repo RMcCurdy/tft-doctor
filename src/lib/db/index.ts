@@ -30,8 +30,14 @@ function createDb(): DrizzleDb {
   const client = postgres(connectionString, {
     // Supabase connection pooler settings for serverless
     prepare: false,
-    // Limit connections for serverless (each function instance gets its own pool)
-    max: 1,
+    // Allow concurrent API route queries (static + comps fire in parallel)
+    max: 5,
+    // Fail fast instead of hanging forever if DB is unreachable
+    connect_timeout: 10,
+    // Close idle connections before Supabase's pgBouncer drops them
+    idle_timeout: 20,
+    // Recycle connections to avoid stale pgBouncer connections
+    max_lifetime: 60 * 5,
   });
 
   return drizzle(client, { schema });

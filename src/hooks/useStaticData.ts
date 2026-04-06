@@ -38,6 +38,10 @@ type ChampionEntry = { name: string; icon: string; cost: number };
 type EntityEntry = { name: string; icon: string; tier?: string };
 type ItemEntry = { name: string; icon: string; isEmblem: boolean; components: string[] };
 
+interface RateLimitInfo {
+  retryAfter: number;
+}
+
 export function useStaticData() {
   const [championMap, setChampionMap] = useState<Record<string, ChampionEntry>>({});
   const [itemMap, setItemMap] = useState<Record<string, ItemEntry>>({});
@@ -48,10 +52,21 @@ export function useStaticData() {
   const [emblems, setEmblems] = useState<StaticEntity[]>([]);
   const [artifacts, setArtifacts] = useState<StaticEntity[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [rateLimit, setRateLimit] = useState<RateLimitInfo | null>(null);
 
   useEffect(() => {
-    fetch("/api/static")
-      .then((r) => r.json())
+    fetch("/api/static", { signal: AbortSignal.timeout(15_000) })
+      .then((r) => {
+        if (r.status === 429) {
+          const retryAfter = parseInt(r.headers.get("Retry-After") ?? "0", 10);
+          setRateLimit({ retryAfter: retryAfter || 120 });
+          setError("Rate limit reached");
+          throw new Error("Rate limited");
+        }
+        if (!r.ok) throw new Error(`Failed to load static data (${r.status})`);
+        return r.json();
+      })
       .then((data: StaticDataResponse) => {
         const champs: Record<string, ChampionEntry> = {};
         for (const c of data.champions ?? []) {
@@ -83,7 +98,14 @@ export function useStaticData() {
 
         setIsLoaded(true);
       })
-      .catch(() => setIsLoaded(true));
+      .catch((err) => {
+        if (err instanceof DOMException && err.name === "TimeoutError") {
+          setError("Request timed out — the server may be starting up.");
+        } else if (!(err instanceof Error && err.message === "Rate limited")) {
+          setError(err instanceof Error ? err.message : "Failed to load static data");
+        }
+        setIsLoaded(true);
+      });
   }, []);
 
   return {
@@ -100,5 +122,7 @@ export function useStaticData() {
     emblems,
     artifacts,
     isLoaded,
+    error,
+    rateLimit,
   };
 }

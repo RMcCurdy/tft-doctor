@@ -1,0 +1,47 @@
+name: Pipeline — Production Ingestion (6h)
+
+# Runs every 6 hours to keep match data and comp stats fresh.
+# This is the workhorse that ensures your recommendations reflect
+# the evolving meta throughout a patch cycle.
+#
+# HOW TO ENABLE:
+#   1. Store your production Riot API key as the RIOT_API_KEY secret
+#   2. Go to Settings → Variables → Actions → New repository variable
+#   3. Name: PRODUCTION_PIPELINE  Value: true
+#
+# The cron fires every 6h but the job skips instantly (zero cost)
+# until the PRODUCTION_PIPELINE variable is set.
+
+on:
+  schedule:
+    - cron: "0 */6 * * *" # Every 6 hours: midnight, 6am, noon, 6pm UTC
+  workflow_dispatch: {} # Manual trigger always works, regardless of variable
+
+concurrency:
+  group: pipeline-production-ingestion
+  cancel-in-progress: false
+
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    if: ${{ github.event_name == 'workflow_dispatch' || vars.PRODUCTION_PIPELINE == 'true' }}
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      RIOT_API_KEY: ${{ secrets.RIOT_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "pnpm"
+      - run: pnpm install --frozen-lockfile
+
+      - name: Ingest matches
+        run: npx tsx pipeline/ingest-matches.ts
+
+      - name: Aggregate comps
+        run: npx tsx pipeline/aggregate-comps.ts

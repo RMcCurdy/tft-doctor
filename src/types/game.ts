@@ -8,6 +8,37 @@ export interface Champion {
   icon: string; // Data Dragon icon path
 }
 
+export interface ChampionAbility {
+  name: string;
+  description: string;
+  icon: string;
+}
+
+export interface ChampionTraitDetail {
+  id: string;
+  name: string;
+  description: string;
+  icon: string;
+  breakpoints: TraitBreakpoint[];
+}
+
+export interface SuggestedItem {
+  id: string;
+  name: string;
+  icon: string;
+  frequency: number; // number of comps recommending this item
+}
+
+export interface ChampionDetailData {
+  id: string;
+  name: string;
+  cost: number;
+  icon: string;
+  traits: ChampionTraitDetail[];
+  ability: ChampionAbility | null;
+  suggestedItems: SuggestedItem[];
+}
+
 export interface Item {
   id: string; // e.g., "TFT_Item_InfinityEdge"
   name: string; // e.g., "Infinity Edge"

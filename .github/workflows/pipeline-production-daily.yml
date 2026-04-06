@@ -1,0 +1,56 @@
+name: Pipeline — Production Daily Sync
+
+# Full daily pipeline for when you have a production Riot API key.
+# Runs the complete ingestion cycle: patch detection, static data,
+# player discovery, match ingestion, and comp aggregation.
+#
+# HOW TO ENABLE:
+#   1. Store your production Riot API key as the RIOT_API_KEY secret
+#   2. Go to Settings → Variables → Actions → New repository variable
+#   3. Name: PRODUCTION_PIPELINE  Value: true
+#
+# The cron fires daily but the job skips instantly (zero cost) until
+# the PRODUCTION_PIPELINE variable is set.
+
+on:
+  schedule:
+    - cron: "0 5 * * *" # 5:00 AM UTC (~midnight EST)
+  workflow_dispatch: {} # Manual trigger always works, regardless of variable
+
+concurrency:
+  group: pipeline-production-daily
+  cancel-in-progress: false
+
+jobs:
+  full-sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    if: ${{ github.event_name == 'workflow_dispatch' || vars.PRODUCTION_PIPELINE == 'true' }}
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      RIOT_API_KEY: ${{ secrets.RIOT_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "pnpm"
+      - run: pnpm install --frozen-lockfile
+
+      - name: Detect patch
+        run: npx tsx pipeline/detect-patch.ts
+
+      - name: Sync static data
+        run: npx tsx pipeline/sync-static-data.ts
+
+      - name: Discover players
+        run: npx tsx pipeline/discover-players.ts
+
+      - name: Ingest matches
+        run: npx tsx pipeline/ingest-matches.ts
+
+      - name: Aggregate comps
+        run: npx tsx pipeline/aggregate-comps.ts
